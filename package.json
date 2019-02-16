@@ -1,0 +1,29 @@
+{
+  "name": "anthologist",
+  "version": "0.0.1",
+  "description": "A crowdsorced interactive writing site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/Quantx/writers-blocks.git"
+  },
+  "keywords": [
+    "anthologist",
+    "writing",
+    "book",
+    "story",
+    "block"
+  ],
+  "author": "Samuel Deutsch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/Quantx/writers-blocks/issues"
+  },
+  "homepage": "https://gitlab.com/Quantx/writers-blocks#README",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
