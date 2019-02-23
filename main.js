@@ -38,18 +38,34 @@ app.get('/admin(.html)?', function(req, res) {
 app.post('/login_submit', function(req, res) {
     if ( !req.body || !req.body.username || !req.body.password ) return res.sendStatus(400)
 
+    const mode = req.body.mode
     const username = req.body.username
     const password = req.body.password
 
-    console.log( username + ", " + password )
+    if ( mode == "login" )
+    {
+        console.log( mode + ", " + username + ", " + password )
 
-    if ( username == "testuser" && password == "testpass" )
-    {
-        res.redirect("/profile?owner=" + username)
+        if ( username == "testuser" && password == "testpass" )
+        {
+            res.redirect("/profile?owner=" + username)
+        }
+        else
+        {
+            res.redirect("/login?fail=1")
+        }
     }
-    else
+    else if ( mode == "signup" )
     {
-        res.redirect("/login?fail=1")
+        if ( !req.body.email ) return res.sendStatus(400)
+
+        const email = req.body.email
+
+        const salt = crypto.randomBytes(64)
+
+        const hashpass = crypto.pbkdf2Sync( password, salt, 100000, 64, "sha512" )
+
+        console.log(hashpass.toString("hex"), salt.toString("hex"))
     }
 })
 
