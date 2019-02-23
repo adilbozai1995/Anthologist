@@ -1,7 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const crypto = require("crypto")
-const uuid = require("uuid")
+const uuid = require("uuid/v4")
+const isuuid = require("is-uuid")
 const app = express()
 const port = 3070
 
@@ -16,11 +17,18 @@ app.get('/login', function(req, res) {
     res.sendFile('/html/login.html', {root: __dirname} );
 })
 
-app.get('/profile/:owner', function(req, res) {
+app.get('/profile/:accountid', function(req, res) {
 
-    const owner = req.params.owner
+    const accountid = req.params.accountid
 
-    console.log( owner )
+    if ( isuuid.v4( accountid ) )
+    {
+        console.log( "Valid UUID: " + accountid )
+    }
+    else
+    {
+        console.log( "Invalid UUID: " + accountid )
+    }
 
     res.sendFile('/html/profile.html', {root: __dirname} );
 })
@@ -33,7 +41,19 @@ app.get('/new-story', function(req, res) {
     res.sendFile('/html/new-story.html', {root: __dirname} );
 })
 
-app.get('/story', function(req, res) {
+app.get('/story/:storyid', function(req, res) {
+
+    const storyid = req.params.storyid
+
+    if ( isuuid.v4( storyid ) )
+    {
+        console.log( "Valid UUID: " + storyid )
+    }
+    else
+    {
+        console.log( "Invalid UUID: " + storyid )
+    }
+
     res.sendFile('/html/story.html', {root: __dirname} );
 })
 
