@@ -1,0 +1,461 @@
+@import url('http://garten.in.ua/css/fonts/SignPainter-HouseScript/SignPainter.css');
+
+@import url('https://use.fontawesome.com/releases/v5.7.2/css/all.css');
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  background-image: linear-gradient(#00b8e6, #005266);
+  position: relative;
+  
+}
+div {
+  display: block;
+}
+
+.notification-bar {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(187, 182, 182);
+  position: relative;
+  z-index: 301;
+    min-width: 100%;
+}
+
+.head {
+  float: left;
+  
+}
+.head1 {
+  margin: 7px 0;
+  
+  margin-right: 0.5%;
+
+}
+
+.logo {
+  font-family:'SignPainter';
+  font-size: 110%;
+  font-weight: bold;
+  color: #1b6f85;
+  display: inline-block;
+  outline: none;
+  padding: 2px;
+  position: relative;
+  cursor: pointer;
+
+}
+
+
+
+
+
+.notimg {
+  fill: none;
+  stroke: none;
+  stroke-opacity: 0;
+}
+
+.notify {
+  background-color: transparent;
+  border: none;
+  margin-left:78%;
+  position: absolute;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  float: left;
+  align-self: auto;
+  outline: none;
+  cursor: pointer;
+
+  
+}
+
+.in {
+  background-color: #81c5d6;
+  border-color: #225964;
+  position: relative;
+  margin-left:73%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding-bottom: 0.5%;
+  padding-top: 0.5%;
+  align-self: auto;
+  
+}
+
+.search {
+
+  background-color: transparent;
+  border: none;
+  margin-right:10%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  align-self: auto;
+  position: relative;
+  outline: none;
+  cursor: pointer;
+
+}
+
+.user {
+  background-color: transparent;
+  border: none;
+  margin-left:94%;
+  position: absolute;
+  outline: none;
+  display: inline-block;
+  padding: 10px 25px;
+  align-self: auto;
+  cursor: pointer;
+
+}
+
+.userimg {
+  height: 28pt;
+  width: 28pt;
+}
+
+.searchimg {
+  height: 20pt;
+  width: 20pt;
+}
+.notimg {
+  height: 25pt;
+  width: 25pt;
+}
+
+.submit-buttons {
+  width: 7%;
+  background-color: transparent;
+  background-attachment: fixed;
+  font-family:'SignPainter';
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 10px 2px;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  outline: none;
+  
+}
+.submit-buttons:hover {
+  
+  color: white;
+}
+
+
+.create-story {
+  float: right;
+  width: 14%;
+  background-color: transparent;
+  background-attachment: fixed;
+  font-family:'SignPainter';
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 10px 2px;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  outline: none;
+  
+}
+.create-story:hover {
+  
+  color: white;
+}
+
+
+
+.black_line {
+  position: absolute;
+  margin-top: -40px;
+  margin-left: 85px;
+  
+  width: 3px;
+  height: 28px;
+  background-color: rgb(0, 0, 0);
+  }
+
+  .stories {
+    width: 90%;
+    margin-left: 50px;
+    margin-top: 50px;
+    height: 70%;
+    
+  }
+
+  .story-cover1 {
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    width: 150px;
+    height: 100px;
+    float: left;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    
+  }
+
+  .story-cover1:hover {
+    color: white;
+  }
+
+  .story-cover2 {
+    width: 150px;
+    height: 100px;
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    float: left;
+    margin-left: 150px;
+  }
+
+  .story-cover2:hover {
+    color: white;
+  }
+
+  .story-cover3 {
+    width: 150px;
+    height: 100px;
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  float: left;
+  margin-left: 220px;
+  }
+
+  .story-cover3:hover {
+    color: white;
+  }
+
+  .story-cover4 {
+    width: 150px;
+    height: 100px;
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  float: right;
+  
+  }
+
+  .story-cover4:hover {
+    color: white;
+  }
+  
+
+
+
+
+
+
+  .story-cover5 {
+    width: 150px;
+    height: 100px;
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    float: left;
+    margin-top: 10%;
+    margin-right: 100%;
+    
+  
+  }
+  .story-cover5:hover {
+    color: white;
+  } 
+
+  .story-cover6 {
+    width: 150px;
+    height: 100px;
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    float: left;
+    margin-top: -8.7%;
+    margin-left: 26%;
+    
+    
+  }
+  .story-cover6:hover {
+    color: white;
+  } 
+
+
+  .story-cover7 {
+    width: 150px;
+    height: 100px;
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    float: left;
+    margin-top: -8.7%;
+    margin-left: 58%;
+    
+    
+  }
+  .story-cover7:hover {
+    color: white;
+  } 
+
+
+
+
+  .story-cover8 {
+    width: 150px;
+    height: 100px;
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    float: left;
+    margin-top: -8.7%;
+    float: right;
+    
+    
+  }
+  .story-cover8:hover {
+    color: white;
+  } 
+
+
+  .story-cover9 {
+    width: 150px;
+    height: 100px;
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    float: left;
+    margin-top: 10%;
+    margin-right: 100%;
+    
+  
+  }
+  .story-cover9:hover {
+    color: white;
+  } 
+
+
+  .story-cover10 {
+    width: 150px;
+    height: 100px;
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    float: left;
+    margin-top: -8.7%;
+    margin-left: 26%;
+    
+    
+  }
+  .story-cover10:hover {
+    color: white;
+  } 
+
+
+  .story-cover11 {
+    width: 150px;
+    height: 100px;
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    float: left;
+    margin-top: -8.7%;
+    margin-left: 58.2%;
+  }
+  .story-cover11:hover {
+    color: white;
+  } 
+
+
+  .story-cover12 {
+    width: 150px;
+    height: 100px;
+    font-family: 'SignPainter';
+    font-size: 300%;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    float: right;
+    margin-top: -8.7%;
+  }
+  .story-cover12:hover {
+    color: white;
+  } 

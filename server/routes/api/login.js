@@ -19,7 +19,6 @@ module.exports = (app) => {
         console.log( username + ", " + password + ", " + email )
 
         const salt = crypto.randomBytes(32)
-
         const hashpass = crypto.pbkdf2Sync( password, salt, 100000, 32, "sha512" )
 
         console.log(hashpass.toString("hex"), salt.toString("hex"))
