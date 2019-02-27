@@ -19,6 +19,7 @@ app.listen(port, () => console.log(`Anthologist backend server listening on port
 
 //MySQL Stuff here
 //Connect to server and Database
+//create more accounts, make one read only.
 let mysql = require('mysql');
 let connection = mysql.createConnection({
     host: 'thestrugglingengineer.com',
@@ -37,10 +38,16 @@ connection.connect(function(err) {
 
     //Create User Account Table
     //set varchar to max length, and so on
-    let user_accounts = `create table accounts(
+    let user_accounts = `create table if not exists accounts(
         id INT NOT NULL AUTO_INCREMENT,
-        username VARCHAR(100) NOT NULL,	
-        password VARCHAR(100) NOT NULL,
+	user_UUID VARCHAR(36) NOT NULL,
+        username VARCHAR(32) NOT NULL,	
+        password VARCHAR(32) NOT NULL,
+        salt VARCHAR(32) NOT NULL,
+	email VARCHAR(210) NOT NULL,
+        verify tinyint(1) NOT NULL DEFAULT 0,
+        flag tinyint(1) NOT NULL DEFAULT 0,
+	token_UUID VARCHAR(32) NOT NULL,
         PRIMARY KEY ( id )
     )`;
 
@@ -56,4 +63,18 @@ connection.connect(function(err) {
         }
     });
 
+});
+
+//Insert into Database
+let user_insert = `INSERT INTO accounts(username, password)
+    VALUES(?,?)`;
+
+//example method
+let sample = ['username', 'password'];
+
+connection.query(user_insert, sample, (err, results, fields) => {
+  if (err) {
+    return console.error(err.message);
+  }
+  console.log('Id:' + results.insertId);
 });
