@@ -254,7 +254,13 @@ align-self: top;
       margin: 4px 2px;
       font-weight: bold;
       cursor: pointer;
+      -webkit-transition-duration: 0.4s;
+      transition-duration: 0.4s;
 
+    }
+
+    .submit-buttons:hover {
+      color: white;
     }
     
   
