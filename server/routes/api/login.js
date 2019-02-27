@@ -3,6 +3,9 @@ const fetch = require("node-fetch");
 module.exports = (app) => {
 
     app.post('/api/signup', function(req, res) {
+
+        console.log( "Got signup request" )
+
         if(!req.body
         || !req.body.username
         || !req.body.password
