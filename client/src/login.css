@@ -50,24 +50,7 @@ align-self: top;
     
     }
 
-.notification-bar {
-  top:0px;left:0px;width:100%;
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
-  position: fixed;
-  background-color: rgb(187, 182, 182);
 
-}
-
-
-
-  
-.logo {
-font-size: 250%;
-font-family:'SignPainter';
-font-weight: bold;
-color: #1b6f85;
-  }
 
 
   .popup {
@@ -92,6 +75,119 @@ color: #1b6f85;
     background: white;
   }
 
-
+  div {
+    display: block;
+  }
+  
+  .notification-bar {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(187, 182, 182);
+    position: relative;
+    z-index: 301;
+      min-width: 100%;
+   
+  }
+  
+  .head {
+    float: left;
+    
+  }
+  .head1 {
+    margin: 7px 0;
+    
+    margin-right: 0.5%;
+  
+  }
+  
+  .logo {
+    font-family:'SignPainter';
+    font-size: 110%;
+    font-weight: bold;
+    color: #1b6f85;
+    display: inline-block;
+    outline: none;
+    padding: 2px;
+    position: relative;
+  }
+  
+  
+  
+  
+  
+  .notimg {
+    fill: none;
+    stroke: none;
+    stroke-opacity: 0;
+  }
+  
+  .notify {
+    background-color: transparent;
+    border: none;
+    margin-left:78%;
+    position: absolute;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    float: left;
+    align-self: auto;
+    outline: none;
+    
+    
+  }
+  
+  .in {
+    background-color: #81c5d6;
+    border-color: #225964;
+    position: relative;
+    margin-left:73%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding-bottom: 0.5%;
+    padding-top: 0.5%;
+    align-self: auto;
+    
+  }
+  
+  .search {
+  
+    background-color: transparent;
+    border: none;
+    margin-right:10%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    align-self: auto;
+    position: relative;
+    outline: none;
+    
+  
+    
+    
+  }
+  
+  .user {
+    background-color: transparent;
+    border: none;
+    margin-left:94%;
+    position: absolute;
+    outline: none;
+    display: inline-block;
+    padding: 10px 25px;
+    align-self: auto;
+  }
+  
+  .userimg {
+    height: 28pt;
+    width: 28pt;
+  }
+  
+  .searchimg {
+    height: 20pt;
+    width: 20pt;
+  }
+  .notimg {
+    height: 25pt;
+    width: 25pt;
+  }
+  
 
 
