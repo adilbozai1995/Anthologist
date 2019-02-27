@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const mysql = require('mysql')
+const nodemail = require('nodemailer')
 const port = 3070
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -47,6 +48,13 @@ db2.connect(function(err) {
 });
 global.sqlsec = db2;
 
+global.mailer = nodemail.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'anthologist.noreply@gmail.com',
+        pass: 'Team36rocks!'
+    }
+});
 app.listen(port, (err) => {
     if ( err ) { console.log( err ); };
     console.log(`Anthologist backend server listening on port ${port}!`);
