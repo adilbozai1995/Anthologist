@@ -26,6 +26,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "is-uuid": "^1.0.2",
+    "nodemailer": "^5.1.1",
     "uuid": "^3.3.2"
   }
 }
