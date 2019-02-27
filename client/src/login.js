@@ -82,15 +82,16 @@ constructor() {
         <div className="black_line"></div>
         
         <div className="login_side"> 
-        <h1>Login</h1>
+        <h1 className= 'login-sign-up'>Login</h1>
         
         <div class="email_login_attributes">
-        <label> Email address  </label>
+        <label className='login-labels'> Email address  </label>
         <input type="text" id="email_id"/>
         </div>
 
+      
         <div class="login_pass_attributes">
-        <label> Password  </label>
+        <label className='login-labels'> Password  </label>
         <input type="password" id="login_password"/>
         </div>
 
@@ -106,25 +107,26 @@ constructor() {
         </div>
 
 
+       {/* SIGN UP SIDE */}
 
-        <div className="sign_up_side">
-        <h1>Sign Up</h1>
+        <div className="sign_up_side">  
+        <h1 className= 'login-sign-up' >Sign Up</h1>
 
 
 
         <div class="up_username_attributes">
-        <label> Username  </label>
+        <label className='login-labels'> Username   </label>
         <input type="text" id="up_username"/>
         </div>
 
         
         <div class="email_up_attributes">
-        <label> Email address  </label>
+        <label className='login-labels' > Email address  </label>
         <input type="text" id="email_id_up"/>
         </div>
 
         <div class="up_pass_attributes">
-        <label> Password  </label>
+        <label className='login-labels' > Password  </label>
         <input type="password" id="up_password"/>
         </div>
 
@@ -150,7 +152,7 @@ constructor() {
         </div>
         
         {/* Search Bar */}
-        <input className="in" type="text" ></input>
+        <input id="search_input bar" className="in" type="text" ></input>
         <button className="notify"><img className="notimg" src='notification-icon.png'></img> </button>
         <button className="user"><img className="userimg" src='avatar.png'></img> </button>
          <button className="search"><img className="searchimg" src='search.png'></img> </button>

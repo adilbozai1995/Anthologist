@@ -188,6 +188,29 @@ align-self: top;
     height: 25pt;
     width: 25pt;
   }
+
+  .login-sign-up {
+    font-family:'SignPainter';
+    font-size: 300%;
+    font-weight: bold;
+    color: black;
+    display: inline-block;
+    outline: none;
+    padding: 2px;
+    position: relative;
+  }
+
+  .login-labels {
+    font-family:'SignPainter';
+    font-size: 130%;
+    font-weight: bold;
+    color: black;
+    display: inline-block;
+    outline: none;
+    padding: 2px;
+    position: relative;
+  }
+  
   
 
 
