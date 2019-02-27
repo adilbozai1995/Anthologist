@@ -3,7 +3,7 @@ import './login.css';
 
 class Popup extends React.Component {
   onForgotSendClicked(){
-    var email_reset = document.getElementById('email_reset_mail'); 
+    var email_reset = document.getElementById('email_reset_mail');
      console.log(email_reset.value);
   }
   render() {
@@ -13,7 +13,7 @@ class Popup extends React.Component {
           <h1>Reset Password</h1>
           <label> Send Email  </label>
         <input type="text" id="email_reset_mail"/>
-        <button id ="send_mail_btn" onClick={() => this.onForgotSendClicked()} 
+        <button id ="send_mail_btn" onClick={() => this.onForgotSendClicked()}
         color="blue">Send Email</button>{' '}
         <button onClick={this.props.closePopup}>Done</button>
         </div>
