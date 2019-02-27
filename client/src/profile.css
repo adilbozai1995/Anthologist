@@ -1,0 +1,158 @@
+@import url('http://garten.in.ua/css/fonts/SignPainter-HouseScript/SignPainter.css');
+
+.App {
+height: 100vh;
+background-image: linear-gradient(#00b8e6, #005266);
+}
+
+.notification-bar {
+top:0px;left:0px;width:100%;
+padding-top: 0.5%;
+padding-bottom: 0.5%;
+position: fixed;
+background-color: rgb(187, 182, 182);
+}
+
+.logo {
+font-size: 250%;
+font-family:'SignPainter';
+font-weight: bold;
+color: #1b6f85;
+}
+
+.Namecontainer {
+    height: 25%;
+    padding-top: 0.75%;
+    padding-bottom: 0.5%;
+    margin-top: 30px;
+    width: 100%;left: 0px;
+    /* background-color: white; */
+}
+
+        .Image{
+            height: 150px;
+            margin-left: 4%;
+            margin-top: 1.75%;
+            float: left;
+            background-image: url(android.svg);
+            width:150px;
+            box-shadow: 1px 1px 5px black;
+        }
+
+        .Name{
+            height: 90px;
+            /*background-color: rebeccapurple; */
+            margin-left: 20%;
+            width: 50%;
+            padding-top: 1%;
+        }
+                .name{
+                    height: 90px;
+                    width: 100%;
+                    font-style: italic;
+                    font-display: bold;
+                    font-size: 75px;
+                    font-family:'Roboto';
+                    font-family:'SignPainter';
+                    color: black;
+                    /*background-color: red; */
+                }
+
+        .Age{
+            height: 50px;
+            margin-left: 20%;
+            width: 50%;
+            font-style: italic;
+            font-display: bold;
+            /*background-color: bisque; */
+            font-size: 25px;
+            font-family:'Roboto';
+            padding-top: 0.5%;
+            padding-bottom: 0.5%;
+        }
+
+                .age{
+                    height: 50px;
+                    width:100%;
+                    font-size: 35px;
+                    font-family:'SignPainter';
+                    color: black;
+                    /*background-color: brown; */
+                }
+
+        .Box{
+            height: 95px;
+            margin-left: 20%;
+            width: 50%;
+            font-style: italic;
+            font-display: bold;
+            font-size: 25px;
+            /* background-color: indianred; */
+            font-family:'Roboto';
+        }
+
+                    .typetext{
+                        height: 95px;
+                        width: 100%;
+                        padding-top: 3.75%;
+                        /* background-color: crimson; */
+                        padding-bottom: 0.5%;
+                    }
+
+
+.Contributioncontainer{
+    left:0px;width:100%;
+    margin-bottom: -20px;
+    padding-top: 3.5%;
+    height: 75%;
+    /* background-color: peru;  */
+}
+
+                .contribution{
+                    height: 10%;
+                    margin-left:15%; margin-right:15%;width:60%;
+                    font-style: bold;
+                    font-style: italic;  
+                    font-size: 45px;
+                    margin-top: 1.5%;
+                    text-align:center; 
+                    font-display: center;
+                    font-family: 'Times New Roman', Times, serif;
+                    text-align: center;
+                    font-family: 'Roboto';
+                    /* background-color: rgb(23, 50, 139);  */
+                }
+
+                        .cont{
+                            height: 100px;
+                            width: 100%;
+                            font-style: italic;
+                            font-display: bold;
+                            font-size: 65px;
+                            font-family:'Roboto';
+                            font-family:'SignPainter';
+                            color: black;
+
+                        }
+
+                .btn{
+                    margin-left:7%; margin-right:5%;width:50%;
+                    border-radius: 10px;
+                    float:left;
+                    margin-top: 75px;
+                    width: 100px;
+                    height: 100px; 
+                    background-image: url(android.svg);
+                    
+                 }
+
+                 .btn2{
+                    margin-left:7%; margin-right:5%;width:50%;
+                    border-radius: 10px;
+                    box-align: center;
+                    float:left;
+                    margin-top: 75px;
+                    width: 100px;
+                    height: 100px; 
+                    background-image: url(android.svg);
+                 }
