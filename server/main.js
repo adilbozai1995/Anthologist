@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
     res.send("Anthologist backend!");
 });
 
-// Connect to the database as the insecure bot
+// Connect to the database as the insecure bot. use for reading data
 var db1 = mysql.createConnection({
     host: 'thestrugglingengineer.com',
     port: '3306',
@@ -31,7 +31,7 @@ db1.connect(function(err) {
 });
 global.sqlcon = db1;
 
-// Connect to the database as the secure bot
+// Connect to the database as the secure bot. use for writing data.
 var db2 = mysql.createConnection({
     host: 'thestrugglingengineer.com',
     port: '3306',
