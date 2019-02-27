@@ -62,7 +62,7 @@ constructor() {
      console.log(password);
      console.log(username);
 
-     var sign_up_json = '{"username":username, "password":password, "email",target}';
+     var sign_up_json = {"username":username, "password":password, "email":target};
      var obj = JSON.stringify(sign_up_json);
 
      var xhttp = new XMLHttpRequest();
