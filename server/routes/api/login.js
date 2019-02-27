@@ -49,16 +49,50 @@ module.exports = (app) => {
 
         if(!req.body
         || !req.body.email
-        || !req.body.password ) return res.sendStatus(400)
+        || !req.body.password )
+        {
+            console.log( 'login: missing field' )
+            return res.sendStatus(400)
+        }
 
         const email = req.body.email
         const password = req.body.password
 
-        console.log( email + ", " + password )
+        if(email.length > 254
+        || password.length > 32 )
+        {
+            console.log( 'login: field too long' )
+            return res.sendStatus(400)
+        }
 
-        const salt = ""
-        const hashpass = crypto.pbkdf2Sync( password, salt, 100000, 32, "sha512" )
+        sqlcon.query(
+            'SELECT id, password, salt, token FROM accounts WHERE email=?;',
+            [ email ],
+            function ( err, rsql )
+            {
+                if ( err ) console.log( "login: sql_error: " + err )
 
-        console.log(hashpass.toString("hex"), salt.toString("hex"))
-    })
+                if ( rsql.length > 0 )
+                {
+                    var acct = rsql[0];
+
+                    const salt = Buffer.from( acct.salt, 'hex' )
+                    const hashpass = crypto.pbkdf2Sync( password, salt, 100000, 32, "sha512" )
+
+                    if ( hashpass.toString('hex') === acct.password )
+                    {
+                        console.log( "login: correct password for email: " + email );
+                    }
+                    else
+                    {
+                        console.log( "login: incorrect password for email: " + email );
+                    }
+                }
+                else
+                {
+                    console.log( "login: no account with email: " + email );
+                }
+            }
+        );
+    });
 }
