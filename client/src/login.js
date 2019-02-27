@@ -58,13 +58,12 @@ constructor() {
     var password = document.getElementById('up_password').value; 
     var username = document.getElementById('up_username').value; 
     
-     console.log(target);
-     console.log(password);
-     console.log(username);
+     
 
      var sign_up_json = {"username":username, "password":password, "email":target};
      var obj = JSON.stringify(sign_up_json);
 
+      console.log(obj);
      var xhttp = new XMLHttpRequest();
      xhttp.open("POST", "/api/signup" , true);
      xhttp.onreadystatechange = function () {
@@ -76,7 +75,7 @@ constructor() {
 
         }
      };
-
+     xhttp.setRequestHeader("Content-Type", "application/json");
      xhttp.send(obj);
 
 
