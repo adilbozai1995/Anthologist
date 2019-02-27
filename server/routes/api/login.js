@@ -37,12 +37,26 @@ module.exports = (app) => {
             'INSERT INTO accounts (id, username, password, salt, email, token) VALUES ( ?, ?, ?, ?, ?, ? )',
             [ acctid, username, hashpass.toString('hex'), salt.toString('hex'), email, token ],
             function( err, rsql ) {
-                if ( err ) console.log( "signup: sql_error: " + err )
-                console.log( rsql )
+                if ( err )
+                {
+                    if ( err.code === 'ER_DUP_ENTRY' )
+                    {
+                        console.log( "signup: duplicate email" )
+                        res.json({"status":"fail","reason":"duplicate email"});
+                    }
+                    else
+                    {
+                        console.log( "signup: sql_error: ", err );
+                        res.json({"status":"fail","reason":"un-caught sql error"});
+                    }
+                }
+                else
+                {
+                    console.log( rsql )
+                    res.json({ "status":"okay","account":acctid,"token":token});
+                }
             }
         );
-
-        res.json({ "account":acctid, "token":token });
     })
 
     app.post('/api/login', function(req, res) {
@@ -66,11 +80,15 @@ module.exports = (app) => {
         }
 
         sqlcon.query(
-            'SELECT id, password, salt, token FROM accounts WHERE email=?;',
+            'SELECT id, password, salt FROM accounts WHERE email=?;',
             [ email ],
             function ( err, rsql )
             {
-                if ( err ) console.log( "login: sql_error: " + err )
+                if ( err )
+                {
+                    console.log( "login: sql_error: ", err );
+                    res.json({"status":"fail","reason":"un-caught sql error"});
+                }
 
                 if ( rsql.length > 0 )
                 {
@@ -81,16 +99,23 @@ module.exports = (app) => {
 
                     if ( hashpass.toString('hex') === acct.password )
                     {
+                        const token = crypto.randomBytes(32).toString('hex');
+
+                        sqlsec.query( 'UPDATE accounts SET token=? WHERE id=?;', [ token, acct.id ] );
+
                         console.log( "login: correct password for email: " + email );
+                        res.json({"status":"okay","account":acct.id,"token":token})
                     }
                     else
                     {
                         console.log( "login: incorrect password for email: " + email );
+                        res.json({"status":"fail","reason":"incorrect password"})
                     }
                 }
                 else
                 {
                     console.log( "login: no account with email: " + email );
+                    res.json({"status":"fail","reason":"no account with that email"})
                 }
             }
         );
