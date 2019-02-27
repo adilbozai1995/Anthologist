@@ -18,7 +18,7 @@ var db1 = mysql.createConnection({
     host: 'thestrugglingengineer.com',
     port: '3306',
     user: 'service',
-    password: 'Anthologist',
+    password: '9nQzDKe2kDs+y7o2VArScg==',
     database: 'Anthologist'
 });
 
@@ -35,7 +35,7 @@ var db2 = mysql.createConnection({
     host: 'thestrugglingengineer.com',
     port: '3306',
     user: 'serviceSecure',
-    password: 'Anthologist',
+    password: 'C+n9NscBcHbYPmAp6cN5Hw==',
     database: 'Anthologist'
 });
 
@@ -45,7 +45,7 @@ db2.connect(function(err) {
     }
     console.log('Connected to the MySQL server.');
 });
-global.sqlcon = db2;
+global.sqlsec = db2;
 
 app.listen(port, (err) => {
     if ( err ) { console.log( err ); };
