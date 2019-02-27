@@ -46,6 +46,25 @@ constructor() {
      document.getElementById('login_password').value = ""; 
      document.getElementById('email_id').value = ""; 
 
+
+     var sign_up_json = {"email":target, "password":password};
+     var obj = JSON.stringify(sign_up_json);
+
+      console.log(obj);
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/signup" , true);
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+
+
+        }
+     };
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.send(obj);
+
      //Password and username recived as text!
      
 
