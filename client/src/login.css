@@ -108,6 +108,8 @@ align-self: top;
     outline: none;
     padding: 2px;
     position: relative;
+    cursor: pointer;
+
   }
   
   
@@ -130,7 +132,8 @@ align-self: top;
     float: left;
     align-self: auto;
     outline: none;
-    
+    cursor: pointer;
+
     
   }
   
@@ -157,10 +160,8 @@ align-self: top;
     align-self: auto;
     position: relative;
     outline: none;
-    
-  
-    
-    
+    cursor: pointer;
+
   }
   
   .user {
@@ -172,6 +173,8 @@ align-self: top;
     display: inline-block;
     padding: 10px 25px;
     align-self: auto;
+    cursor: pointer;
+
   }
   
   .userimg {
@@ -250,7 +253,6 @@ align-self: top;
       font-size: 30px;
       margin: 4px 2px;
       font-weight: bold;
-      
       cursor: pointer;
 
     }
