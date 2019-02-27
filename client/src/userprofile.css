@@ -188,7 +188,7 @@
                 border-style: solid;
                 border-width: 4pt;
                 border-color: black;
-                /* background-color: indianred; */
+                background-color: white;
             }
     
                         .typetext{
@@ -197,7 +197,7 @@
                             padding-top: 3.75%;
                             /* background-color: crimson; */
                             padding-bottom: 0.5%;
-                            font-size: 30px;
+                            font-size: 35px;
                             font-display: bold;
                             text-align: center;
                             font-family:'SignPainter';
