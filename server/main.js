@@ -18,6 +18,7 @@ app.get('/', function (req, res) {
 app.listen(port, () => console.log(`Anthologist backend server listening on port ${port}!`))
 
 //MySQL Stuff here
+//Connect to server and Database
 let mysql = require('mysql');
 let connection = mysql.createConnection({
     host: 'thestrugglingengineer.com',
@@ -28,9 +29,31 @@ let connection = mysql.createConnection({
 });
 
 connection.connect(function(err) {
-  if (err) {
-    return console.error('error: ' + err.message);
-  }
- 
-  console.log('Connected to the MySQL server.');
+    if (err) {
+        return console.error('error: ' + err.message);
+    }
+    console.log('Connected to the MySQL server.');
+
+
+    //Create User Account Table
+    //set varchar to max length, and so on
+    let user_accounts = `create table accounts(
+        id INT NOT NULL AUTO_INCREMENT,
+        username VARCHAR(100) NOT NULL,	
+        password VARCHAR(100) NOT NULL,
+        PRIMARY KEY ( id )
+    )`;
+
+    connection.query(user_accounts, function(err, results, fields){
+        if (err) {
+            console.log(err.message);
+        }
+    });
+
+    connection.end(function(err) {
+        if (err) {
+        return console.log(err.message);
+        }
+    });
+
 });
