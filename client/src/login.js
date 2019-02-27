@@ -89,6 +89,7 @@ constructor() {
         <input type="text" id="email_id"/>
         </div>
 
+      
         <div class="login_pass_attributes">
         <label> Password  </label>
         <input type="password" id="login_password"/>
@@ -106,8 +107,9 @@ constructor() {
         </div>
 
 
+       {/* SIGN UP SIDE */}
 
-        <div className="sign_up_side">
+        <div className="sign_up_side">  
         <h1>Sign Up</h1>
 
 
@@ -150,7 +152,7 @@ constructor() {
         </div>
         
         {/* Search Bar */}
-        <input className="in" type="text" ></input>
+        <input id="search_input bar" className="in" type="text" ></input>
         <button className="notify"><img className="notimg" src='notification-icon.png'></img> </button>
         <button className="user"><img className="userimg" src='avatar.png'></img> </button>
          <button className="search"><img className="searchimg" src='search.png'></img> </button>
