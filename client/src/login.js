@@ -54,12 +54,32 @@ constructor() {
 
   onSignUpClicked()
   {
-    var target = document.getElementById('email_id_up'); 
-    var password = document.getElementById('up_password'); 
-    var username = document.getElementById('up_username'); 
-     console.log(target.value);
-     console.log(password.value);
-     console.log(username.value);
+    var target = document.getElementById('email_id_up').value; 
+    var password = document.getElementById('up_password').value; 
+    var username = document.getElementById('up_username').value; 
+    
+     console.log(target);
+     console.log(password);
+     console.log(username);
+
+     var sign_up_json = '{"username":username, "password":password, "email",target}';
+     var obj = JSON.stringify(sign_up_json);
+
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/signup" , true);
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+
+
+        }
+     };
+
+     xhttp.send(obj);
+
+
 
      document.getElementById('up_username').value = ""; 
      document.getElementById('up_password').value = ""; 
@@ -110,12 +130,12 @@ constructor() {
        {/* SIGN UP SIDE */}
 
         <div className="sign_up_side">  
-        <h1>Sign Up</h1>
+        <h1 className= 'login-sign-up' >Sign Up</h1>
 
 
 
         <div class="up_username_attributes">
-        <label className='login-labels'> Username  </label>
+        <label className='login-labels'> Username   </label>
         <input type="text" id="up_username"/>
         </div>
 

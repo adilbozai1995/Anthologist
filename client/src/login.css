@@ -202,7 +202,7 @@ align-self: top;
 
   .login-labels {
     font-family:'SignPainter';
-    font-size: 100%;
+    font-size: 130%;
     font-weight: bold;
     color: black;
     display: inline-block;
@@ -210,6 +210,7 @@ align-self: top;
     padding: 2px;
     position: relative;
   }
+  
   
 
 
