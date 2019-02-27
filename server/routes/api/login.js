@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const request = require("request");
 const crypto = require("crypto")
 const uuid = require("uuid/v4")
 const isuuid = require("is-uuid")
@@ -52,8 +52,10 @@ module.exports = (app) => {
                 }
                 else
                 {
-                    console.log( rsql )
+                    console.log( "signup: account created" )
                     res.json({ "status":"okay","account":acctid,"token":token});
+
+                    request.post( "http://localhost:3070/api/verify", {json:{"account":acctid,"token":token}} );
                 }
             }
         );
