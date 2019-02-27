@@ -9,7 +9,7 @@ background-image: linear-gradient(#00b8e6, #005266);
   left: 45vh;
   width: 700px;
   height: 500px;
-  background-color: rgba(255, 255, 255, 0.336);
+  background-color: transparent;
   
 }
 
@@ -46,8 +46,7 @@ align-self: top;
     left: 45vh;
     width: 349px;
     height: 500px;
-    
-    
+  
     }
 
 
@@ -72,7 +71,7 @@ align-self: top;
     top: 25%;
     bottom: 25%;
     margin: auto;
-    background: white;
+    background-color: antiquewhite;
   }
 
   div {
@@ -190,6 +189,7 @@ align-self: top;
   }
 
   .login-sign-up {
+    height: 20%;
     font-family:'SignPainter';
     font-size: 300%;
     font-weight: bold;
@@ -202,14 +202,59 @@ align-self: top;
 
   .login-labels {
     font-family:'SignPainter';
-    font-size: 130%;
+    font-size: 160%;
     font-weight: bold;
     color: black;
     display: inline-block;
     outline: none;
     padding: 2px;
     position: relative;
+
   }
+
+  .label-inputs {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 50%;
+  background-color: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  border-bottom: 1px solid black;
+  margin-left: -3%; 
+  font-size: 100%;
+  }
+  
+
+  .sign_up_side {
+    align-items: center;
+  }
+
+  .label-div label {
+     display: inline-block; 
+     width: 150px; 
+     height: 60px;
+     text-align: left; 
+    }
+
+    .submit-buttons {
+
+      background-image: linear-gradient(#7a8386, #454849);
+      background-attachment: fixed;
+      font-family:'SignPainter';
+      border: none;
+      color: black;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 30px;
+      margin: 4px 2px;
+      font-weight: bold;
+      
+      cursor: pointer;
+
+    }
+    
   
   
 

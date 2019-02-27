@@ -84,23 +84,23 @@ constructor() {
         <div className="login_side"> 
         <h1 className= 'login-sign-up'>Login</h1>
         
-        <div class="email_login_attributes">
+        <div class="label-div">
         <label className='login-labels'> Email address  </label>
-        <input type="text" id="email_id"/>
+        <input className='label-inputs' type="text" id="email_id"/>
         </div>
 
       
-        <div class="login_pass_attributes">
+        <div class="label-div">
         <label className='login-labels'> Password  </label>
-        <input type="password" id="login_password"/>
+        <input className='label-inputs' type="password" id="login_password"/>
         </div>
 
         <div>
-        <button id ="login_btn" onClick={() => this.onLoginClicked()} 
+        <button className="submit-buttons" id ="login_btn" onClick={() => this.onLoginClicked()} 
         color="blue">Submit</button>{' '}
 
         
-        <button id= "forgot_btn" onClick={this.togglePopup.bind(this)}>Forgot it?</button>
+        <button className="submit-buttons" id= "forgot_btn" onClick={this.togglePopup.bind(this)}>Forgot it?</button>
         
         </div>
 
@@ -114,24 +114,24 @@ constructor() {
 
 
 
-        <div class="up_username_attributes">
+        <div class="label-div">
         <label className='login-labels'> Username   </label>
-        <input type="text" id="up_username"/>
+        <input className='label-inputs' type="text" id="up_username"/>
         </div>
 
         
-        <div class="email_up_attributes">
+        <div class="label-div">
         <label className='login-labels' > Email address  </label>
-        <input type="text" id="email_id_up"/>
+        <input className='label-inputs' type="text" id="email_id_up"/>
         </div>
 
-        <div class="up_pass_attributes">
+        <div class="label-div">
         <label className='login-labels' > Password  </label>
-        <input type="password" id="up_password"/>
+        <input className='label-inputs' type="password" id="up_password"/>
         </div>
 
         <div>
-        <button id ="up_btn" onClick={() => this.onSignUpClicked()} 
+        <button className="submit-buttons" id ="up_btn" onClick={() => this.onSignUpClicked()} 
         color="blue">Submit</button>{' '}
 
         </div>
