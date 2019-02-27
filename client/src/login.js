@@ -139,10 +139,23 @@ constructor() {
         
         </div>  
         
+        {/* Menu top bar */}
         <div className="notification-bar">
-        <a className="logo" href>anthologist</a>
-        </div>
 
+        {/* Anthologist logo */}
+        <div className="head">
+          <h1 className="head1">
+            <a className="logo" href>anthologist</a>
+          </h1>
+        </div>
+        
+        {/* Search Bar */}
+        <input className="in" type="text" ></input>
+        <button className="notify"><img className="notimg" src='notification-icon.png'></img> </button>
+        <button className="user"><img className="userimg" src='avatar.png'></img> </button>
+         <button className="search"><img className="searchimg" src='search.png'></img> </button>
+
+        </div>
         
         
  
