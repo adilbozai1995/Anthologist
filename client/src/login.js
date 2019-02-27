@@ -109,13 +109,8 @@ constructor() {
 
        {/* SIGN UP SIDE */}
 
-<<<<<<< HEAD
-        <div className="sign_up_side">
-        <h1 className= 'login-sign-up'>Sign Up</h1>
-=======
         <div className="sign_up_side">  
         <h1>Sign Up</h1>
->>>>>>> 5a8036e5d447ef324e54aadeb0e7ffc5efc35505
 
 
 
