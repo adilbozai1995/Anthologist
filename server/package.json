@@ -24,6 +24,8 @@
   },
   "homepage": "https://gitlab.com/Quantx/writers-blocks#README",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "is-uuid": "^1.0.2",
+    "uuid": "^3.3.2"
   }
 }

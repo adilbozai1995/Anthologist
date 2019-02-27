@@ -46,6 +46,25 @@ constructor() {
      document.getElementById('login_password').value = ""; 
      document.getElementById('email_id').value = ""; 
 
+
+     var sign_up_json = {"email":target, "password":password};
+     var obj = JSON.stringify(sign_up_json);
+
+      console.log(obj);
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/signup" , true);
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+
+
+        }
+     };
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.send(obj);
+
      //Password and username recived as text!
      
 
@@ -54,12 +73,31 @@ constructor() {
 
   onSignUpClicked()
   {
-    var target = document.getElementById('email_id_up'); 
-    var password = document.getElementById('up_password'); 
-    var username = document.getElementById('up_username'); 
-     console.log(target.value);
-     console.log(password.value);
-     console.log(username.value);
+    var target = document.getElementById('email_id_up').value; 
+    var password = document.getElementById('up_password').value; 
+    var username = document.getElementById('up_username').value; 
+    
+     
+
+     var sign_up_json = {"username":username, "password":password, "email":target};
+     var obj = JSON.stringify(sign_up_json);
+
+      console.log(obj);
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/signup" , true);
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+
+
+        }
+     };
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.send(obj);
+
+
 
      document.getElementById('up_username').value = ""; 
      document.getElementById('up_password').value = ""; 
