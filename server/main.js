@@ -26,7 +26,7 @@ db1.connect(function(err) {
     if (err) {
         return console.error('MySQL error: ' + err.message);
     }
-    console.log('Connected to the MySQL server.');
+    console.log('Connected to the MySQL server as: service');
 });
 global.sqlcon = db1;
 
@@ -43,7 +43,7 @@ db2.connect(function(err) {
     if (err) {
         return console.error('MySQL error: ' + err.message);
     }
-    console.log('Connected to the MySQL server.');
+    console.log('Connected to the MySQL server as: serviceSecure');
 });
 global.sqlsec = db2;
 
