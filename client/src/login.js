@@ -74,14 +74,14 @@ constructor() {
 
   onLoginClicked()
   {
-     var target = document.getElementById('email_id').value;
+     var email = document.getElementById('email_id').value;
      var password = document.getElementById('login_password').value;
     //  console.log(target.value);
     //  console.log(password.value);
      document.getElementById('login_password').value = "";
      document.getElementById('email_id').value = "";
 
-     var obj = JSON.stringify({"email":target, "password":password});
+     var obj = JSON.stringify({"email":email, "password":password});
     //  console.log(obj);
 
      var xhttp = new XMLHttpRequest();

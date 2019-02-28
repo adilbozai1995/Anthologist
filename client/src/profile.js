@@ -18,7 +18,7 @@ class profile extends Component {
         {/* Anthologist logo */}
         <div className="head">
           <h1 className="head1">
-            <a className="logo" href>anthologist</a>
+          <Link to='/'><a className="logo" href>anthologist</a></Link>
           </h1>
         </div>
         
@@ -55,10 +55,10 @@ class profile extends Component {
         <span className='btn2'> STORY 4</span>
         <span className='btn2'>STORY 3</span>
 
-        <span className='btn'>STORY 5</span>
-        <span className='btn'>STORY 6</span>
-        <span className='btn2'>STORY 8</span>
-        <span className='btn2'> STORY 7</span>
+        <span className='btn'>Block A</span>
+        <span className='btn'>Block B</span>
+        <span className='btn2'>Block C</span>
+        <span className='btn2'> Block D</span>
         
 
         

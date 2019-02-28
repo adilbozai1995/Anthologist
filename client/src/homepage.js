@@ -32,9 +32,9 @@ class homepage extends Component {
         
         {/* Top buttons under menu bar */}
         <div className='top-buttons'>
-        <button className="submit-buttons" id ="new-story" color="blue">New </button>
-        <div className="black_line"></div>
-        <button className="submit-buttons" id ="popular-stories" color="blue"> Popular</button>
+        <button className="submit-buttons_2" id ="new-story" color="blue">New </button>
+        <div className="black_line_2"></div>
+        <button className="submit-buttons_2" id ="popular-stories" color="blue"> Popular</button>
         <button className="create-story" id ="create-story-button" color="blue"> create a story</button>
         </div>
 
