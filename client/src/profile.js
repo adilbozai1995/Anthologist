@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import queryString from 'query-string';
 import logo from './logo.svg';
 import { Link } from 'react-router-dom';
 
@@ -51,20 +52,50 @@ class profile extends Component {
 
             }
 
-            if(localStorage.account === account) {
-              document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
-            }
-            else
-            {
-              document.getElementById('logout').parentNode.removeChild(document.getElementById('logout'));
-            }
-
           }
           
         }
      };
      xhttp.send(obj);
 
+    if(localStorage.account === account)
+    {
+      document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
+    }
+    else
+    {
+      document.getElementById('logout').parentNode.removeChild(document.getElementById('logout'));
+    }
+
+     const args = queryString.parse(this.props.location.search);
+
+     if ( !args.verify ) return;
+     if ( localStorage.account !== account) return;
+
+     var vobj = JSON.stringify({
+      "account":account,
+      "token":localStorage.token,
+      "verify":args.verify
+   });
+
+    console.log(this.props)
+
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/fetch-profile" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+          
+          if (response.status === 'okay') {
+
+          }
+          
+        }
+     };
+     xhttp.send(vobj);
   }
 
   onFlag() {
