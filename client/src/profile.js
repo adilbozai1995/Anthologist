@@ -15,6 +15,7 @@ class profile extends Component {
       isHidden: true
     }
   }
+
   toggleHidden () {
     this.setState({
       isHidden: !this.state.isHidden
@@ -98,6 +99,37 @@ class profile extends Component {
      xhttp.send(vobj);
   }
 
+onClickVerifyEmail(){
+  if ( !localStorage.account || !localStorage.token ) return;
+
+    var obj = JSON.stringify({
+      "account":localStorage.account,
+      "token":localStorage.token,
+    });
+
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/send-verification" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+           
+          if (response.status === 'okay') {
+            window.location.replace("/profile/" + localStorage.account)
+          }
+          else
+          {
+            localStorage.account = ""
+            localStorage.token = ""
+          }
+        }
+     };
+     xhttp.send(obj);
+
+}
+
   onFlag() {
 
     var flag = this.props.match.params.account;
@@ -163,15 +195,9 @@ onLogout() {
         </div>  
 
         <div>
-          <button id ="verified" onClick={this.toggleHidden.bind(this)} className="ver"> Verify Email</button> {this.state.isHidden}
+          <button id ="verified" onClick={() => this.onClickVerifyEmail()} className="ver"> Verify Email</button> {this.state.isHidden}
         
         </div>
-        
-        
-            
-            
-        
-
 
         <div id ="2" className="Namecontainer">
             <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 

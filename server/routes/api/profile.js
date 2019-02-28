@@ -52,7 +52,7 @@ module.exports = (app) => {
         if(!req.body
         || !req.body.account
         || !req.body.token
-        || !req.body.flag)
+        || !req.body.flag) // The account being flagged
         {
             console.log("flag-profile: missing field")
             return res.sendStatus(400)
@@ -70,21 +70,43 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
-        request.post( "http://localhost:3070/api/validate", {json:{"account":account,"token":token}}, function(err, vres, body)
+        request.post( "http://localhost:3070/api/validate", {json:{"account":account,"token":token}}, function(verr, vres, body)
         {
-            if ( err )
+            if ( verr )
             {
-                console.log( "flag-profile: validate request error: ", err )
+                console.log( "flag-profile: validate request error: ", verr )
                 res.json({"status":"fail","reason":"unable to authenticate"})
-            }
-            else if ( 1 == 0 )
-            {
-                console.log( "flag-profile: invalid authentication token for account: " + account )
-                res.json({"status":"fail","reason":"invalid authentication token"})
             }
             else
             {
-                console.log(body)
+                var vresb = JSON.parse( body )
+
+                else if ( vresp.status === "fail" )
+                {
+                    console.log( "flag-profile: invalid authentication token for account: " + account )
+                    res.json({"status":"fail","reason":"invalid authentication token"})
+                }
+                else
+                {
+                    sqlsec.query("UPDATE accounts SET flag=? WHERE id=? AND id='no_flag';", [ account, flag ], function( err, rsql )
+                    {
+                        if ( err )
+                        {
+                            console.log( "flag-profile: sql_error: ", err )
+                            res.json({"status":"fail","reason":"un-caught sql error"})
+                        }
+                        else if ( rsql.affectedRows < 1 )
+                        {
+                            console.log("flag-profile: account already flagged or doesn't exist: (FLAG:" + flag + "|ACCT:" + account + ")" )
+                            res.json({"status":"fail","reason":"account already flaged or doesn't exist"})
+                        }
+                        else
+                        {
+                            console.log("flag-profile: account: " + flag + " flagged by: " + account)
+                            res.json({"status":"okay"})
+                        }
+                    });
+                }
             }
         });
     });
