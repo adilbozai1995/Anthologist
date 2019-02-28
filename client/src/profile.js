@@ -8,15 +8,28 @@ import './profile.css';
 
 class profile extends Component {
 
-
+  constructor () {
+    super()
+    this.state = {
+      isHidden: true
+    }
+  }
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
 
 
   componentDidMount() {
 
-    
+<<<<<<< HEAD
+=======
+    var account = this.props.match.params.account;
 
+>>>>>>> 7c1d20c8eff034896044ccb80abe6e16f8c1c775
     var obj = JSON.stringify({
-      "account":this.props.match.params.account
+      "account":account
    });
 
     console.log(this.props)
@@ -34,7 +47,20 @@ class profile extends Component {
             //update dom with new data           
             document.getElementById('n1').innerHTML = response.username;
             document.getElementById('user_description').innerHTML = response.description;
+            var verify_return = response.verify;
 
+            if(verify_return === ("verified")){
+             //toggleHidden();              
+
+            }
+
+            if(localStorage.account === account) {
+              document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
+            }
+            else
+            {
+              document.getElementById('logout').parentNode.removeChild(document.getElementById('logout'));
+            }
 
           }
           
@@ -44,8 +70,42 @@ class profile extends Component {
 
   }
 
+<<<<<<< HEAD
 
+  // onClickVerifyEmail(){
+  //   var xhttp = new XMLHttpRequest();
+  //    xhttp.open("POST", "/api/send-verification" , true);
+  //    xhttp.setRequestHeader("Content-Type", "application/json");
+  //    xhttp.onreadystatechange = function () {
+  //       if(this.readyState === 4 && this.status === 200) {
+  //         var response = JSON.parse(this.responseText);
+  //         console.log(response);
+          
+  //         if (response.status === 'okay') {
+  //           //update dom with new data           
+  //           document.getElementById('n1').innerHTML = response.username;
+  //           document.getElementById('user_description').innerHTML = response.description;
+  //           var verify_return = response.verify;
 
+  //           if(verify_return === ("verified")){
+  //            //toggleHidden();              
+
+  //           }
+  //         }
+  //       }
+  //    };
+  //    xhttp.send(obj);
+  // }
+
+=======
+  
+onLogout() {
+            
+            localStorage.account = ""
+            localStorage.token =""
+    
+        }
+>>>>>>> 7c1d20c8eff034896044ccb80abe6e16f8c1c775
 
   render() {
     return (
@@ -70,13 +130,21 @@ class profile extends Component {
 
         </div>  
 
+        <div>
+          <button id ="verified" onClick={this.toggleHidden.bind(this)} className="ver"> Verify Email</button> {this.state.isHidden}
+        
+        </div>
         
         
-      
+            
+            
+        
 
 
         <div id ="2" className="Namecontainer">
             <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
+            <button id='flag' className="notify"><img className="notimg" src='/flg.png'></img> </button>
+            <Link to='/'><button className="create-story" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
            
             <div id = "n1" className="Name"> <a className="name" href> </a> </div>
             <div id = "n2" className="Rating"> <a className="rating" href> Marks: 4.2 </a></div>

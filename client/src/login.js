@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link,Prompt } from 'react-router-dom';
 import './login.css';
 
+
 class Popup extends React.Component {
   onForgotSendClicked(){
     var email_reset = document.getElementById('email_reset_mail');
@@ -125,8 +126,11 @@ constructor() {
      };
      xhttp.send(obj);
 
-     //Password and username recived as text!
+
      
+     
+     
+
 
 
   }
@@ -235,6 +239,8 @@ constructor() {
         <div>
         <button className="submit-buttons" id ="up_btn" onClick={() => this.onSignUpClicked()} 
         color="blue">Submit</button>{' '}
+
+        <button onclick="window.location.href='./homepage'">Click Me</button>
 
         </div>
 
