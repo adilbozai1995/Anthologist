@@ -150,4 +150,56 @@ module.exports = (app) => {
             }
         );
     });
+
+    app.post('/api/send-reset', function(req, res) {
+
+        if(!req.body
+        || !req.body.email )
+        {
+            console.log( 'login: missing field' )
+            return res.sendStatus(400)
+        }
+
+        const email = req.body.email
+
+        if( email.length > 254 )
+        {
+            console.log( 'login: field too long' )
+            return res.sendStatus(400)
+        }
+
+        sqlcon.query("SELECT id FROM accounts WHERE email=?;", [ email ], function( err, rsql )
+        {
+            if ( err )
+            {
+                console.log( "reset: sql_error: ", err );
+                res.json({"status":"fail","reason":"un-caught sql error"});
+            }
+            else if ( rsql.length == 0 )
+            {
+                console.log( "reset: no account with email: " + email );
+                res.json({"status":"fail","reason":"no account with that email"});
+            }
+            else
+            {
+                var reskey = crypto.randomBytes(32).toString('hex');
+                var resurl = "http://localhost:3000/reset/" + rsql[0].id + "?reset=" + reskey
+
+                mailer.sendMail({
+                    'from': 'anthologist.noreply@gmail.com',
+                    'to': email,
+                    'subject': 'Reset your password',
+                    'text': ( 'Click on this link to reset your account password: ' + resurl )
+                }, (err, info) => {
+                    //console.log(info.envelope);
+                    //console.log(info.messageId);
+                });
+
+                sqlsec.query("UPDATE accounts SET reset=? WHERE id=?;", [ reskey, rsql[0].id ] );
+
+                console.log( "reset: password reset email sent to: " + email )
+                res.json({"status":"okay"})
+            }
+        });
+    });
 }

@@ -10,25 +10,23 @@ class Popup extends React.Component {
 
     var obj = JSON.stringify({"email":email_reset.value});
 
-     var xhttp = new XMLHttpRequest();
-     xhttp.open("POST", "/api/reset" , true);
-     xhttp.setRequestHeader("Content-Type", "application/json");
-     xhttp.onreadystatechange = function () {
-        if(this.readyState === 4 && this.status === 200) {
-       
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/send-reset" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function () {
+       if(this.readyState === 4 && this.status === 200) {
+
           var response = JSON.parse(this.responseText);
           console.log(response);
-          
+
           if (response.status === 'okay') {
-          //tell the user 
+          //tell the user
           }
-          
+
         }
      };
      xhttp.send(obj);
-    
-     
-
   }
   render() {
     return (
