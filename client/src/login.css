@@ -1,8 +1,10 @@
 .App {
 height: 100vh;
-background-image: linear-gradient(#00b8e6, #005266);
+ background-image: linear-gradient(#00b8e6, #005266); 
 }
-
+.div {
+  display: block;
+}
 .box{
   position: fixed;
   top: 20vh;
