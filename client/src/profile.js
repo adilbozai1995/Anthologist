@@ -7,12 +7,22 @@ import './profile.css';
 
 
 class profile extends Component {
-  verify(){
 
-    var obj = JSON.stringify({"token":localStorage.token});
+  
+
+
+  componentDidMount() {
+
+    
+
+    var obj = JSON.stringify({
+      "account":this.props.match.params.account
+   });
+
+    console.log(this.props)
 
      var xhttp = new XMLHttpRequest();
-     xhttp.open("POST", "/api/reset" , true);
+     xhttp.open("POST", "/api/fetch-profile" , true);
      xhttp.setRequestHeader("Content-Type", "application/json");
      xhttp.onreadystatechange = function () {
         if(this.readyState === 4 && this.status === 200) {
@@ -29,9 +39,10 @@ class profile extends Component {
      };
      xhttp.send(obj);
 
-
-
   }
+
+
+
 
   render() {
     return (
@@ -64,11 +75,11 @@ class profile extends Component {
         <div id ="2" className="Namecontainer">
             <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
            
-            <div id = "n1" className="Name"> <a className="name" href> Alexa Charles </a> </div>
+            <div id = "n1" className="Name"> <a className="name" href> </a> </div>
             <div id = "n2" className="Rating"> <a className="rating" href> Marks: 4.2 </a></div>
             
             <div id = "n3" className="Box"> 
-                <div className="typetext"> This is an example User Description</div>
+                <div id = "user_description" className="typetext"> This is an example User Description</div>
             </div>
             
         </div> 
@@ -112,6 +123,10 @@ class profile extends Component {
 
 
       </div>
+
+
+
+
     );
   }
 }

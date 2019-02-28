@@ -21,7 +21,7 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
-        sqlcon.fetch( "SELECT username, description, flag FROM accounts WHERE id=?;", [ account ],
+        sqlcon.query( "SELECT username, description, flag FROM accounts WHERE id=?;", [ account ],
             function (err, rsql)
             {
                 if ( err )
