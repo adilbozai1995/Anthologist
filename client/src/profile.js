@@ -8,12 +8,20 @@ import './profile.css';
 
 class profile extends Component {
 
-
+  constructor () {
+    super()
+    this.state = {
+      isHidden: true
+    }
+  }
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
 
 
   componentDidMount() {
-
-    
 
     var obj = JSON.stringify({
       "account":this.props.match.params.account
@@ -34,6 +42,12 @@ class profile extends Component {
             //update dom with new data           
             document.getElementById('n1').innerHTML = response.username;
             document.getElementById('user_description').innerHTML = response.description;
+            var verify_return = response.verify;
+
+            if(verify_return === ("verified")){
+             //toggleHidden();              
+
+            }
 
 
           }
@@ -45,6 +59,30 @@ class profile extends Component {
   }
 
 
+  // onClickVerifyEmail(){
+  //   var xhttp = new XMLHttpRequest();
+  //    xhttp.open("POST", "/api/send-verification" , true);
+  //    xhttp.setRequestHeader("Content-Type", "application/json");
+  //    xhttp.onreadystatechange = function () {
+  //       if(this.readyState === 4 && this.status === 200) {
+  //         var response = JSON.parse(this.responseText);
+  //         console.log(response);
+          
+  //         if (response.status === 'okay') {
+  //           //update dom with new data           
+  //           document.getElementById('n1').innerHTML = response.username;
+  //           document.getElementById('user_description').innerHTML = response.description;
+  //           var verify_return = response.verify;
+
+  //           if(verify_return === ("verified")){
+  //            //toggleHidden();              
+
+  //           }
+  //         }
+  //       }
+  //    };
+  //    xhttp.send(obj);
+  // }
 
 
   render() {
@@ -70,7 +108,10 @@ class profile extends Component {
 
         </div>  
 
+        <div>
+          <button id ="verified" onClick={this.toggleHidden.bind(this)} className="ver"> Verify Email</button> {this.state.isHidden}
         
+        </div>
         
       
 
