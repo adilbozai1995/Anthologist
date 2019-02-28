@@ -81,7 +81,7 @@ module.exports = (app) => {
             {
                 var vresb = JSON.parse( body )
 
-                else if ( vresp.status === "fail" )
+                if ( vresp.status === "fail" )
                 {
                     console.log( "flag-profile: invalid authentication token for account: " + account )
                     res.json({"status":"fail","reason":"invalid authentication token"})
