@@ -46,10 +46,9 @@ class profile extends Component {
             //update dom with new data           
             document.getElementById('n1').innerHTML = response.username;
             document.getElementById('user_description').innerHTML = response.description;
-            var verify_return = response.verify;
 
-            if(verify_return === ("verified")){
-             //toggleHidden();              
+            if(response.verify === "verified"){
+              document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));            
 
             }
 
@@ -202,7 +201,7 @@ onLogout() {
         <div id ="2" className="Namecontainer">
             <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
             <button id='flag' className="notify"><img className="notimg" src='/flg.png' onClick={() => this.onFlag()} ></img> </button>
-            <Link to='/'><button className="create-story" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
+            <Link to='/'><button className="logout" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
            
             <div id = "n1" className="Name"> <a className="name" href> </a> </div>
             <div id = "n2" className="Rating"> <a className="rating" href> Marks: 4.2 </a></div>

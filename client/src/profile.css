@@ -4,7 +4,7 @@
     position: relative;
     overflow: hidden;
     overflow-y: scroll;
-    overflow-x: scroll;
+    
 
     }
 
@@ -56,7 +56,34 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 20px;
+  font-size: 25px;
+  margin: 10px 2px;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  outline: none;
+  margin-top: 4%;
+  margin-right: -2%
+  
+      }
+      
+      .ver:hover {
+        color: white;
+      }
+      
+      .logout {
+        float: right;
+  width: 14%;
+  background-color: transparent;
+  background-attachment: fixed;
+  font-family:'SignPainter';
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
   margin: 10px 2px;
   font-weight: bold;
   cursor: pointer;
@@ -64,10 +91,12 @@
   transition-duration: 0.4s;
   outline: none;
   margin-top: 0%;
+  margin-right: -15%
       }
-      
-      
-      
+
+      .logout:hover {
+        color: white;
+      }
       
       .notimg {
         fill: none;
