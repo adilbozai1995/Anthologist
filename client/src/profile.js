@@ -7,6 +7,32 @@ import './profile.css';
 
 
 class profile extends Component {
+  verify(){
+
+    var obj = JSON.stringify({"token":localStorage.token});
+
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/reset" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+          
+          if (response.status === 'okay') {
+           //check verify
+
+          }
+          
+        }
+     };
+     xhttp.send(obj);
+
+
+
+  }
+
   render() {
     return (
 
@@ -29,6 +55,8 @@ class profile extends Component {
          <button className="search"><img className="searchimg" src='/search.png'></img> </button>
 
         </div>  
+
+        
         
       
 

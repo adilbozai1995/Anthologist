@@ -5,7 +5,30 @@ import './login.css';
 class Popup extends React.Component {
   onForgotSendClicked(){
     var email_reset = document.getElementById('email_reset_mail');
-     console.log(email_reset.value);
+    console.log(email_reset.value);
+
+
+    var obj = JSON.stringify({"email":email_reset.value});
+
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/reset" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+          
+          if (response.status === 'okay') {
+          //tell the user 
+          }
+          
+        }
+     };
+     xhttp.send(obj);
+    
+     
+
   }
   render() {
     return (
