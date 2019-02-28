@@ -13,10 +13,10 @@ class profile extends Component {
 
   componentDidMount() {
 
-    
+    var account = this.props.match.params.account;
 
     var obj = JSON.stringify({
-      "account":this.props.match.params.account
+      "account":account
    });
 
     console.log(this.props)
@@ -35,6 +35,13 @@ class profile extends Component {
             document.getElementById('n1').innerHTML = response.username;
             document.getElementById('user_description').innerHTML = response.description;
 
+            if(localStorage.account === account) {
+              document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
+            }
+            else
+            {
+              document.getElementById('logout').parentNode.removeChild(document.getElementById('logout'));
+            }
 
           }
           
@@ -44,8 +51,13 @@ class profile extends Component {
 
   }
 
-
-
+  
+onLogout() {
+            
+            localStorage.account = ""
+            localStorage.token =""
+    
+        }
 
   render() {
     return (
@@ -72,11 +84,16 @@ class profile extends Component {
 
         
         
-      
+        
+            
+            
+        
 
 
         <div id ="2" className="Namecontainer">
             <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
+            <button id='flag' className="notify"><img className="notimg" src='/flg.png'></img> </button>
+            <Link to='/'><button className="create-story" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
            
             <div id = "n1" className="Name"> <a className="name" href> </a> </div>
             <div id = "n2" className="Rating"> <a className="rating" href> Marks: 4.2 </a></div>
