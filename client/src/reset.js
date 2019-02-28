@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import queryString from 'query-string';
 import ReactDOM from 'react-dom';
 
 import './reset.css';
@@ -9,25 +10,36 @@ import './homepage.css';
 
 
 class reset extends Component {
+  componentDidMount() {
+    const args = queryString.parse(this.props.location.search)
+
+    if ( !args.reset ) window.location.replace("/");
+  }
+
   onChangePass(){
 
-    var password= document.getElementById('reset_password').value;
-    
-    var key = "gf";
-   
+    var password = document.getElementById('reset_password').value;
+
+    const args = queryString.parse(this.props.location.search)
+
+    if ( !args.reset )
+    {
+        window.location.replace("/");
+        return;
+    }
+
     document.getElementById('reset_password').value = "";
-   
+
     var account = this.props.match.params.account;
 
-    var obj = JSON.stringify({"account":account,"reset":key, "password":password});
-   
+    var obj = JSON.stringify({"account":account,"reset":args.reset,"password":password});
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/api/reset" , true);
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.onreadystatechange = function () {
        if(this.readyState === 4 && this.status === 200) {
-      
+
          var response = JSON.parse(this.responseText);
          console.log(response);
 
@@ -60,9 +72,9 @@ class reset extends Component {
         
         {/* Search Bar */}
         <input id="search_input bar" className="in" type="text" ></input>
-        <button className="notify"><img className="notimg" src='notification-icon.png'></img> </button>
-        <button className="user"><img className="userimg" src='avatar.png'></img> </button>
-         <button className="search"><img className="searchimg" src='search.png'></img> </button>
+        <button className="notify"><img className="notimg" src='/notification-icon.png'></img> </button>
+        <button className="user"><img className="userimg" src='/avatar.png'></img> </button>
+         <button className="search"><img className="searchimg" src='/search.png'></img> </button>
 
         </div>
 

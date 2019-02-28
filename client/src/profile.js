@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import queryString from 'query-string';
 import logo from './logo.svg';
 import { Link } from 'react-router-dom';
 
@@ -14,6 +15,7 @@ class profile extends Component {
       isHidden: true
     }
   }
+
   toggleHidden () {
     this.setState({
       isHidden: !this.state.isHidden
@@ -44,19 +46,10 @@ class profile extends Component {
             //update dom with new data           
             document.getElementById('n1').innerHTML = response.username;
             document.getElementById('user_description').innerHTML = response.description;
-            var verify_return = response.verify;
 
-            if(verify_return === ("verified")){
-             //toggleHidden();              
+            if(response.verify === "verified"){
+              document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));            
 
-            }
-
-            if(localStorage.account === account) {
-              document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
-            }
-            else
-            {
-              document.getElementById('logout').parentNode.removeChild(document.getElementById('logout'));
             }
 
           }
@@ -65,6 +58,115 @@ class profile extends Component {
      };
      xhttp.send(obj);
 
+    if( !localStorage.account || !localStorage.token)
+    {
+      document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
+    }
+
+    if(localStorage.account === account)
+    {
+      document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
+    }
+    else
+    {
+      document.getElementById('logout').parentNode.removeChild(document.getElementById('logout'));
+      document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));
+
+    }
+
+     const args = queryString.parse(this.props.location.search);
+
+     if ( !args.verify ) return;
+     if ( localStorage.account !== account) return;
+
+     var vobj = JSON.stringify({
+      "account":account,
+      "verify":args.verify
+   });
+
+    console.log(this.props)
+
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/verify" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+          
+          if (response.status === 'okay' || (response.status === 'fail' && response.reason === 'account already verified')) {
+            document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));
+          }
+          
+          
+        }
+     };
+     xhttp.send(vobj);
+  }
+
+onClickVerifyEmail(){
+  if ( !localStorage.account || !localStorage.token ) return;
+
+    var obj = JSON.stringify({
+      "account":localStorage.account,
+      "token":localStorage.token,
+    });
+
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/send-verification" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+           
+          if (response.status === 'okay') {
+            window.location.replace("/profile/" + localStorage.account)
+          }
+          else
+          {
+            localStorage.account = ""
+            localStorage.token = ""
+          }
+        }
+     };
+     xhttp.send(obj);
+
+}
+
+  onFlag() {
+
+    var flag = this.props.match.params.account;
+
+    var obj = JSON.stringify({
+      "account":localStorage.account,
+      "token":localStorage.token,
+      "flag":flag
+   });
+
+    console.log(this.props)
+
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/flag-profile" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+          
+          if (response.status === 'okay') {
+            
+            document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
+          }
+          
+        }
+     };
+     xhttp.send(obj);
+
+    
   }
 
   
@@ -93,26 +195,20 @@ onLogout() {
         {/* Search Bar */}
         <input className="in" type="text" ></input>
         <button className="notify"><img className="notimg" src='/notification-icon.png'></img> </button>
-        <button className="user"><img className="userimg" src='/avatar.png'></img> </button>
+        <button className="user"><Link to='/login'><img className="userimg" src='/avatar.png'></img></Link> </button>
          <button className="search"><img className="searchimg" src='/search.png'></img> </button>
 
         </div>  
 
         <div>
-          <button id ="verified" onClick={this.toggleHidden.bind(this)} className="ver"> Verify Email</button> {this.state.isHidden}
+          <button id ="verified" onClick={() => this.onClickVerifyEmail()} className="ver"> Verify Email</button> {this.state.isHidden}
         
         </div>
-        
-        
-            
-            
-        
-
 
         <div id ="2" className="Namecontainer">
             <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
-            <button id='flag' className="notify"><img className="notimg" src='/flg.png'></img> </button>
-            <Link to='/'><button className="create-story" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
+            <button id='flag' className="notify"><img className="notimg" src='/flg.png' onClick={() => this.onFlag()} ></img> </button>
+            <Link to='/'><button className="logout" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
            
             <div id = "n1" className="Name"> <a className="name" href> </a> </div>
             <div id = "n2" className="Rating"> <a className="rating" href> Marks: 4.2 </a></div>
@@ -139,21 +235,6 @@ onLogout() {
         <span className='btn2'> Block D</span>
         
 
-        
-         
-                        {/* <a href="https://www.google.com/"><button type="publish" class="btn" >Button1</button></a>
-                        <a href="https://www.google.com/"><button class="btn">Button2</button></a>
-
-                        <button type="submit" class="btn2" >Button3</button>
-                        <button type="publish" class="btn2" >Button4</button>
-                        <button class="btn2">Back2</button>
-
-                        <a href="https://www.google.com/"><button type="publish" class="btn" >Button5</button></a>
-                        <a href="https://www.google.com/"><button class="btn">Button6</button></a>
-
-                        <button type="submit" class="btn2" >Button7</button>
-                        <button type="publish" class="btn2" >Publish6</button>
-                        <button class="btn2">Back5</button> */}
 
                 </div>
 
