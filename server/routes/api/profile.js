@@ -50,9 +50,9 @@ module.exports = (app) => {
 
     app.post('/api/flag-profile', function(req, res) {
         if(!req.body
-        || !req.account
-        || !req.token
-        || !req.flag)
+        || !req.body.account
+        || !req.body.token
+        || !req.body.flag)
         {
             console.log("flag-profile: missing field")
             return res.sendStatus(400)
