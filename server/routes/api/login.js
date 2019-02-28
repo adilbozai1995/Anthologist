@@ -55,7 +55,7 @@ module.exports = (app) => {
                     console.log( "signup: account created" )
                     res.json({ "status":"okay","account":acctid,"token":token});
 
-                    request.post( "http://localhost:3070/api/verify", {json:{"account":acctid,"token":token}} );
+                    request.post( "http://localhost:3070/api/send-verification", {json:{"account":acctid,"token":token}} );
                 }
             }
         );
