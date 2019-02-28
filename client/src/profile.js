@@ -14,6 +14,7 @@ class profile extends Component {
       isHidden: true
     }
   }
+  
   toggleHidden () {
     this.setState({
       isHidden: !this.state.isHidden
@@ -23,11 +24,8 @@ class profile extends Component {
 
   componentDidMount() {
 
-<<<<<<< HEAD
-=======
     var account = this.props.match.params.account;
 
->>>>>>> 7c1d20c8eff034896044ccb80abe6e16f8c1c775
     var obj = JSON.stringify({
       "account":account
    });
@@ -70,42 +68,43 @@ class profile extends Component {
 
   }
 
-<<<<<<< HEAD
+onClickVerifyEmail(){
+  if ( !localStorage.account || !localStorage.token ) return;
 
-  // onClickVerifyEmail(){
-  //   var xhttp = new XMLHttpRequest();
-  //    xhttp.open("POST", "/api/send-verification" , true);
-  //    xhttp.setRequestHeader("Content-Type", "application/json");
-  //    xhttp.onreadystatechange = function () {
-  //       if(this.readyState === 4 && this.status === 200) {
-  //         var response = JSON.parse(this.responseText);
-  //         console.log(response);
-          
-  //         if (response.status === 'okay') {
-  //           //update dom with new data           
-  //           document.getElementById('n1').innerHTML = response.username;
-  //           document.getElementById('user_description').innerHTML = response.description;
-  //           var verify_return = response.verify;
+    var obj = JSON.stringify({
+      "account":localStorage.account,
+      "token":localStorage.token,
+    });
 
-  //           if(verify_return === ("verified")){
-  //            //toggleHidden();              
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/send-verification" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+           
+          if (response.status === 'okay') {
+            window.location.replace("/profile/" + localStorage.account)
+          }
+          else
+          {
+            localStorage.account = ""
+            localStorage.token = ""
+          }
+        }
+     };
+     xhttp.send(obj);
 
-  //           }
-  //         }
-  //       }
-  //    };
-  //    xhttp.send(obj);
-  // }
+}
 
-=======
-  
 onLogout() {
             
             localStorage.account = ""
             localStorage.token =""
     
         }
->>>>>>> 7c1d20c8eff034896044ccb80abe6e16f8c1c775
 
   render() {
     return (
@@ -131,15 +130,9 @@ onLogout() {
         </div>  
 
         <div>
-          <button id ="verified" onClick={this.toggleHidden.bind(this)} className="ver"> Verify Email</button> {this.state.isHidden}
+          <button id ="verified" onClick={() => this.onClickVerifyEmail()} className="ver"> Verify Email</button> {this.state.isHidden}
         
         </div>
-        
-        
-            
-            
-        
-
 
         <div id ="2" className="Namecontainer">
             <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
