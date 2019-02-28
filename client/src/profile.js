@@ -8,7 +8,17 @@ import './profile.css';
 
 class profile extends Component {
 
-
+  constructor () {
+    super()
+    this.state = {
+      isHidden: true
+    }
+  }
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
 
 
   componentDidMount() {
@@ -34,6 +44,12 @@ class profile extends Component {
             //update dom with new data           
             document.getElementById('n1').innerHTML = response.username;
             document.getElementById('user_description').innerHTML = response.description;
+            var verify_return = response.verify;
+
+            if(verify_return === ("verified")){
+             //toggleHidden();              
+
+            }
 
             if(localStorage.account === account) {
               document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
@@ -115,7 +131,10 @@ onLogout() {
 
         </div>  
 
+        <div>
+          <button id ="verified" onClick={this.toggleHidden.bind(this)} className="ver"> Verify Email</button> {this.state.isHidden}
         
+        </div>
         
         
             
