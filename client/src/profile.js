@@ -58,6 +58,11 @@ class profile extends Component {
      };
      xhttp.send(obj);
 
+    if( !localStorage.account || !localStorage.token)
+    {
+      document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
+    }
+
     if(localStorage.account === account)
     {
       document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
@@ -65,6 +70,8 @@ class profile extends Component {
     else
     {
       document.getElementById('logout').parentNode.removeChild(document.getElementById('logout'));
+      document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));
+
     }
 
      const args = queryString.parse(this.props.location.search);
@@ -89,9 +96,10 @@ class profile extends Component {
           var response = JSON.parse(this.responseText);
           console.log(response);
           
-          if (response.status === 'okay') {
-
+          if (response.status === 'okay' || (response.status === 'fail' && response.reason === 'account already verified')) {
+            document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));
           }
+          
           
         }
      };
