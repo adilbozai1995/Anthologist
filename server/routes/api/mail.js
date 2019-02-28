@@ -85,7 +85,6 @@ module.exports = (app) => {
 
         if(!req.body
         || !req.body.account
-        || !req.body.token
         || !req.body.verify )
         {
             console.log( "verify: missing field" );
@@ -93,7 +92,6 @@ module.exports = (app) => {
         }
 
         const account = req.body.account
-        const token = req.body.token
         const verkey = req.body.verify
 
         if ( !isuuid.v4(account)
@@ -105,7 +103,7 @@ module.exports = (app) => {
         }
 
         sqlcon.query(
-            "SELECT token, verify FROM accounts WHERE id=?;", [ account ],
+            "SELECT verify FROM accounts WHERE id=?;", [ account ],
             function ( err, rsql )
             {
                 if ( err )
@@ -113,41 +111,27 @@ module.exports = (app) => {
                     console.log( "verify: sql_error: ", err )
                     res.json({"status":"fail","reason":"un-caught sql error"})
                 }
+                else if ( rsql.length == 0 )
+                {
+                    console.log( "verify: no account with id: " + account )
+                    res.json({"status":"fail","reason":"no account with that id"})
+                }
+                else if ( rsql[0].verify === "verified" )
+                {
+                    console.log( "verify: account already verified: " + account )
+                    res.json({"status":"fail","reason":"account already verified"})
+                }
+                else if ( rsql[0].verify !== verkey )
+                {
+                    console.log( "verify: invalid verification key" )
+                    res.json({"status":"fail","reason":"invalid verification key"})
+                }
                 else
                 {
-                    if ( rsql.length > 0 )
-                    {
-                        if ( rsql[0].token === token )
-                        {
-                            if ( rsql[0].verify === "verified" )
-                            {
-                                console.log( "verify: account already verified: " + account )
-                                res.json({"status":"fail","reason":"account already verified"})
-                            }
-                            else if ( rsql[0].verify === verkey )
-                            {
-                                sqlsec.query( "UPDATE accounts SET verify='verified' WHERE id=?;", [account] );
+                    sqlsec.query( "UPDATE accounts SET verify='verified' WHERE id=?;", [account] );
 
-                                console.log( "verify: verified account with id: " + account )
-                                res.json({"status":"okay"})
-                            }
-                            else
-                            {
-                                console.log( "verify: invalid verification key" )
-                                res.json({"status":"fail","reason":"invalid verification key"})
-                            }
-                        }
-                        else
-                        {
-                            console.log( "verify: invalid security token" )
-                            res.json({"status":"fail","reason":"invalid security token"})
-                        }
-                    }
-                    else
-                    {
-                        console.log( "verify: no account with id: " + account )
-                        res.json({"status":"fail","reason":"no account with that id"})
-                    }
+                    console.log( "verify: verified account with id: " + account )
+                    res.json({"status":"okay"})
                 }
             }
         );

@@ -74,7 +74,6 @@ class profile extends Component {
 
      var vobj = JSON.stringify({
       "account":account,
-      "token":localStorage.token,
       "verify":args.verify
    });
 
