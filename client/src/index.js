@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter, Route,Switch} from 'react-router-dom';
 import login from './login';
 import userprofile from './profile';
+import reset from './reset';
 
 
 ReactDOM.render(
@@ -20,6 +21,7 @@ ReactDOM.render(
     <Route exact path='/' component={homepage}/>
     <Route exact path='/profile/:account' component={userprofile}></Route>
     <Route exact path='/login' component={login}></Route>
+    <Route exact path='/reset/:account' component={reset}></Route>
     </div>
     </Switch>
 </BrowserRouter>,
