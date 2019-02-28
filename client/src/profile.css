@@ -1,6 +1,11 @@
 .App {
     height: 100vh;
     background-image: linear-gradient(#00b8e6, #005266);
+    position: relative;
+    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: scroll;
+
     }
 
     div {
@@ -152,6 +157,17 @@
             }
                     .name{
                         height: 90px;
+                        width: 100%;
+                        font-display: bold;
+                        font-size: 55px;
+                        font-weight: bold;
+                        font-family:'SignPainter';
+                        color: black;
+                        /*background-color: red; */
+                    }
+
+                    #n1 {
+                      height: 90px;
                         width: 100%;
                         font-display: bold;
                         font-size: 55px;

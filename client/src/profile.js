@@ -1,10 +1,52 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import { Link } from 'react-router-dom';
 
-import './userprofile.css';
+
+import './profile.css';
 
 
-class userprofile extends Component {
+class profile extends Component {
+
+
+
+
+  componentDidMount() {
+
+    
+
+    var obj = JSON.stringify({
+      "account":this.props.match.params.account
+   });
+
+    console.log(this.props)
+
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/fetch-profile" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+          
+          if (response.status === 'okay') {
+            //update dom with new data           
+            document.getElementById('n1').innerHTML = response.username;
+            document.getElementById('user_description').innerHTML = response.description;
+
+
+          }
+          
+        }
+     };
+     xhttp.send(obj);
+
+  }
+
+
+
+
   render() {
     return (
 
@@ -16,29 +58,31 @@ class userprofile extends Component {
         {/* Anthologist logo */}
         <div className="head">
           <h1 className="head1">
-            <a className="logo" href>anthologist</a>
+          <Link to='/'><a className="logo" href>anthologist</a></Link>
           </h1>
         </div>
         
         {/* Search Bar */}
         <input className="in" type="text" ></input>
-        <button className="notify"><img className="notimg" src='notification-icon.png'></img> </button>
-        <button className="user"><img className="userimg" src='avatar.png'></img> </button>
-         <button className="search"><img className="searchimg" src='search.png'></img> </button>
+        <button className="notify"><img className="notimg" src='/notification-icon.png'></img> </button>
+        <button className="user"><img className="userimg" src='/avatar.png'></img> </button>
+         <button className="search"><img className="searchimg" src='/search.png'></img> </button>
 
         </div>  
+
+        
         
       
 
 
         <div id ="2" className="Namecontainer">
-            <div id = "n0" > <img className="Image" src='avatar.png' ></img> </div> 
+            <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
            
-            <div id = "n1" className="Name"> <a className="name" href> Alexa Charles </a> </div>
+            <div id = "n1" className="Name"> <a className="name" href> </a> </div>
             <div id = "n2" className="Rating"> <a className="rating" href> Marks: 4.2 </a></div>
             
             <div id = "n3" className="Box"> 
-                <div className="typetext"> This is an example User Description</div>
+                <div id = "user_description" className="typetext"> This is an example User Description</div>
             </div>
             
         </div> 
@@ -53,10 +97,10 @@ class userprofile extends Component {
         <span className='btn2'> STORY 4</span>
         <span className='btn2'>STORY 3</span>
 
-        <span className='btn'>STORY 5</span>
-        <span className='btn'>STORY 6</span>
-        <span className='btn2'>STORY 8</span>
-        <span className='btn2'> STORY 7</span>
+        <span className='btn'>Block A</span>
+        <span className='btn'>Block B</span>
+        <span className='btn2'>Block C</span>
+        <span className='btn2'> Block D</span>
         
 
         
@@ -82,8 +126,12 @@ class userprofile extends Component {
 
 
       </div>
+
+
+
+
     );
   }
 }
 
-export default userprofile;
+export default profile;

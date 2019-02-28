@@ -1,8 +1,15 @@
 .App {
-height: 100vh;
-background-image: linear-gradient(#00b8e6, #005266);
-}
+  height: 100vh;
+  background-image: linear-gradient(#00b8e6, #005266);
+  position: relative;
+  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: scroll;
 
+}
+.div {
+  display: block;
+}
 .box{
   position: fixed;
   top: 20vh;
