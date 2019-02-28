@@ -223,8 +223,45 @@ onLogout() {
                 <div id = "m0" className="contribution"> <a className="cont" href> Contributions </a></div> 
 
 
+              <div className='story-div' >
+                <span className='block'>STORY 1</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+              </div>
+              <div className='story-div' >
+                <span className='block'>STORY 1</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+              </div>
+              <div className='story-div' >
+                <span className='block'>STORY 1</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+              </div>
+              <div className='story-div' >
+                <span className='block'>STORY 1</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+              </div>
+              <div className='story-div' >
+                <span className='block'>STORY 1</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+                <span className='block'>Block</span>
+              </div>
+              
 
-                <span className='btn'>STORY 1</span>
+
+        {/* <span className='btn'>STORY 1</span>
         <span className='btn'>STORY 2</span>
         <span className='btn2'> STORY 4</span>
         <span className='btn2'>STORY 3</span>
@@ -233,10 +270,28 @@ onLogout() {
         <span className='btn'>Block B</span>
         <span className='btn2'>Block C</span>
         <span className='btn2'> Block D</span>
-        
+         */}
 
 
                 </div>
+
+      <div className='comments'>
+
+      <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
+      <span className='cmt'>Commented on a story called "A Boy with a Laptop"</span>
+      <span className='cmt'>Commented on a story called "A Boy with a Laptop"</span>
+      <span className='cmt'>Commented on a story called "Girl with the dragon tattoo"</span>
+      <span className='cmt'>Commented on a story called "The Guy who dies with the Vending Machine"</span>
+      <span className='cmt'>Commented on a story called "Apple Tree"</span>
+      <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
+      <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
+      <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
+      
+
+
+
+
+      </div>
 
 
 

@@ -270,9 +270,9 @@
     
     
     .Contributioncontainer{
-        width: 92%;
-    margin-left: 4%;
-    margin-top: -3%;
+        width: 100%;
+    margin-left: 7%;
+    margin-right: 50%;
     height: 47%;
          /* background-color: peru;   */
     }
@@ -282,11 +282,11 @@
                         height: 20%;
                         margin-left:15%; margin-right:15%;width:60%;
                         font-size: 45px;
-                        margin-top: 1.5%;
+                        margin-top: 4%;
                         text-align:center; 
-                        font-display: center;   
+                        font-display: center;  
+                        font-weight: bold; 
                         /* background-color: rgb(23, 50, 139);  */
-                        margin-left: 20%; 
                     }
     
                             .cont{
@@ -343,3 +343,73 @@
                         color: white;
                       }
     
+
+                      .comments {
+
+                          width: 92%;
+                          margin-left: 4%;
+                          margin-top: 9%;
+                          margin-bottom: 4%;
+
+                          height: 40%;
+                          background-color: #ffffff;
+                          border-style: solid;
+                          border-width: 4pt;
+                          border-color: black;
+                          overflow: hidden;
+                          overflow-y: scroll;
+
+    
+
+                      }
+
+                      .cmt {
+                        font-family: 'SignPainter';
+                        font-size: 140%;
+                        text-align: center;
+                        font-weight: bold;
+                        border-radius: 10px;
+                        float:left;
+                        margin-top: 2%;
+                        width: 100%;
+                        height: auto;
+                        background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+                         -webkit-transition-duration: 0.4s;
+                        transition-duration: 0.4s;
+                        cursor: pointer;
+                      }
+
+
+.story-div {
+  width: 15%;
+  height: 100%;
+  background-color: transparent;
+
+  overflow: hidden;
+  overflow-y: scroll;
+  float: left;
+  margin-right: 3%;
+  
+}
+.block {
+                        border-radius: 10px;
+                        font-family: 'SignPainter';
+                        font-size: 300%;
+                        text-align: center;
+                        font-weight: bold;
+                        border-radius: 10px;
+                        float: left;
+                        margin-top: 10%;
+                        margin-bottom: 10%;
+                        width: 150px;
+                        height: 100px;
+                        background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+                        box-shadow: 10px 10px grey;
+                         -webkit-transition-duration: 0.4s;
+                        transition-duration: 0.4s;
+                        cursor: pointer;
+}
+
+.block:hover {
+  color: white;
+}
