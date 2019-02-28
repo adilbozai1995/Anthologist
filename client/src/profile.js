@@ -24,9 +24,9 @@ class profile extends Component {
         
         {/* Search Bar */}
         <input className="in" type="text" ></input>
-        <button className="notify"><img className="notimg" src='notification-icon.png'></img> </button>
-        <button className="user"><img className="userimg" src='avatar.png'></img> </button>
-         <button className="search"><img className="searchimg" src='search.png'></img> </button>
+        <button className="notify"><img className="notimg" src='/notification-icon.png'></img> </button>
+        <button className="user"><img className="userimg" src='/avatar.png'></img> </button>
+         <button className="search"><img className="searchimg" src='/search.png'></img> </button>
 
         </div>  
         
@@ -34,7 +34,7 @@ class profile extends Component {
 
 
         <div id ="2" className="Namecontainer">
-            <div id = "n0" > <img className="Image" src='avatar.png' ></img> </div> 
+            <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
            
             <div id = "n1" className="Name"> <a className="name" href> Alexa Charles </a> </div>
             <div id = "n2" className="Rating"> <a className="rating" href> Marks: 4.2 </a></div>

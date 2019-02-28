@@ -18,7 +18,7 @@ class homepage extends Component {
         {/* Anthologist logo */}
         <div className="head">
           <h1 className="head1">
-            <a className="logo" href>anthologist</a>
+          <Link to='/'><a className="logo" href>anthologist</a></Link>
           </h1>
         </div>
         

@@ -38,30 +38,70 @@ constructor() {
       showPopup: !this.state.showPopup
     });
   }
+
+  componentDidMount() {
+
+    if ( !localStorage.account || !localStorage.token ) return;
+
+    var obj = JSON.stringify({
+      "account":localStorage.account,
+      "token":localStorage.token,
+    });
+
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/validate" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+          
+          if (response.status === 'okay') {
+            window.location.replace("/profile/" + localStorage.account)
+          }
+          else
+          {
+            localStorage.account = ""
+            localStorage.token = ""
+          }
+        }
+     };
+     xhttp.send(obj);
+
+  }
+
+
   onLoginClicked()
   {
      var target = document.getElementById('email_id').value;
      var password = document.getElementById('login_password').value;
-     console.log(target.value);
-     console.log(password.value);
+    //  console.log(target.value);
+    //  console.log(password.value);
      document.getElementById('login_password').value = "";
      document.getElementById('email_id').value = "";
 
      var obj = JSON.stringify({"email":target, "password":password});
-     console.log(obj);
+    //  console.log(obj);
 
      var xhttp = new XMLHttpRequest();
      xhttp.open("POST", "/api/login" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
      xhttp.onreadystatechange = function () {
         if(this.readyState === 4 && this.status === 200) {
        
           var response = JSON.parse(this.responseText);
           console.log(response);
 
+          if (response.status === 'okay') {
+            localStorage.token = response.token;
+            localStorage.account = response.account;
+            window.location.replace("/profile/" + response.account)
+          }
+
 
         }
      };
-     xhttp.setRequestHeader("Content-Type", "application/json");
      xhttp.send(obj);
 
      //Password and username recived as text!
@@ -72,25 +112,30 @@ constructor() {
 
   onSignUpClicked()
   {
-    var target = document.getElementById('email_id_up').value; 
+    var email = document.getElementById('email_id_up').value; 
     var password = document.getElementById('up_password').value; 
     var username = document.getElementById('up_username').value; 
 
-     var obj = JSON.stringify({"username":username, "password":password, "email":target});
+     var obj = JSON.stringify({"username":username, "password":password, "email":email});
 
-     console.log(obj);
      var xhttp = new XMLHttpRequest();
      xhttp.open("POST", "/api/signup" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
      xhttp.onreadystatechange = function () {
         if(this.readyState === 4 && this.status === 200) {
        
           var response = JSON.parse(this.responseText);
           console.log(response);
+          
+          if (response.status === 'okay') {
+            localStorage.token = response.token;
+            localStorage.account = response.account;
+            window.location.replace("/profile/" + response.account)
+          }
 
 
         }
      };
-     xhttp.setRequestHeader("Content-Type", "application/json");
      xhttp.send(obj);
 
 
@@ -183,8 +228,7 @@ constructor() {
         {/* Anthologist logo */}
         <div className="head">
           <h1 className="head1">
-            <a className="logo" href>anthologist</a>
-          </h1>
+          <Link to='/'><a className="logo" href>anthologist</a></Link></h1>
         </div>
         
         {/* Search Bar */}

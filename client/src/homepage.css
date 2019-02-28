@@ -178,8 +178,8 @@ div {
 
 
 .black_line {
-  position: absolute;
-  margin-top: -40px;
+  position: fixed;
+  margin-top: 0px;
   margin-left: 85px;
   
   width: 3px;
