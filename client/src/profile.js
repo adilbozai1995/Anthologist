@@ -8,7 +8,7 @@ import './profile.css';
 
 class profile extends Component {
 
-  
+
 
 
   componentDidMount() {
@@ -31,7 +31,7 @@ class profile extends Component {
           console.log(response);
           
           if (response.status === 'okay') {
-           
+            //update dom with new data           
             document.getElementById('n1').innerHTML = response.username;
             document.getElementById('user_description').innerHTML = response.description;
 
