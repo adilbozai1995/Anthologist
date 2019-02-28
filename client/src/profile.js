@@ -82,7 +82,7 @@ class profile extends Component {
     console.log(this.props)
 
      var xhttp = new XMLHttpRequest();
-     xhttp.open("POST", "/api/fetch-profile" , true);
+     xhttp.open("POST", "/api/verify" , true);
      xhttp.setRequestHeader("Content-Type", "application/json");
      xhttp.onreadystatechange = function () {
         if(this.readyState === 4 && this.status === 200) {
