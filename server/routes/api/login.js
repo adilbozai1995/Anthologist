@@ -122,4 +122,53 @@ module.exports = (app) => {
             }
         );
     });
+
+    app.post('/api/validate', function(req, res) {
+
+        if(!req.body
+        || !req.body.account
+        || !req.body.token )
+        {
+            console.log( 'validate: missing field' )
+            return res.sendStatus(400)
+        }
+
+        const account = req.body.account
+        const token = req.body.token
+
+        if(!isuuid.v4( account )
+        || token.length != 64 )
+        {
+            console.log( 'validate: incorrect field' )
+            return res.sendStatus(400)
+        }
+
+        sqlcon.query(
+            "SELECT token FROM accounts WHERE id=?;",
+            [ account ],
+            function( err, rsql )
+            {
+                if ( err )
+                {
+                    console.log( "validate: sql_error: ", err );
+                    res.json({"status":"fail","reason":"un-caught sql exception"});
+                }
+                else if ( rsql.length == 0 )
+                {
+                    console.log( "validate: no account with id: " + account );
+                    res.json({"status":"fail","reason":"no account with that id"});
+                }
+                else if ( rsql[0].token !== token )
+                {
+                    console.log( "validate: invalid login token for id: " + account );
+                    res.json({"status":"fail","reason":"invalid login token"});
+                }
+                else
+                {
+                    console.log( "validate: valid login token for id: " + account );
+                    res.json({"status":"okay"})
+                }
+            }
+        );
+    });
 }
