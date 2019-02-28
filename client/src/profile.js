@@ -3,10 +3,10 @@ import logo from './logo.svg';
 import { Link } from 'react-router-dom';
 
 
-import './userprofile.css';
+import './profile.css';
 
 
-class userprofile extends Component {
+class profile extends Component {
   render() {
     return (
 
@@ -88,4 +88,4 @@ class userprofile extends Component {
   }
 }
 
-export default userprofile;
+export default profile;
