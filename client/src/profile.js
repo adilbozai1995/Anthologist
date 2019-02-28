@@ -14,7 +14,7 @@ class profile extends Component {
       isHidden: true
     }
   }
-  
+
   toggleHidden () {
     this.setState({
       isHidden: !this.state.isHidden
@@ -99,6 +99,40 @@ onClickVerifyEmail(){
 
 }
 
+  onFlag() {
+
+    var flag = this.props.match.params.account;
+
+    var obj = JSON.stringify({
+      "account":localStorage.account,
+      "token":localStorage.token,
+      "flag":flag
+   });
+
+    console.log(this.props)
+
+     var xhttp = new XMLHttpRequest();
+     xhttp.open("POST", "/api/flag-profile" , true);
+     xhttp.setRequestHeader("Content-Type", "application/json");
+     xhttp.onreadystatechange = function () {
+        if(this.readyState === 4 && this.status === 200) {
+       
+          var response = JSON.parse(this.responseText);
+          console.log(response);
+          
+          if (response.status === 'okay') {
+            
+            document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
+          }
+          
+        }
+     };
+     xhttp.send(obj);
+
+    
+  }
+
+  
 onLogout() {
             
             localStorage.account = ""
@@ -124,7 +158,7 @@ onLogout() {
         {/* Search Bar */}
         <input className="in" type="text" ></input>
         <button className="notify"><img className="notimg" src='/notification-icon.png'></img> </button>
-        <button className="user"><img className="userimg" src='/avatar.png'></img> </button>
+        <button className="user"><Link to='/login'><img className="userimg" src='/avatar.png'></img></Link> </button>
          <button className="search"><img className="searchimg" src='/search.png'></img> </button>
 
         </div>  
@@ -136,7 +170,7 @@ onLogout() {
 
         <div id ="2" className="Namecontainer">
             <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
-            <button id='flag' className="notify"><img className="notimg" src='/flg.png'></img> </button>
+            <button id='flag' className="notify"><img className="notimg" src='/flg.png' onClick={() => this.onFlag()} ></img> </button>
             <Link to='/'><button className="create-story" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
            
             <div id = "n1" className="Name"> <a className="name" href> </a> </div>
@@ -164,21 +198,6 @@ onLogout() {
         <span className='btn2'> Block D</span>
         
 
-        
-         
-                        {/* <a href="https://www.google.com/"><button type="publish" class="btn" >Button1</button></a>
-                        <a href="https://www.google.com/"><button class="btn">Button2</button></a>
-
-                        <button type="submit" class="btn2" >Button3</button>
-                        <button type="publish" class="btn2" >Button4</button>
-                        <button class="btn2">Back2</button>
-
-                        <a href="https://www.google.com/"><button type="publish" class="btn" >Button5</button></a>
-                        <a href="https://www.google.com/"><button class="btn">Button6</button></a>
-
-                        <button type="submit" class="btn2" >Button7</button>
-                        <button type="publish" class="btn2" >Publish6</button>
-                        <button class="btn2">Back5</button> */}
 
                 </div>
 
