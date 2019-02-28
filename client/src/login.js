@@ -4,7 +4,7 @@ import './login.css';
 
 class Popup extends React.Component {
   onForgotSendClicked(){
-    var email_reset = document.getElementById('email_reset_mail'); 
+    var email_reset = document.getElementById('email_reset_mail');
      console.log(email_reset.value);
   }
   render() {
@@ -14,7 +14,7 @@ class Popup extends React.Component {
           <h1>Reset Password</h1>
           <label> Send Email  </label>
         <input type="text" id="email_reset_mail"/>
-        <button id ="send_mail_btn" onClick={() => this.onForgotSendClicked()} 
+        <button id ="send_mail_btn" onClick={() => this.onForgotSendClicked()}
         color="blue">Send Email</button>{' '}
         <button onClick={this.props.closePopup}>Done</button>
         </div>
@@ -40,20 +40,18 @@ constructor() {
   }
   onLoginClicked()
   {
-    var target = document.getElementById('email_id'); 
-    var password = document.getElementById('login_password'); 
+     var target = document.getElementById('email_id').value;
+     var password = document.getElementById('login_password').value;
      console.log(target.value);
      console.log(password.value);
-     document.getElementById('login_password').value = ""; 
-     document.getElementById('email_id').value = ""; 
+     document.getElementById('login_password').value = "";
+     document.getElementById('email_id').value = "";
 
+     var obj = JSON.stringify({"email":target, "password":password});
+     console.log(obj);
 
-     var sign_up_json = {"email":target, "password":password};
-     var obj = JSON.stringify(sign_up_json);
-
-      console.log(obj);
      var xhttp = new XMLHttpRequest();
-     xhttp.open("POST", "/api/signup" , true);
+     xhttp.open("POST", "/api/login" , true);
      xhttp.onreadystatechange = function () {
         if(this.readyState === 4 && this.status === 200) {
        
@@ -77,13 +75,10 @@ constructor() {
     var target = document.getElementById('email_id_up').value; 
     var password = document.getElementById('up_password').value; 
     var username = document.getElementById('up_username').value; 
-    
-     
 
-     var sign_up_json = {"username":username, "password":password, "email":target};
-     var obj = JSON.stringify(sign_up_json);
+     var obj = JSON.stringify({"username":username, "password":password, "email":target});
 
-      console.log(obj);
+     console.log(obj);
      var xhttp = new XMLHttpRequest();
      xhttp.open("POST", "/api/signup" , true);
      xhttp.onreadystatechange = function () {

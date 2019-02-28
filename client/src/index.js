@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+
 import homepage from './homepage';
+
 
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter, Route,Switch} from 'react-router-dom';
@@ -15,10 +17,9 @@ ReactDOM.render(
 <BrowserRouter>
 <Switch>
     <div>
-    <Route exact path='' component={homepage}/>
+    <Route exact path='/' component={homepage}/>
     <Route exact path='/userprofile' component={userprofile}></Route>
     <Route exact path='/login' component={login}></Route>
-
     </div>
     </Switch>
 </BrowserRouter>,
