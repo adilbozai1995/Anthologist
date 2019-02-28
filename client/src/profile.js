@@ -69,6 +69,8 @@ class profile extends Component {
          <button className="search"><img className="searchimg" src='/search.png'></img> </button>
 
         </div>  
+
+        
         
       
 
