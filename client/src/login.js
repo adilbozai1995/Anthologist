@@ -240,7 +240,6 @@ constructor() {
         <button className="submit-buttons" id ="up_btn" onClick={() => this.onSignUpClicked()} 
         color="blue">Submit</button>{' '}
 
-        <button onclick="window.location.href='./homepage'">Click Me</button>
 
         </div>
 
