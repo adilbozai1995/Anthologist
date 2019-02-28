@@ -49,6 +49,43 @@ module.exports = (app) => {
     });
 
     app.post('/api/flag-profile', function(req, res) {
-        
+        if(!req.body
+        || !req.account
+        || !req.token
+        || !req.flag)
+        {
+            console.log("flag-profile: missing field")
+            return res.sendStatus(400)
+        }
+
+        const account = req.body.account
+        const token = req.body.token
+        const flag = req.body.flag
+
+        if(!isuuid.v4( account )
+        || !isuuid.v4( flag )
+        || token.length != 64 )
+        {
+            console.log("flag-profile: invalid field")
+            return res.sendStatus(400)
+        }
+
+        request.post( "http://localhost:3070/api/validate", {json:{"account":account,"token":token}}, function(err, vres, body)
+        {
+            if ( err )
+            {
+                console.log( "flag-profile: validate request error: ", err )
+                res.json({"status":"fail","reason":"unable to authenticate"})
+            }
+            else if ( 1 == 0 )
+            {
+                console.log( "flag-profile: invalid authentication token for account: " + account )
+                res.json({"status":"fail","reason":"invalid authentication token"})
+            }
+            else
+            {
+                console.log(body)
+            }
+        });
     });
 }

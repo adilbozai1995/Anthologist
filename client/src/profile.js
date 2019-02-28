@@ -8,13 +8,26 @@ import './profile.css';
 
 class profile extends Component {
 
-
+  constructor () {
+    super()
+    this.state = {
+      isHidden: true
+    }
+  }
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
 
 
   componentDidMount() {
 
+<<<<<<< HEAD
+=======
     var account = this.props.match.params.account;
 
+>>>>>>> 7c1d20c8eff034896044ccb80abe6e16f8c1c775
     var obj = JSON.stringify({
       "account":account
    });
@@ -34,6 +47,12 @@ class profile extends Component {
             //update dom with new data           
             document.getElementById('n1').innerHTML = response.username;
             document.getElementById('user_description').innerHTML = response.description;
+            var verify_return = response.verify;
+
+            if(verify_return === ("verified")){
+             //toggleHidden();              
+
+            }
 
             if(localStorage.account === account) {
               document.getElementById('flag').parentNode.removeChild(document.getElementById('flag'));
@@ -51,6 +70,34 @@ class profile extends Component {
 
   }
 
+<<<<<<< HEAD
+
+  // onClickVerifyEmail(){
+  //   var xhttp = new XMLHttpRequest();
+  //    xhttp.open("POST", "/api/send-verification" , true);
+  //    xhttp.setRequestHeader("Content-Type", "application/json");
+  //    xhttp.onreadystatechange = function () {
+  //       if(this.readyState === 4 && this.status === 200) {
+  //         var response = JSON.parse(this.responseText);
+  //         console.log(response);
+          
+  //         if (response.status === 'okay') {
+  //           //update dom with new data           
+  //           document.getElementById('n1').innerHTML = response.username;
+  //           document.getElementById('user_description').innerHTML = response.description;
+  //           var verify_return = response.verify;
+
+  //           if(verify_return === ("verified")){
+  //            //toggleHidden();              
+
+  //           }
+  //         }
+  //       }
+  //    };
+  //    xhttp.send(obj);
+  // }
+
+=======
   
 onLogout() {
             
@@ -58,6 +105,7 @@ onLogout() {
             localStorage.token =""
     
         }
+>>>>>>> 7c1d20c8eff034896044ccb80abe6e16f8c1c775
 
   render() {
     return (
@@ -82,7 +130,10 @@ onLogout() {
 
         </div>  
 
+        <div>
+          <button id ="verified" onClick={this.toggleHidden.bind(this)} className="ver"> Verify Email</button> {this.state.isHidden}
         
+        </div>
         
         
             
