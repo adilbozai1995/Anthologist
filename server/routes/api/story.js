@@ -13,6 +13,7 @@ module.exports = (app) => {
         || !req.body.minblock    // Min blocks before voting starts
         || !req.body.votetime   // How long to keep voting open for (minutes)
         || !req.body.storylen )  // Min number of blocks before story can end
+        || !req.body.writers )
         {
             console.log( "story-create: missing fields" )
             return res.sendStatus(400)
@@ -60,6 +61,8 @@ module.exports = (app) => {
 
         const storylen = req.body.storylen
 
+        var writers = req.body.writers
+
         sqlcon.query( "SELECT token FROM accounts WHERE id=?;",
             [ account ],
             function( aerr, arsql )
@@ -77,7 +80,7 @@ module.exports = (app) => {
                         {
                             const storyid = uuid( )
 
-                            sqlcon.query( "INSERT INTO story (id, author, title, charlimit, minblock, votetime, storylen) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                            sqlsec.query( "INSERT INTO story (id, author, title, charlimit, minblock, votetime, storylen) VALUES (?, ?, ?, ?, ?, ?, ?)",
                             [
                                 storyid,
                                 account,
@@ -87,6 +90,18 @@ module.exports = (app) => {
                                 votetime,
                                 storylen
                             ]);
+
+                            for each ( user in writers )
+                            {
+                                if ( !isuuid.v4( user ) )
+                                {
+                                    sqlsec.query( "INSERT INTO story_writers (writer, story) VALUES (?, ?)",
+                                    [
+                                        user,
+                                        storyid
+                                    ]);
+                                }
+                            }
 
                             console.log("story-create: created new story: " + title );
                             res.json({"status":"okay","story":storyid});
