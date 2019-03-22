@@ -76,6 +76,9 @@ class story extends Component {
     });
   }
   
+  onBookmarkClicked(){
+    var x = 0;
+  }
 
   componentDidMount()
   {
@@ -211,7 +214,7 @@ class story extends Component {
         {/* Proposed Blocks */}
         <div className='proposed'>
             <div className='p-blocks'>
-                <span className='st1'>Completed Block 1</span>
+                <span className='st1'>Proposed Block 1</span>
                 <div className='author1'>Author</div>
                 <div className='slash1'>/</div>
                 <div className='likes1'>Likes</div>
@@ -219,17 +222,17 @@ class story extends Component {
 
             </div>
               <div className='p-blocks'>
-                <span className='st'>Completed Block 2</span>
-                <div className='author'>Author</div>
-                <div className='slash'>/</div>
-                <div className='likes'>Likes</div>
+                <span className='st'>Proposed Block 2</span>
+                <div className='author1'>Author</div>
+                <div className='slash1'>/</div>
+                <div className='likes1'>Likes</div>
 
             </div>
             <div className='p-blocks'>
-                <span className='st'>Completed Block 3</span>
-                <div className='author'>Author</div>
-                <div className='slash'>/</div>
-                <div className='likes'>Likes</div>
+                <span className='st'>Proposed Block 3</span>
+                <div className='author1'>Author</div>
+                <div className='slash1'>/</div>
+                <div className='likes1'>Likes</div>
             </div>
             
         </div>
@@ -238,7 +241,7 @@ class story extends Component {
         <button className="addAButton" id ="addAButtonID" color="blue">Add a block </button>
        
         {/* Add a bookmark button */}
-        <button className="bookmark"><img className="bkimg" src='/bookmark.png'></img> </button>
+        <button className="bookmark"><img className="bkimg" onClick={() => this.onBookmarkClicked()} src='/bookmark.png'></img> </button>
 
         {this.state.showPopup ? 
           <Popup
