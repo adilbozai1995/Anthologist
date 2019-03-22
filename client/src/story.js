@@ -23,7 +23,6 @@ class Popup extends React.Component {
 
 
 class story extends Component {
-<<<<<<< HEAD
   
   constructor() {
     super();
@@ -38,7 +37,6 @@ class story extends Component {
     });
   }
   
-=======
 
   componentDidMount()
   {
@@ -69,7 +67,6 @@ class story extends Component {
 
   }
 
->>>>>>> e0fa16db59e0441d55989c33fa67311173702f2d
   render() {
     return (
      
@@ -103,17 +100,10 @@ class story extends Component {
         {/* Blocks */}
         <div className='blocks-container'>
             <div className='blocks'>
-<<<<<<< HEAD
                 <button className='st' onClick={this.togglePopup.bind(this)}>Completed Block 1</button>
                 <div className='author'>Author</div>
                 <div className='slash'>/</div>
                 <div className='likes'>Likes</div>
-=======
-                <span className='st'>Completed Block 1</span>
-                <div className='author' id='sAuthor'>Author</div>
-                <div className='slash' id='sSlash'>/</div>
-                <div className='likes' id='sLikes'>Likes</div>
->>>>>>> e0fa16db59e0441d55989c33fa67311173702f2d
 
 
             </div>
