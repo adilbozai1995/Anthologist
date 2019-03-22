@@ -204,6 +204,9 @@ class story extends Component {
         {/* Add Block Button */}
         <button className="addAButton" id ="addAButtonID" color="blue">Add a block </button>
        
+        {/* Add a bookmark button */}
+        <button className="bookmark"><img className="bkimg" src='/bookmark.png'></img> </button>
+
         {this.state.showPopup ? 
           <Popup
             text='Close Me'

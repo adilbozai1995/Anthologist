@@ -494,3 +494,25 @@ text-align: center
   color: white;
 }
 
+.bookmark {
+  background-color: transparent;
+  border: none;
+  margin-left:93%;
+  position: absolute;
+  top: 13%;
+  margin-bottom: 1%;
+  float: left;
+  align-self: auto;
+  outline: none;
+  cursor: pointer;
+
+}
+
+
+
+.bkimg {
+
+
+  height: 28pt;
+  width: 28pt;
+}

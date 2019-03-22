@@ -37,7 +37,7 @@ class homepage extends Component {
         <button className="submit-buttons_2" id ="popular-stories" color="blue"> Popular</button>
         <button className="submit-buttons_2" id ="popular-stories" color="blue"> Following</button>
         <div className="black_line_3"></div>
-        <button className="create-story" id ="create-story-button" color="blue"> create a story</button>
+        <button className="create-story" id ="create-story-button" color="blue"><Link className="create-story" to='/new-story'> create a story</Link></button>
         </div>
 
 
