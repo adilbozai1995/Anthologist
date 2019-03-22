@@ -190,6 +190,16 @@ div {
   background-color: black;
   }
 
+  .black_line_3 {
+    position: fixed;
+    margin-top: -3%;
+    margin-left: 14.5%;
+    
+    width: 3px;
+    height: 28px;
+    background-color: black;
+    }
+
   .stories {
     width: 90%;
     margin-left: 50px;

@@ -261,17 +261,6 @@ onLogout() {
               
 
 
-        {/* <span className='btn'>STORY 1</span>
-        <span className='btn'>STORY 2</span>
-        <span className='btn2'> STORY 4</span>
-        <span className='btn2'>STORY 3</span>
-
-        <span className='btn'>Block A</span>
-        <span className='btn'>Block B</span>
-        <span className='btn2'>Block C</span>
-        <span className='btn2'> Block D</span>
-         */}
-
 
                 </div>
 
