@@ -84,22 +84,22 @@ class news extends Component {
         {/* Entry points */}
         <div className='inputs_new'>
             
-            <div><span className='st'>Book Title : </span>
+            <div><span className='st2'>Book Title : </span>
                 <input className='input_new' type="text" id="book_title"/>
             </div>
-            <div><span className='st'>Story Length : </span>
+            <div><span className='st2'>Story Length : </span>
                 <input className='input_new' type="text" id="story_length"/>
             </div>
-            <div><span className='st'>Max Char count : </span>
+            <div><span className='st2'>Max Char count : </span>
                 <input className='input_new' type="text" id="max_char"/>
             </div>
-            <div><span className='st'>Min Block for Vote : </span>
+            <div><span className='st2'>Min Block for Vote : </span>
                 <input className='input_new' type="text" id="min_vote"/>
             </div>
-            <div><span className='st'>Voting Time per block : </span>
+            <div><span className='st2'>Voting Time per block : </span>
                 <input className='input_new' type="text" id="vote_time"/>
             </div>
-            <div><span className='st'>Writers : </span>
+            <div><span className='st2'>Writers : </span>
                 <textarea className='input_new' type="text" id="writers_list"/>
             </div>
 
