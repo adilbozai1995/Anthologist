@@ -67,7 +67,8 @@ class story extends Component {
                 document.getElementById('charLimit').innerHTML = "Character Limit: " + response.charlimit
                 document.getElementById('minBl').innerHTML = "Min Story Len: " + response.storylen
                 document.getElementById('votesLimit').innerHTML = "Min Blocks for Vote: " + response.minblock
-                document.getElementById('nOfViews').innerHTML = response.views + " Views"
+                document.getElementById('votesTime').innerHTML = "Vote Time (minutes): " + response.votetime
+                document.getElementById('nViews').innerHTML = response.views + " Views"
             }
         }
      };
@@ -108,6 +109,7 @@ class story extends Component {
         {/* Blocks */}
         <div className='blocks-container'>
             <div className='blocks'>
+<<<<<<< HEAD
                 <button className='st' >Completed Block 1</button>
                 <div className='author'>Author</div>
                 <div className='slash'>/</div>
@@ -115,6 +117,12 @@ class story extends Component {
                 <div className='author' id='sAuthor'>Author</div>
                 <div className='slash' id='sSlash'>/</div>
                 <div className='likes' id='sLikes'>Likes</div>
+=======
+                <button className='st' onClick={this.togglePopup.bind(this)}>Completed Block 1</button>
+                <div className='author'>Author</div>
+                <div className='slash'>/</div>
+                <div className='likes'>Likes</div>
+>>>>>>> bef66646573ac9dd9e03b87a79e889fe32d60b43
 
 
             </div>
