@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+import story from './story'
 import homepage from './homepage';
 
 
@@ -18,10 +19,14 @@ ReactDOM.render(
 <BrowserRouter>
 <Switch>
     <div>
+    <Route exact path='/story/:story' component={story}></Route>
     <Route exact path='/' component={homepage}/>
     <Route exact path='/profile/:account' component={userprofile}></Route>
     <Route exact path='/login' component={login}></Route>
     <Route exact path='/reset/:account' component={reset}></Route>
+    {/* <Route exact path='/new-story' component={newstory}></Route>
+    <Route exact path='/story/:story' component={story}></Route>
+    <Route exact path='/admin' component={admin}></Route> */}
     </div>
     </Switch>
 </BrowserRouter>,

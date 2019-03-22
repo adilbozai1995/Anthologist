@@ -1,0 +1,197 @@
+@import url('http://garten.in.ua/css/fonts/SignPainter-HouseScript/SignPainter.css');
+
+@import url('https://use.fontawesome.com/releases/v5.7.2/css/all.css');
+
+.App {
+  height: 100vh;
+  background-image: linear-gradient(#00b8e6, #005266);
+  position: relative;
+  overflow: hidden;
+  overflow-y: scroll;
+ 
+
+  
+}
+div {
+  display: block;
+}
+
+.notification-bar {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(187, 182, 182);
+  position: relative;
+  z-index: 301;
+    min-width: 100%;
+}
+
+.head {
+  float: left;
+  
+}
+.head1 {
+  margin: 7px 0;
+  
+  margin-right: 0.5%;
+
+}
+
+.logo {
+  font-family:'SignPainter';
+  font-size: 110%;
+  font-weight: bold;
+  color: #1b6f85;
+  display: inline-block;
+  outline: none;
+  padding: 2px;
+  position: relative;
+  cursor: pointer;
+
+}
+
+
+
+
+
+.notimg {
+  fill: none;
+  stroke: none;
+  stroke-opacity: 0;
+}
+
+.notify {
+  background-color: transparent;
+  border: none;
+  margin-left:78%;
+  position: absolute;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  float: left;
+  align-self: auto;
+  outline: none;
+  cursor: pointer;
+
+  
+}
+
+.in {
+  background-color: #81c5d6;
+  border-color: #225964;
+  position: relative;
+  margin-left:73%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding-bottom: 0.5%;
+  padding-top: 0.5%;
+  align-self: auto;
+  
+}
+
+.search {
+
+  background-color: transparent;
+  border: none;
+  margin-right:10%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  align-self: auto;
+  position: relative;
+  outline: none;
+  cursor: pointer;
+
+}
+
+.user {
+  background-color: transparent;
+  border: none;
+  margin-left:94%;
+  position: absolute;
+  outline: none;
+  display: inline-block;
+  padding: 10px 25px;
+  align-self: auto;
+  cursor: pointer;
+
+}
+
+.userimg {
+  height: 28pt;
+  width: 28pt;
+}
+
+.searchimg {
+  height: 20pt;
+  width: 20pt;
+}
+.notimg {
+  height: 25pt;
+  width: 25pt;
+}
+
+
+
+.StoryTitle {
+    
+height: 100%;
+width: 100%;
+font-display: bold;
+font-size: 440%;
+font-weight: bold;
+font-family:'SignPainter';
+color: black;
+text-align: center
+
+}
+
+
+.blocks-container {
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 50%;
+    position: absolute;
+    top: 25%;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 47%;
+}
+
+
+.blocks {
+
+    width: 100%;
+    margin-left: 0%;
+    margin-top: 0%;
+    margin-bottom: 2%;
+    height: 30%;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 4pt;
+    border-color: black;
+    
+}
+
+.st {
+    font-family: 'SignPainter';
+    font-size: 300%;
+    margin-top: 0%;
+    margin-left: 0%;
+    margin-bottom: 2%;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+
+}
+
+.st:hover {
+    color: white;
+  }
+
+  .author {
+    font-family: 'SignPainter';
+    font-size: 100%;
+    font-weight: bold;
+  }
+
+
