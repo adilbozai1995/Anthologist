@@ -332,7 +332,6 @@ text-align: center
     border-style: solid;
     border-width: 4pt;
     border-color: white;
-<<<<<<< HEAD
 }
 
 .popup_view_story {
@@ -356,10 +355,9 @@ text-align: center
   bottom: 25%;
   margin: auto;
   background-color: grey;
-=======
-    font-family: 'SignPainter';
-    font-weight: bold;
-    text-align: center;
+  font-family: 'SignPainter';
+  font-weight: bold;
+  text-align: center;
 }
 
 .vLimit {
@@ -422,5 +420,4 @@ text-align: center
     margin-top: -4.7%;
     text-align: left;
     float: right;
->>>>>>> e0fa16db59e0441d55989c33fa67311173702f2d
 }

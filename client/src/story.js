@@ -23,7 +23,6 @@ class Popup extends React.Component {
 
 
 class story extends Component {
-<<<<<<< HEAD
   
   constructor() {
     super();
@@ -38,7 +37,6 @@ class story extends Component {
     });
   }
   
-=======
 
   componentDidMount()
   {
@@ -61,10 +59,11 @@ class story extends Component {
 
             if ( response.status === 'okay' )
             {
-                document.getElementById('story-title').innerHTML = "Title: " + response.title
+                document.getElementById('story-title').innerHTML = response.title
                 document.getElementById('charLimit').innerHTML = "Character Limit: " + response.charlimit
                 document.getElementById('minBl').innerHTML = "Min Story Len: " + response.storylen
                 document.getElementById('votesLimit').innerHTML = "Min Blocks for Vote: " + response.minblock
+                document.getElementById('nOfViews').innerHTML = response.views + " Views"
             }
         }
      };
@@ -72,7 +71,6 @@ class story extends Component {
 
   }
 
->>>>>>> e0fa16db59e0441d55989c33fa67311173702f2d
   render() {
     return (
      
@@ -101,22 +99,15 @@ class story extends Component {
 
 
         {/* Title of story */}
-        <div id = "story-title" className="StoryTitle" id='stitle'> Working Title<a className="title" href> </a> </div>
+        <div id="story-title" className="StoryTitle"> Working Title<a className="title" href> </a> </div>
 
         {/* Blocks */}
         <div className='blocks-container'>
             <div className='blocks'>
-<<<<<<< HEAD
                 <button className='st' onClick={this.togglePopup.bind(this)}>Completed Block 1</button>
-                <div className='author'>Author</div>
-                <div className='slash'>/</div>
-                <div className='likes'>Likes</div>
-=======
-                <span className='st'>Completed Block 1</span>
                 <div className='author' id='sAuthor'>Author</div>
                 <div className='slash' id='sSlash'>/</div>
                 <div className='likes' id='sLikes'>Likes</div>
->>>>>>> e0fa16db59e0441d55989c33fa67311173702f2d
 
 
             </div>
