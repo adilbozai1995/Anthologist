@@ -7,8 +7,36 @@ import './story.css';
 
 
 class story extends Component {
-  
-  
+
+  componentDidMount()
+  {
+    var story = this.props.match.params.story;
+
+    var obj = JSON.stringify({
+        "story":story
+    });
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/story-fetch" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+                document.getElementById('story-title').innerHTML = response.title
+            }
+        }
+     };
+     xhttp.send(obj);
+
+  }
+
   render() {
     return (
      

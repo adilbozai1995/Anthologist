@@ -4,12 +4,56 @@ import './admin.css';
 
 class admin extends Component {
 
-    onDeleteAccount(){
-        document.getElementById('admin_id_input').value = "";
+    onDeleteAccount()
+    {
+        if ( !localStorage.account || !localStorage.token ) return;
+
+        var obj = JSON.stringify({
+            "account": localStorage.account,
+            "token": localStorage.token,
+            "profile": document.getElementById('admin_id_input').value
+        });
+
+        document.getElementById('admin_id_input').value = ""
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/api/profile-remove" , true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.onreadystatechange = function ()
+        {
+            if ( this.readyState === 4 && this.status === 200 )
+            {
+                var response = JSON.parse(this.responseText);
+                console.log(response);
+            }
+         };
+         xhttp.send(obj);
     }
 
-    onDeleteStory(){
-        document.getElementById('admin_id_input').value = "";
+    onDeleteStory()
+    {
+        if ( !localStorage.account || !localStorage.token ) return;
+
+        var obj = JSON.stringify({
+            "account": localStorage.account,
+            "token": localStorage.token,
+            "story": document.getElementById('admin_id_input').value
+        });
+
+        document.getElementById('admin_id_input').value = ""
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/api/story-remove" , true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.onreadystatechange = function ()
+        {
+            if ( this.readyState === 4 && this.status === 200 )
+            {
+                var response = JSON.parse(this.responseText);
+                console.log(response);
+            }
+        };
+        xhttp.send(obj);
     }
       
       render() {
