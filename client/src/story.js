@@ -29,7 +29,10 @@ class story extends Component {
 
             if ( response.status === 'okay' )
             {
-                document.getElementById('story-title').innerHTML = response.title
+                document.getElementById('story-title').innerHTML = "Title: " + response.title
+                document.getElementById('charLimit').innerHTML = "Character Limit: " + response.charlimit
+                document.getElementById('minBl').innerHTML = "Min Story Len: " + response.storylen
+                document.getElementById('votesLimit').innerHTML = "Min Blocks for Vote: " + response.minblock
             }
         }
      };
