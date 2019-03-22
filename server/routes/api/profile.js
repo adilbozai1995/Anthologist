@@ -41,7 +41,8 @@ module.exports = (app) => {
                         "username": rsql[0].username,
                         "description": rsql[0].description,
                         "flag": rsql[0].flag,
-                        "verify": rsql[0].verify
+                        "verify": rsql[0].verify,
+                        "admin": rsql[0].admin
                     });
                 }
             }
