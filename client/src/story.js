@@ -122,9 +122,11 @@ class story extends Component {
         <div className='cLimit' id='charLimit'></div>
           <div className='minBlocks' id='minBl'></div>
           <div className='vLimit' id='votesLimit' ></div>
+          <div className='vTime' id='votesTime' ></div>
         </div>
 
-        
+        {/* Change Time Button */}
+        <button className="changeTimeButton" id ="changeTime" color="blue">Change Vote Time </button>
 
 
         {/* Proposed Blocks */}
