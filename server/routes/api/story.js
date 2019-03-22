@@ -400,9 +400,7 @@ module.exports = (app) => {
             }
             else
             {
-                var vresb = JSON.parse( body )
-
-                if ( vresp.status === "fail" )
+                if ( String(body).indexOf("'fail'") > 0 )
                 {
                     console.log( "story-flag: invalid authentication token for account: " + account )
                     res.json({"status":"fail","reason":"invalid authentication token"})
