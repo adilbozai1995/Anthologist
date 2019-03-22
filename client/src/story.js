@@ -37,15 +37,15 @@ class story extends Component {
 
 
         {/* Title of story */}
-        <div id = "story-title" className="StoryTitle"> Working Title<a className="title" href> </a> </div>
+        <div id = "story-title" className="StoryTitle" id='stitle'> Working Title<a className="title" href> </a> </div>
 
         {/* Blocks */}
         <div className='blocks-container'>
             <div className='blocks'>
                 <span className='st'>Completed Block 1</span>
-                <div className='author'>Author</div>
-                <div className='slash'>/</div>
-                <div className='likes'>Likes</div>
+                <div className='author' id='sAuthor'>Author</div>
+                <div className='slash' id='sSlash'>/</div>
+                <div className='likes' id='sLikes'>Likes</div>
 
 
             </div>
@@ -78,6 +78,10 @@ class story extends Component {
         {/* Number of Likes */}
         <div className='nOfLikes'>400 Likes</div>
 
+        {/* Number of Views */}
+        <div className='nOfViews' id='nViews'>100 Views</div>
+
+
         {/* Book Logo */}
         <div className='book-logo'>
          <img className="bookimg" src='/book.png' ></img>
@@ -86,9 +90,10 @@ class story extends Component {
 
         {/* Attributes */}
         <div className='attributesBlock'>
-        <div className='cLimit'></div>
-          <div className='minBlocks'></div>
-          <div className='vLimit'></div>
+        <h1 className='attributes'>Attributes</h1>
+        <div className='cLimit' id='charLimit'></div>
+          <div className='minBlocks' id='minBl'></div>
+          <div className='vLimit' id='votesLimit' ></div>
         </div>
 
         
@@ -97,14 +102,14 @@ class story extends Component {
         {/* Proposed Blocks */}
         <div className='proposed'>
             <div className='p-blocks'>
-                <span className='st'>Completed Block 1</span>
-                <div className='author'>Author</div>
-                <div className='slash'>/</div>
-                <div className='likes'>Likes</div>
+                <span className='st1'>Completed Block 1</span>
+                <div className='author1'>Author</div>
+                <div className='slash1'>/</div>
+                <div className='likes1'>Likes</div>
 
 
             </div>
-            <div className='p-blocks'>
+              <div className='p-blocks'>
                 <span className='st'>Completed Block 2</span>
                 <div className='author'>Author</div>
                 <div className='slash'>/</div>
@@ -116,17 +121,13 @@ class story extends Component {
                 <div className='author'>Author</div>
                 <div className='slash'>/</div>
                 <div className='likes'>Likes</div>
-
-
             </div>
             <div className='p-blocks'>
                 <span className='st'>Completed Block 4</span>
                 <div className='author'>Author</div>
                 <div className='slash'>/</div>
                 <div className='likes'>Likes</div>
-
-
-            </div>
+            </div>  
         </div>
 
 
