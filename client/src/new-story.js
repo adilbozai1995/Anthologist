@@ -5,7 +5,7 @@ import './new-story.css';
 class news extends Component {
   onAddClicked(){
     var email = document.getElementById('book_title').value;
-    var a = document.getElementById('genre').value;
+    var a = document.getElementById('story_length').value;
     var b = document.getElementById('max_char').value;
     var c = document.getElementById('min_vote').value;
     var d = document.getElementById('vote_time').value;
@@ -13,7 +13,7 @@ class news extends Component {
     var f = document.getElementById('story').value;
 
     document.getElementById('book_title').value = "";
-    document.getElementById('genre').value= "";
+    document.getElementById('story_length').value= "";
     document.getElementById('max_char').value= "";
     document.getElementById('min_vote').value= "";
     document.getElementById('vote_time').value= "";
@@ -63,8 +63,8 @@ class news extends Component {
             <div><span className='st'>Book Title : </span>
                 <input className='input_new' type="text" id="book_title"/>
             </div>
-            <div><span className='st'>Genre : </span>
-                <input className='input_new' type="text" id="genre"/>
+            <div><span className='st'>Story Length : </span>
+                <input className='input_new' type="text" id="story_length"/>
             </div>
             <div><span className='st'>Max Char count : </span>
                 <input className='input_new' type="text" id="max_char"/>

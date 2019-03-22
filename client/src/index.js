@@ -12,6 +12,7 @@ import login from './login';
 import userprofile from './profile';
 import reset from './reset';
 import newstory from './new-story';
+import admin from './admin';
 
 
 ReactDOM.render(
@@ -26,8 +27,8 @@ ReactDOM.render(
     <Route exact path='/login' component={login}></Route>
     <Route exact path='/reset/:account' component={reset}></Route>
     <Route exact path='/new-story' component={newstory}></Route>
-    {/* <Route exact path='/story/:story' component={story}></Route>
-    <Route exact path='/admin' component={admin}></Route> */}
+    {/* <Route exact path='/story/:story' component={story}></Route>*/}
+    <Route exact path='/admin' component={admin}></Route> 
     </div>
     </Switch>
 </BrowserRouter>,
