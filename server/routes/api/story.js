@@ -223,6 +223,8 @@ module.exports = (app) => {
             }
             else
             {
+                sqlsec.query("UPDATE stories SET views = views + 1 WHERE id=?", [ story ])
+
                 console.log( "story-fetch: fetched story with id: " + story )
                 res.json({
                     "status":"okay",
@@ -232,7 +234,8 @@ module.exports = (app) => {
                     "charlimit":rsql[0].charlimit,
                     "minblock":rsql[0].minblock,
                     "votetime":rsql[0].votetime,
-                    "storylen":rsql[0].storylen
+                    "storylen":rsql[0].storylen,
+                    "views":(rsql[0].views + 1)
                 });
             }
         });
