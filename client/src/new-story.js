@@ -15,20 +15,40 @@ class news extends Component {
         "charlimit": document.getElementById('max_char').value,
         "minblock": document.getElementById('min_vote').value,
         "votetime": document.getElementById('vote_time').value,
+        "storylen": document.getElementById('story_length').value,
         "writers": document.getElementById('writers_list').value,
     }
 
     var a = document.getElementById('story').value
 
     document.getElementById('book_title').value = "";
-    document.getElementById('genre').value = "";
     document.getElementById('max_char').value = "";
     document.getElementById('min_vote').value = "";
     document.getElementById('vote_time').value = "";
     document.getElementById('writers_list').value = "";
+    document.getElementById('story_length').value = "";
     document.getElementById('story').value = "";
 
-  }
+    var jstr = JSON.stringify(obj)
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/story-create" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+                window.location.replace("/story/" + response.story)
+            }
+        }
+    };
+    xhttp.send(jstr);
+ }
 
 
    
@@ -67,8 +87,8 @@ class news extends Component {
             <div><span className='st'>Book Title : </span>
                 <input className='input_new' type="text" id="book_title"/>
             </div>
-            <div><span className='st'>Genre : </span>
-                <input className='input_new' type="text" id="genre"/>
+            <div><span className='st'>Story Length : </span>
+                <input className='input_new' type="text" id="story_length"/>
             </div>
             <div><span className='st'>Max Char count : </span>
                 <input className='input_new' type="text" id="max_char"/>
