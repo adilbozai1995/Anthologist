@@ -156,4 +156,61 @@ module.exports = (app) => {
             }
         });
     });
+
+    app.post('/api/profile-remove', function(req, res)
+    {
+        if(!req.body
+        || !req.body.account
+        || !req.body.token
+        || !req.body.profile)
+        {
+            console.log("profile-remove: missing field")
+            return res.sendStatus(400)
+        }
+
+        const account = req.body.account
+        const token = req.body.token
+        const profile = req.body.profile
+
+        if(!isuuid.v4( account )
+        || !isuuid.v4( profile )
+        || token.length != 64 )
+        {
+            console.log("profile-remove: invalid field")
+            return res.sendStatus(400)
+        }
+
+        sqlcon.query( "SELECT token, admin FROM accounts WHERE id=?;",
+        [ account ],
+        function ( err, rsql )
+        {
+            if ( err )
+            {
+                console.log( "profile-remove: sql_error: ", err )
+                res.json({"status":"fail","reason":"un-caught sql error"});
+            }
+            else if ( rsql.length == 0 )
+            {
+                console.log( "profile-remove: no account with id: " + account )
+                res.json({"status":"fail","reason":"no account with that id"});
+            }
+            else if ( rsql[0].token !== token )
+            {
+                console.log( "profile-remove: invalid token for account: " + account )
+                res.json({"status":"fail","reason":"invalid token"});
+            }
+            else if ( rsql[0].admin != 1 )
+            {
+                console.log( "profile-remove: not an admin account: " + account );
+                res.json({"status":"fail","reason":"not admin"});
+            }
+            else
+            {
+                sqlsec.query("DELETE FROM accounts WHERE id=?;", [ profile ])
+
+                console.log( "profile-remove: admin: " + account + ", deleted account: " + profile )
+                res.json({"status":"okay"})
+            }
+        });
+    });
 }
