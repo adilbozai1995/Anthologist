@@ -166,7 +166,7 @@ text-align: center
     background-color: transparent;
     border-style: solid;
     border-width: 4pt;
-    border-color: black;
+    border-color: white;
     
 }
 
@@ -188,10 +188,103 @@ text-align: center
     color: white;
   }
 
-  .author {
+.author {
     font-family: 'SignPainter';
+    width: 87%;
     font-size: 100%;
     font-weight: bold;
-  }
+    margin-top: 5%;
+    margin-left: 0%;
+    text-align: right;
+    float: left;
+}
 
+.slash {
+    font-family: 'SignPainter';
+    width: 2%;
+    font-size: 100%;
+    font-weight: bold;
+    margin-left: 88%;
+    margin-top: 5%;
 
+}
+
+.likes {
+    font-family: 'SignPainter';
+    width: 10%;
+    font-size: 100%;
+    font-weight: bold;
+    margin-top: -3%;
+    text-align: left;
+    float: right;
+}
+
+.nOfLikes {
+    width: 10%;
+    text-align: center;
+    margin-left: 0%;
+    font-family: 'SignPainter';
+    font-weight: bold;
+    font-size: 150%;
+    margin-left: 5%;
+    height: auto;
+    border-style: solid;
+    border-width: 4pt;
+    border-color: white;
+    position: absolute;
+    top: 50%;
+}
+
+.book-logo {
+     height: 45%;
+        padding-top: 0.75%;
+        padding-bottom: 0.5%;
+        margin-top: 0%;
+        width: 100%;left: 0px;
+}
+
+.bookimg{
+    height: 30%;
+    margin-left: 2%;
+    position: absolute;
+    top: 17%;
+    float: left;
+    background-color: transparent;
+    width:auto;
+    
+}
+
+.proposed {
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    overflow-y:hidden;
+    overflow-x: scroll;
+    height: 30%;
+    background-color: red;
+}
+
+.p-blocks {
+    width: 20%;
+    position: absolute;
+    height: 40%;
+    background-color: palegreen;
+    border-style: solid;
+    border-width: 4pt;
+    border-color: white;
+}
+
+.attributesBlock {
+
+    width: 17%;
+    margin-left: 78%;
+    position: absolute;
+    top: 25%;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 47%;
+    background-color: red;
+    border-style: solid;
+    border-width: 4pt;
+    border-color: white;
+}

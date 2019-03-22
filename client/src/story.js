@@ -43,22 +43,94 @@ class story extends Component {
         <div className='blocks-container'>
             <div className='blocks'>
                 <span className='st'>Completed Block 1</span>
-                <span className='st'>Author</span>
-                <span className='author'>Author</span>
+                <div className='author'>Author</div>
+                <div className='slash'>/</div>
+                <div className='likes'>Likes</div>
+
 
             </div>
             <div className='blocks'>
                 <span className='st'>Completed Block 2</span>
+                <div className='author'>Author</div>
+                <div className='slash'>/</div>
+                <div className='likes'>Likes</div>
+
+
             </div>
             <div className='blocks'>
                 <span className='st'>Completed Block 3</span>
+                <div className='author'>Author</div>
+                <div className='slash'>/</div>
+                <div className='likes'>Likes</div>
+
+
             </div>
             <div className='blocks'>
                 <span className='st'>Completed Block 4</span>
+                <div className='author'>Author</div>
+                <div className='slash'>/</div>
+                <div className='likes'>Likes</div>
+
+
             </div>
         </div>
- 
+
+        {/* Number of Likes */}
+        <div className='nOfLikes'>400 Likes</div>
+
+        {/* Book Logo */}
+        <div className='book-logo'>
+         <img className="bookimg" src='/book.png' ></img>
+        </div>
          
+
+        {/* Attributes */}
+        <div className='attributesBlock'>
+        <div className='cLimit'></div>
+          <div className='minBlocks'></div>
+          <div className='vLimit'></div>
+        </div>
+
+        
+
+
+        {/* Proposed Blocks */}
+        <div className='proposed'>
+            <div className='p-blocks'>
+                <span className='st'>Completed Block 1</span>
+                <div className='author'>Author</div>
+                <div className='slash'>/</div>
+                <div className='likes'>Likes</div>
+
+
+            </div>
+            <div className='p-blocks'>
+                <span className='st'>Completed Block 2</span>
+                <div className='author'>Author</div>
+                <div className='slash'>/</div>
+                <div className='likes'>Likes</div>
+
+            </div>
+            <div className='p-blocks'>
+                <span className='st'>Completed Block 3</span>
+                <div className='author'>Author</div>
+                <div className='slash'>/</div>
+                <div className='likes'>Likes</div>
+
+
+            </div>
+            <div className='p-blocks'>
+                <span className='st'>Completed Block 4</span>
+                <div className='author'>Author</div>
+                <div className='slash'>/</div>
+                <div className='likes'>Likes</div>
+
+
+            </div>
+        </div>
+
+
+
       </div>
  
 
