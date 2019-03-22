@@ -231,13 +231,11 @@ class story extends Component {
                 <div className='slash'>/</div>
                 <div className='likes'>Likes</div>
             </div>
-            <div className='p-blocks'>
-                <span className='st'>Completed Block 4</span>
-                <div className='author'>Author</div>
-                <div className='slash'>/</div>
-                <div className='likes'>Likes</div>
-            </div>  
+            
         </div>
+
+        {/* Add Block Button */}
+        <button className="addAButton" id ="addAButtonID" color="blue">Add a block </button>
        
         {this.state.showPopup ? 
           <Popup
