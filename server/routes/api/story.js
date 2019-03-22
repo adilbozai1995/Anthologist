@@ -13,7 +13,7 @@ module.exports = (app) => {
         || !req.body.minblock  // Min blocks before voting starts
         || !req.body.votetime  // How long to keep voting open for (minutes)
         || !req.body.storylen  // Min number of blocks before story can end
-        || !req.body.writers ) // Array of writers
+        || typeof(req.body.writers) === 'undefined' ) // CSV of writers
         {
             console.log( "story-create: missing fields" )
             return res.sendStatus(400)
@@ -61,7 +61,7 @@ module.exports = (app) => {
 
         const storylen = req.body.storylen
 
-        var writers = req.body.writers
+        var writers = req.body.writers.split(",")
 
         sqlcon.query( "SELECT token FROM accounts WHERE id=?;",
         [ account ],
@@ -86,7 +86,7 @@ module.exports = (app) => {
             {
                 const storyid = uuid( )
 
-                sqlsec.query( "INSERT INTO story (id, author, title, charlimit, minblock, votetime, storylen) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                sqlsec.query( "INSERT INTO stories (id, author, title, charlimit, minblock, votetime, storylen) VALUES (?, ?, ?, ?, ?, ?, ?)",
                 [
                     storyid,
                     account,
@@ -99,7 +99,7 @@ module.exports = (app) => {
 
                 for ( var i = 0; i < writers.length; i++ )
                 {
-                    if ( !isuuid.v4( writers[i] ) )
+                    if ( isuuid.v4( writers[i] ) )
                     {
                         sqlsec.query( "INSERT INTO story_writers (writer, story) VALUES (?, ?)",
                         [
