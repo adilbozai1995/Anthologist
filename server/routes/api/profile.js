@@ -110,4 +110,49 @@ module.exports = (app) => {
             }
         });
     });
+
+    app.post('/api/profile-bookmark', function(req, res)
+    {
+        if( !req.body || !req.body.account )
+        {
+            console.log( "profile-bookmark: missing fields" )
+            return res.sendStatus(400)
+        }
+
+        const account = req.body.account
+
+        if ( !isuuid.v4( account ) )
+        {
+            console.log( "profile-bookmark: invalid account: " + account )
+            return res.sendStatus(400)
+        }
+
+        sqlcon.query("SELECT stories.title, stories.id, stories.author, accounts.username FROM stories INNER JOIN story_bookmarks ON story_bookmarks.story=stories.id WHERE story_bookmarks.user=?;",
+        [ account ],
+        function( err, rsql )
+        {
+            if ( err )
+            {
+                console.log( "profile-bookmark: sql_error: ", err )
+                res.json({"status":"fail","reason":"un-caught sql error"});
+            }
+            else
+            {
+                var out = []
+
+                for ( var i = 0; i < rsql.legth; i++ )
+                {
+                    out.push({
+                        "title":rsql[i].title,
+                        "storyid":rsql[i].id,
+                        "authorid":rsql[i].author,
+                        "author":rsql[i].username
+                    })
+                }
+
+                console.log("profile-bookmark: requested bookmarks for account: " + account)
+                res.json({"status":"okay","data":out})
+            }
+        });
+    });
 }
