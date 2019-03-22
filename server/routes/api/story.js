@@ -13,7 +13,7 @@ module.exports = (app) => {
         || !req.body.minblock  // Min blocks before voting starts
         || !req.body.votetime  // How long to keep voting open for (minutes)
         || !req.body.storylen  // Min number of blocks before story can end
-        || !req.body.writers ) // Array of writers
+        || typeof(req.body.writers) === 'undefined' ) // CSV of writers
         {
             console.log( "story-create: missing fields" )
             return res.sendStatus(400)
@@ -61,7 +61,7 @@ module.exports = (app) => {
 
         const storylen = req.body.storylen
 
-        var writers = req.body.writers
+        var writers = req.body.writers.split(",")
 
         sqlcon.query( "SELECT token FROM accounts WHERE id=?;",
         [ account ],
@@ -86,7 +86,7 @@ module.exports = (app) => {
             {
                 const storyid = uuid( )
 
-                sqlsec.query( "INSERT INTO story (id, author, title, charlimit, minblock, votetime, storylen) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                sqlsec.query( "INSERT INTO stories (id, author, title, charlimit, minblock, votetime, storylen) VALUES (?, ?, ?, ?, ?, ?, ?)",
                 [
                     storyid,
                     account,
@@ -99,7 +99,7 @@ module.exports = (app) => {
 
                 for ( var i = 0; i < writers.length; i++ )
                 {
-                    if ( !isuuid.v4( writers[i] ) )
+                    if ( isuuid.v4( writers[i] ) )
                     {
                         sqlsec.query( "INSERT INTO story_writers (writer, story) VALUES (?, ?)",
                         [
@@ -223,6 +223,9 @@ module.exports = (app) => {
             }
             else
             {
+                sqlsec.query("UPDATE stories SET views = views + 1 WHERE id=?", [ story ])
+
+                console.log( "story-fetch: fetched story with id: " + story )
                 res.json({
                     "status":"okay",
                     "author":rsql[0].author,
@@ -231,7 +234,8 @@ module.exports = (app) => {
                     "charlimit":rsql[0].charlimit,
                     "minblock":rsql[0].minblock,
                     "votetime":rsql[0].votetime,
-                    "storylen":rsql[0].storylen
+                    "storylen":rsql[0].storylen,
+                    "views":(rsql[0].views + 1)
                 });
             }
         });
@@ -311,58 +315,54 @@ module.exports = (app) => {
         || !req.body.token
         || !req.body.story)
         {
-            console.log( "story-remove: missing fields" )
+            console.log("story-remove: missing field")
             return res.sendStatus(400)
         }
 
         const account = req.body.account
         const token = req.body.token
-
-        if ( !isuuid.v4( account ) )
-        {
-            console.log( "story-remove: invalid account: " + account )
-            return res.sendStatus(400)
-        }
-
-        if ( token.length != 64 )
-        {
-            console.log( "story-remove: invalid token" )
-            return res.sendStatus(400)
-        }
-
         const story = req.body.story
 
-        if ( !isuuid.v4( story ) )
+        if(!isuuid.v4( account )
+        || !isuuid.v4( story )
+        || token.length != 64 )
         {
-            console.log( "story-remove: invalid story: " + story )
+            console.log("story-remove: invalid field")
             return res.sendStatus(400)
         }
 
-        sqlcon.query( "SELECT token FROM accounts WHERE id=?;",
+        sqlcon.query( "SELECT token, admin FROM accounts WHERE id=?;",
         [ account ],
-        function( aerr, arsql )
+        function ( err, rsql )
         {
-            if ( aerr )
+            if ( err )
             {
-                console.log( "story-remove: sql_error: ", aerr );
-                res.json({"status":"fail","reason":"un-caught sql error"})
+                console.log( "story-remove: sql_error: ", err )
+                res.json({"status":"fail","reason":"un-caught sql error"});
             }
-            else if ( arsql.length == 0 )
+            else if ( rsql.length == 0 )
             {
                 console.log( "story-remove: no account with id: " + account )
-                res.json({"status":"fail","reason":"no account with that id"})
+                res.json({"status":"fail","reason":"no account with that id"});
             }
-            else if ( arsql[0].token !== token )
+            else if ( rsql[0].token !== token )
             {
-                console.log("story-remove: invalid security token for account: " + account )
-                res.json({"status":"fail","reason":"invalid security token"})
+                console.log( "story-remove: invalid token for account: " + account )
+                res.json({"status":"fail","reason":"invalid token"});
+            }
+            else if ( rsql[0].admin != 1 )
+            {
+                console.log( "story-remove: not an admin account: " + account );
+                res.json({"status":"fail","reason":"not admin"});
             }
             else
             {
-                // Finish this
+                sqlsec.query("DELETE FROM stories WHERE id=?;", [ story ])
+                sqlsec.query("DELETE FROM story_bookmark WHERE story=?;", [ story ])
+                sqlsec.query("DELETE FROM story_writers WHERE story=?;", [ story ])
 
-                console.log("story-remove: admin: " + account + ", removed story: " + story);
-                res.json({"status":"okay"});
+                console.log( "story-remove: admin: " + account + ", deleted story: " + story )
+                res.json({"status":"okay"})
             }
         });
     });

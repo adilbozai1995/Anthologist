@@ -4,6 +4,57 @@ import './admin.css';
 
 class admin extends Component {
 
+    onDeleteAccount()
+    {
+        if ( !localStorage.account || !localStorage.token ) return;
+
+        var obj = JSON.stringify({
+            "account": localStorage.account,
+            "token": localStorage.token,
+            "profile": document.getElementById('admin_id_input').value
+        });
+
+        document.getElementById('admin_id_input').value = ""
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/api/profile-remove" , true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.onreadystatechange = function ()
+        {
+            if ( this.readyState === 4 && this.status === 200 )
+            {
+                var response = JSON.parse(this.responseText);
+                console.log(response);
+            }
+         };
+         xhttp.send(obj);
+    }
+
+    onDeleteStory()
+    {
+        if ( !localStorage.account || !localStorage.token ) return;
+
+        var obj = JSON.stringify({
+            "account": localStorage.account,
+            "token": localStorage.token,
+            "story": document.getElementById('admin_id_input').value
+        });
+
+        document.getElementById('admin_id_input').value = ""
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/api/story-remove" , true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.onreadystatechange = function ()
+        {
+            if ( this.readyState === 4 && this.status === 200 )
+            {
+                var response = JSON.parse(this.responseText);
+                console.log(response);
+            }
+        };
+        xhttp.send(obj);
+    }
       
       render() {
         return (
@@ -34,19 +85,19 @@ class admin extends Component {
           <div id = "story-title" className="StoryTitle"> Admin Control<a className="title" href> </a> </div>
   
           {/* Entry points */}
-          <div className='inputs_new'>
+          <div className='a_inputs_new'>
               
               <div><span className='st'>User ID : </span>
-                  <input className='input_new' type="text" id="book_title"/>
+                  <input className='admin_input' type="text" id="admin_id_input"/>
               </div>
-              <div className = 'button_pos'  >
-                  <button className="add-button" 
-                  id= "add_story" onClick={() => this.onDeleteAccount()}>Add</button>
+              <div className = 'a_button_pos'  >
+                  <button className="admin-button" 
+                  id= "add_story" onClick={() => this.onDeleteAccount()}> Delete Account</button>
                   </div>
 
-             <div className = 'button_pos'  >
-                  <button className="add-button" 
-                  id= "add_story" onClick={() => this.onDeleteStory()}>Add</button>
+             <div className = 'a_button_pos'  >
+                  <button className="admin-button" 
+                  id= "add_story" onClick={() => this.onDeleteStory()}>Delete Story</button>
                   </div>
          
   
