@@ -3,10 +3,40 @@ import { Link,Prompt } from 'react-router-dom';
 import './story.css';
 
 
+class Popup extends React.Component {
+    ViewStory(){
 
+
+    }
+  
+  render() {
+    return (
+      <div className='popup_view_story'>
+        <div className='popup_inner_story'>
+        
+        <button onClick={this.props.closePopup}>Done</button>
+        </div>
+      </div>
+    );
+  }
+}
 
 
 class story extends Component {
+  
+  constructor() {
+    super();
+    this.state = {
+      showPopup: false
+    };
+  }
+
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
+  
 
   componentDidMount()
   {
@@ -30,6 +60,10 @@ class story extends Component {
             if ( response.status === 'okay' )
             {
                 document.getElementById('story-title').innerHTML = response.title
+                document.getElementById('charLimit').innerHTML = "Character Limit: " + response.charlimit
+                document.getElementById('minBl').innerHTML = "Min Story Len: " + response.storylen
+                document.getElementById('votesLimit').innerHTML = "Min Blocks for Vote: " + response.minblock
+                document.getElementById('nOfViews').innerHTML = response.views + " Views"
             }
         }
      };
@@ -65,12 +99,12 @@ class story extends Component {
 
 
         {/* Title of story */}
-        <div id = "story-title" className="StoryTitle" id='stitle'> Working Title<a className="title" href> </a> </div>
+        <div id="story-title" className="StoryTitle"> Working Title<a className="title" href> </a> </div>
 
         {/* Blocks */}
         <div className='blocks-container'>
             <div className='blocks'>
-                <span className='st'>Completed Block 1</span>
+                <button className='st' onClick={this.togglePopup.bind(this)}>Completed Block 1</button>
                 <div className='author' id='sAuthor'>Author</div>
                 <div className='slash' id='sSlash'>/</div>
                 <div className='likes' id='sLikes'>Likes</div>
@@ -78,7 +112,7 @@ class story extends Component {
 
             </div>
             <div className='blocks'>
-                <span className='st'>Completed Block 2</span>
+            <button className='st'>Completed Block 2</button>
                 <div className='author'>Author</div>
                 <div className='slash'>/</div>
                 <div className='likes'>Likes</div>
@@ -86,7 +120,7 @@ class story extends Component {
 
             </div>
             <div className='blocks'>
-                <span className='st'>Completed Block 3</span>
+            <button className='st'>Completed Block 3</button>
                 <div className='author'>Author</div>
                 <div className='slash'>/</div>
                 <div className='likes'>Likes</div>
@@ -94,7 +128,7 @@ class story extends Component {
 
             </div>
             <div className='blocks'>
-                <span className='st'>Completed Block 4</span>
+            <button className='st'>Completed Block 4</button>
                 <div className='author'>Author</div>
                 <div className='slash'>/</div>
                 <div className='likes'>Likes</div>
@@ -159,10 +193,20 @@ class story extends Component {
                 <div className='likes'>Likes</div>
             </div>  
         </div>
-
-
+       
+        {this.state.showPopup ? 
+          <Popup
+            text='Close Me'
+            closePopup={this.togglePopup.bind(this)}
+          />
+          : null
+        }
 
       </div>
+
+
+      
+
  
 
     ); 

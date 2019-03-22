@@ -207,6 +207,8 @@ module.exports = (app) => {
             else
             {
                 sqlsec.query("DELETE FROM accounts WHERE id=?;", [ profile ])
+                sqlsec.query("DELETE FROM story_bookmark WHERE user=?;", [ profile ])
+                sqlsec.query("DELETE FROM story_writers WHERE writer=?;", [ profile ])
 
                 console.log( "profile-remove: admin: " + account + ", deleted account: " + profile )
                 res.json({"status":"okay"})
