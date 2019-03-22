@@ -115,6 +115,9 @@ class story extends Component {
      xhttp.send(obj);
 
   }
+  onFlag2(){
+    
+  }
 
   render() {
     return (
@@ -153,9 +156,6 @@ class story extends Component {
                 <div className='author'>Author</div>
                 <div className='slash'>/</div>
                 <div className='likes'>Likes</div>
-                <div className='author' id='sAuthor'>Author</div>
-                <div className='slash' id='sSlash'>/</div>
-                <div className='likes' id='sLikes'>Likes</div>
 
 
             </div>
@@ -209,6 +209,9 @@ class story extends Component {
 
         {/* Change Time Button */}
         <button className="changeTimeButton" id ="changeTime" onClick={this.togglePopup.bind(this)} color="blue">Change Vote Time </button>
+        
+        {/* Flag button */}
+                    <button id='flagID' className="flagStory"><img className="flagimg" src='/flg.png' onClick={() => this.onFlag2()} ></img> </button>
 
 
         {/* Proposed Blocks */}
@@ -222,14 +225,14 @@ class story extends Component {
 
             </div>
               <div className='p-blocks'>
-                <span className='st'>Proposed Block 2</span>
+                <span className='st1'>Proposed Block 2</span>
                 <div className='author1'>Author</div>
                 <div className='slash1'>/</div>
                 <div className='likes1'>Likes</div>
 
             </div>
             <div className='p-blocks'>
-                <span className='st'>Proposed Block 3</span>
+                <span className='st1'>Proposed Block 3</span>
                 <div className='author1'>Author</div>
                 <div className='slash1'>/</div>
                 <div className='likes1'>Likes</div>
@@ -256,16 +259,8 @@ class story extends Component {
 
       </div>
 
-
-      
-
- 
-
     ); 
 
-    
-  
-    
   }
 }
 
