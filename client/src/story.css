@@ -272,21 +272,24 @@ text-align: center
 }
 
 .proposed {
+    
     width: 100%;
     position: absolute;
-    top: 80%;
+    top: 100%;
     overflow: hidden;
     overflow-y: scroll;
     height: 20%;
     background-color: red;
+
 }
 
 .p-blocks {
     width: 30%;
+    float: left;
+    overflow: hidden;
     position: absolute;
     top: 7%;
     height: 85%;
-    display: inline-block;
     background-color: palegreen;
     border-style: solid;
     border-width: 4pt;
@@ -300,7 +303,7 @@ text-align: center
     top: 25%;
     overflow: hidden;
     overflow-y: scroll;
-    height: 47%;
+    height: 70%;
     background-color: transparent;
 }
 
@@ -314,7 +317,7 @@ text-align: center
 .cLimit {
     width: 100%;
     margin-bottom: 2%;
-    height: 20%;
+    height: 16%;
     background-color: transparent;
     border-style: solid;
     border-width: 4pt;
@@ -327,7 +330,7 @@ text-align: center
 .minBlocks {
     width: 100%;
     margin-bottom: 2%;
-    height: 20%;
+    height: 16%;
     background-color: transparent;
     border-style: solid;
     border-width: 4pt;
@@ -360,10 +363,10 @@ text-align: center
     text-align: center;
 }
 
-.vLimit {
-    width: 100%;
+.vTime {
+  width: 100%;
     margin-bottom: 2%;
-    height: 20%;
+    height: 16%;
     background-color: transparent;
     border-style: solid;
     border-width: 4pt;
@@ -421,3 +424,30 @@ text-align: center
     text-align: left;
     float: right;
 }
+
+.changeTimeButton {
+  width: 20%;
+  background-color: transparent;
+  background-attachment: fixed;
+  font-family:'SignPainter';
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 140%;
+  position: absolute;
+  top: 88%;
+  margin-left: 76%;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  outline: none;
+  
+}
+.changeTimeButton:hover {
+  
+  color: white;
+}
+
