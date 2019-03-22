@@ -8,6 +8,10 @@ class Popup extends React.Component {
 
 
     }
+
+    submit(){
+
+    }
   
   render() {
     return (
@@ -17,7 +21,7 @@ class Popup extends React.Component {
         <div><span className='st'>Enter new voting time : </span>
                 <input className='input_new' type="text" id="vote_time"/>
             </div>
-        
+        <button onClick={() => this.submit()}>Submit</button>
         <button onClick={this.props.closePopup}>Done</button>
         </div>
       </div>
@@ -109,7 +113,6 @@ class story extends Component {
         {/* Blocks */}
         <div className='blocks-container'>
             <div className='blocks'>
-<<<<<<< HEAD
                 <button className='st' >Completed Block 1</button>
                 <div className='author'>Author</div>
                 <div className='slash'>/</div>
@@ -117,12 +120,6 @@ class story extends Component {
                 <div className='author' id='sAuthor'>Author</div>
                 <div className='slash' id='sSlash'>/</div>
                 <div className='likes' id='sLikes'>Likes</div>
-=======
-                <button className='st' onClick={this.togglePopup.bind(this)}>Completed Block 1</button>
-                <div className='author'>Author</div>
-                <div className='slash'>/</div>
-                <div className='likes'>Likes</div>
->>>>>>> bef66646573ac9dd9e03b87a79e889fe32d60b43
 
 
             </div>
