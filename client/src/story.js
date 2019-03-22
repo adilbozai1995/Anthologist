@@ -9,10 +9,41 @@ class Popup extends React.Component {
 
     }
 
-    submit(){
+    submit()
+    {
+        if ( !localStorage.account || !localStorage.token || !sessionStorage.mystory ) return;
 
+        var story = sessionStorage.mystory
+
+        var vtime = document.getElementById("vote_time").value
+        document.getElementById("vote_time").value = ""
+
+        var obj = JSON.stringify({
+            "account": localStorage.account,
+            "token": localStorage.token,
+            "story": story,
+            "votetime": vtime
+        })
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/api/story-editvote" , true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.onreadystatechange = function ()
+        {
+            if ( this.readyState === 4 && this.status === 200 )
+            {
+                var response = JSON.parse(this.responseText);
+                console.log(response);
+
+                if ( response.status === 'okay' )
+                {
+                    document.getElementById('votesTime').innerHTML = "Vote Time (minutes): " + vtime
+                }
+            }
+        };
+        xhttp.send(obj);
     }
-  
+
   render() {
     return (
       <div className='popup_view_story'>
@@ -49,6 +80,8 @@ class story extends Component {
   componentDidMount()
   {
     var story = this.props.match.params.story;
+
+    sessionStorage.mystory = story
 
     var obj = JSON.stringify({
         "story":story
