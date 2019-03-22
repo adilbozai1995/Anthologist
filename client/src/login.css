@@ -263,7 +263,7 @@ align-self: top;
       cursor: pointer;
       -webkit-transition-duration: 0.4s;
       transition-duration: 0.4s;
-
+      
     }
 
     .submit-buttons:hover {
