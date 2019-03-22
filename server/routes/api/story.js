@@ -1,3 +1,4 @@
+const request = require("request")
 const uuid = require("uuid/v4")
 const isuuid = require("is-uuid")
 
@@ -363,6 +364,70 @@ module.exports = (app) => {
 
                 console.log( "story-remove: admin: " + account + ", deleted story: " + story )
                 res.json({"status":"okay"})
+            }
+        });
+    });
+
+    app.post('/api/story-flag', function(req, res)
+    {
+        if(!req.body
+        || !req.body.account
+        || !req.body.token
+        || !req.body.flag) // The story being flagged
+        {
+            console.log("story-flag: missing field")
+            return res.sendStatus(400)
+        }
+
+        const account = req.body.account
+        const token = req.body.token
+        const flag = req.body.flag
+
+        if(!isuuid.v4( account )
+        || !isuuid.v4( flag )
+        || token.length != 64 )
+        {
+            console.log("story-flag: invalid field")
+            return res.sendStatus(400)
+        }
+
+        request.post( "http://localhost:3070/api/validate", {json:{"account":account,"token":token}}, function(verr, vres, body)
+        {
+            if ( verr )
+            {
+                console.log( "story-flag: validate request error: ", verr )
+                res.json({"status":"fail","reason":"unable to authenticate"})
+            }
+            else
+            {
+                var vresb = JSON.parse( body )
+
+                if ( vresp.status === "fail" )
+                {
+                    console.log( "story-flag: invalid authentication token for account: " + account )
+                    res.json({"status":"fail","reason":"invalid authentication token"})
+                }
+                else
+                {
+                    sqlsec.query("UPDATE stories SET flag=? WHERE id=? AND flag='no_flag';", [ account, flag ], function( err, rsql )
+                    {
+                        if ( err )
+                        {
+                            console.log( "story-flag: sql_error: ", err )
+                            res.json({"status":"fail","reason":"un-caught sql error"})
+                        }
+                        else if ( rsql.affectedRows < 1 )
+                        {
+                            console.log("story-flag: story already flagged or doesn't exist: (FLAG:" + flag + "|ACCT:" + account + ")" )
+                            res.json({"status":"fail","reason":"story already flaged or doesn't exist"})
+                        }
+                        else
+                        {
+                            console.log("story-flag: story: " + flag + " flagged by: " + account)
+                            res.json({"status":"okay"})
+                        }
+                    });
+                }
             }
         });
     });

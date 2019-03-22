@@ -1,4 +1,4 @@
-const request = require("request");
+const request = require("request")
 const uuid = require("uuid/v4")
 const isuuid = require("is-uuid")
 
@@ -89,7 +89,7 @@ module.exports = (app) => {
                 }
                 else
                 {
-                    sqlsec.query("UPDATE accounts SET flag=? WHERE id=? AND id='no_flag';", [ account, flag ], function( err, rsql )
+                    sqlsec.query("UPDATE accounts SET flag=? WHERE id=? AND flag='no_flag';", [ account, flag ], function( err, rsql )
                     {
                         if ( err )
                         {
