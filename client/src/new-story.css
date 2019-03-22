@@ -1,0 +1,115 @@
+.App {
+    height: 100vh;
+    background-image: linear-gradient(#00b8e6, #005266);
+    position: relative;
+    overflow: hidden;
+    overflow-y: scroll;
+   
+  
+    
+  }
+  div {
+    display: block;
+  }
+  
+  .notification-bar {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(187, 182, 182);
+    position: relative;
+    z-index: 301;
+      min-width: 100%;
+  }
+  
+  .head {
+    float: left;
+    
+  }
+  .head1 {
+    margin: 7px 0;
+    
+    margin-right: 0.5%;
+  
+  }
+  
+  .logo {
+    font-family:'SignPainter';
+    font-size: 110%;
+    font-weight: bold;
+    color: #1b6f85;
+    display: inline-block;
+    outline: none;
+    padding: 2px;
+    position: relative;
+    cursor: pointer;
+  
+  }
+  .label-div label {
+    display: inline-block; 
+    width: 150px; 
+    height: 60px;
+    text-align: left; 
+   }
+
+   .inputs_new {
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 50%;
+    position: absolute;
+    top: 25%;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 47%;
+}
+
+.new_story_text {
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 50%;
+    position: absolute;
+    top: 60%;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 30%;
+    
+}
+
+.add_text{
+    width: 90%;
+    position: absolute;
+    height: 100%;
+
+}
+
+.button_pos{
+    position: absolute;
+    top: 92%;
+    margin-left: 90%
+   
+
+}
+
+
+.add_story {
+
+    background-image: linear-gradient(#7a8386, #454849);
+    background-attachment: fixed;
+    font-family:'SignPainter';
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+
+  }
+
+  .add_story:hover {
+    color: white;
+  }
