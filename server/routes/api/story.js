@@ -13,7 +13,7 @@ module.exports = (app) => {
         || !req.body.minblock  // Min blocks before voting starts
         || !req.body.votetime  // How long to keep voting open for (minutes)
         || !req.body.storylen  // Min number of blocks before story can end
-        || !req.body.writers ) // Array of writers
+        || !req.body.writers ) // CSV of writers
         {
             console.log( "story-create: missing fields" )
             return res.sendStatus(400)
@@ -61,7 +61,7 @@ module.exports = (app) => {
 
         const storylen = req.body.storylen
 
-        var writers = req.body.writers
+        var writers = req.body.writers.split(",")
 
         sqlcon.query( "SELECT token FROM accounts WHERE id=?;",
         [ account ],

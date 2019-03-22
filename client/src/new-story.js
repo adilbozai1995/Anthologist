@@ -4,25 +4,29 @@ import './new-story.css';
 
 class news extends Component {
   onAddClicked(){
-    var email = document.getElementById('book_title').value;
-    var a = document.getElementById('genre').value;
-    var b = document.getElementById('max_char').value;
-    var c = document.getElementById('min_vote').value;
-    var d = document.getElementById('vote_time').value;
-    var e = document.getElementById('writers_list').value;
-    var f = document.getElementById('story').value;
+
+    if ( !localStorage.account || !localStorage.token ) return;
+
+    var obj = {
+        "account": localStorage.account,
+        "token": localStorage.token,
+
+        "title": document.getElementById('book_title').value,
+        "charlimit": document.getElementById('max_char').value,
+        "minblock": document.getElementById('min_vote').value,
+        "votetime": document.getElementById('vote_time').value,
+        "writers": document.getElementById('writers_list').value,
+    }
+
+    var a = document.getElementById('story').value
 
     document.getElementById('book_title').value = "";
-    document.getElementById('genre').value= "";
-    document.getElementById('max_char').value= "";
-    document.getElementById('min_vote').value= "";
-    document.getElementById('vote_time').value= "";
-    document.getElementById('writers_list').value= "";
-    document.getElementById('story').value= "";
-
-
-    
-
+    document.getElementById('genre').value = "";
+    document.getElementById('max_char').value = "";
+    document.getElementById('min_vote').value = "";
+    document.getElementById('vote_time').value = "";
+    document.getElementById('writers_list').value = "";
+    document.getElementById('story').value = "";
 
   }
 
