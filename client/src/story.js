@@ -8,12 +8,20 @@ class Popup extends React.Component {
 
 
     }
+
+    submit(){
+
+    }
   
   render() {
     return (
       <div className='popup_view_story'>
         <div className='popup_inner_story'>
-        
+
+        <div><span className='st'>Enter new voting time : </span>
+                <input className='input_new' type="text" id="vote_time"/>
+            </div>
+        <button onClick={() => this.submit()}>Submit</button>
         <button onClick={this.props.closePopup}>Done</button>
         </div>
       </div>
@@ -63,7 +71,8 @@ class story extends Component {
                 document.getElementById('charLimit').innerHTML = "Character Limit: " + response.charlimit
                 document.getElementById('minBl').innerHTML = "Min Story Len: " + response.storylen
                 document.getElementById('votesLimit').innerHTML = "Min Blocks for Vote: " + response.minblock
-                document.getElementById('nOfViews').innerHTML = response.views + " Views"
+                document.getElementById('votesTime').innerHTML = "Vote Time (minutes): " + response.votetime
+                document.getElementById('nViews').innerHTML = response.views + " Views"
             }
         }
      };
@@ -104,7 +113,10 @@ class story extends Component {
         {/* Blocks */}
         <div className='blocks-container'>
             <div className='blocks'>
-                <button className='st' onClick={this.togglePopup.bind(this)}>Completed Block 1</button>
+                <button className='st' >Completed Block 1</button>
+                <div className='author'>Author</div>
+                <div className='slash'>/</div>
+                <div className='likes'>Likes</div>
                 <div className='author' id='sAuthor'>Author</div>
                 <div className='slash' id='sSlash'>/</div>
                 <div className='likes' id='sLikes'>Likes</div>
@@ -160,7 +172,7 @@ class story extends Component {
         </div>
 
         {/* Change Time Button */}
-        <button className="changeTimeButton" id ="changeTime" color="blue">Change Vote Time </button>
+        <button className="changeTimeButton" id ="changeTime" onClick={this.togglePopup.bind(this)} color="blue">Change Vote Time </button>
 
 
         {/* Proposed Blocks */}
@@ -199,6 +211,9 @@ class story extends Component {
           />
           : null
         }
+
+
+        
 
       </div>
 
