@@ -53,9 +53,9 @@ module.exports = (app) => {
         const minblock = req.body.minblock
         const votetime = req.body.votetime
 
-        if ( votetime > 1440 )
+        if ( votetime > 1440 || votetime < 5 )
         {
-            console.log( "story-create: vote time too long: " + votetime )
+            console.log( "story-create: vote time too long or short: " + votetime )
             return res.sendStatus(400)
         }
 
@@ -95,7 +95,7 @@ module.exports = (app) => {
                     minblock,
                     votetime,
                     storylen
-                ]);
+                ], function(ca,cb){});
 
                 for ( var i = 0; i < writers.length; i++ )
                 {
@@ -105,7 +105,7 @@ module.exports = (app) => {
                         [
                             writers[i],
                             storyid
-                        ]);
+                        ], function(ca,cb){});
                     }
                 }
 
@@ -152,9 +152,9 @@ module.exports = (app) => {
 
         const votetime = req.body.votetime
 
-        if ( votetime > 1440 )
+        if ( votetime > 1440 || votetime < 5 )
         {
-            console.log( "story-editvote: vote time too long: " + votetime )
+            console.log( "story-editvote: vote time too long or short: " + votetime )
             return res.sendStatus(400)
         }
 
@@ -183,7 +183,7 @@ module.exports = (app) => {
                 [
                     votetime,
                     story
-                ]);
+                ],function(ca,cb){});
 
                 console.log("story-editvote: updated edit time on story: " + story + ", time is: " + votetime + " minutes" );
                 res.json({"status":"okay"});
@@ -223,7 +223,7 @@ module.exports = (app) => {
             }
             else
             {
-                sqlsec.query("UPDATE stories SET views = views + 1 WHERE id=?", [ story ])
+                sqlsec.query( "UPDATE stories SET views = views + 1 WHERE id=?", [ story ], function(ca,cb){} )
 
                 console.log( "story-fetch: fetched story with id: " + story )
                 res.json({
@@ -296,11 +296,11 @@ module.exports = (app) => {
             }
             else
             {
-                sqlsec.query("INSERT INTO stories (user, story) VALUES (?, ?);",
+                sqlsec.query("INSERT INTO story_bookmark (user, story) VALUES (?, ?);",
                 [
                     account,
                     story
-                ]);
+                ], function(ca,cb){});
 
                 console.log("story-bookmarke: bookmarked story: " + story + ", for user: " + account );
                 res.json({"status":"okay"});

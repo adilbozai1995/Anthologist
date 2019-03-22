@@ -77,7 +77,33 @@ class story extends Component {
   }
   
   onBookmarkClicked(){
-    var x = 0;
+    if ( !localStorage.account || !localStorage.token ) return;
+
+    var story = this.props.match.params.story;
+
+    var obj = JSON.stringify({
+        "account": localStorage.account,
+        "token": localStorage.token,
+        "story": story
+    });
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/story-bookmark" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+
+            }
+        }
+    };
+    xhttp.send(obj);
   }
 
   componentDidMount()
