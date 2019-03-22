@@ -53,9 +53,9 @@ module.exports = (app) => {
         const minblock = req.body.minblock
         const votetime = req.body.votetime
 
-        if ( votetime > 1440 )
+        if ( votetime > 1440 || votetime < 5 )
         {
-            console.log( "story-create: vote time too long: " + votetime )
+            console.log( "story-create: vote time too long or short: " + votetime )
             return res.sendStatus(400)
         }
 
@@ -152,9 +152,9 @@ module.exports = (app) => {
 
         const votetime = req.body.votetime
 
-        if ( votetime > 1440 )
+        if ( votetime > 1440 || votetime < 5 )
         {
-            console.log( "story-editvote: vote time too long: " + votetime )
+            console.log( "story-editvote: vote time too long or short: " + votetime )
             return res.sendStatus(400)
         }
 
