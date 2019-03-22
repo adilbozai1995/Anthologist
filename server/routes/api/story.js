@@ -96,7 +96,7 @@ module.exports = (app) => {
                     minblock,
                     votetime,
                     storylen
-                ], function(ca,cb){});
+                ]);
 
                 for ( var i = 0; i < writers.length; i++ )
                 {
