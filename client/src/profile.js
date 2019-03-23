@@ -37,7 +37,8 @@ class profile extends Component {
      xhttp.open("POST", "/api/fetch-profile" , true);
      xhttp.setRequestHeader("Content-Type", "application/json");
      xhttp.onreadystatechange = function () {
-        if(this.readyState === 4 && this.status === 200) {
+        if(this.readyState === 4 && this.status === 200)
+        {
 
           var response = JSON.parse(this.responseText);
           console.log(response);
@@ -51,8 +52,16 @@ class profile extends Component {
               document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));            
 
             }
-
           }
+          else
+          {
+            window.location.replace("/")
+          }
+        }
+        else if ( this.status == 400 )
+        {
+          window.location.replace("/")
+        }
 
         }
      };
