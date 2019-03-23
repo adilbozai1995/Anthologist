@@ -193,7 +193,7 @@ class story extends Component {
         {/* Search Bar */}
         <input id="search_input bar" className="in" type="text" ></input>
         <button className="notify"><img className="notimg" src='/notification-icon.png'></img> </button>
-        <button className="user"><img className="userimg" src='/avatar.png'></img> </button>
+        <button className="user"><Link to='/login'><img className="userimg" src='/avatar.png'></img></Link> </button>
          <button className="search"><img className="searchimg" src='/search.png'></img> </button>
 
         </div>
@@ -255,10 +255,21 @@ class story extends Component {
         {/* Attributes */}
         <div className='attributesBlock'>
         <h1 className='attributes'>Attributes</h1>
-        <div className='cLimit' id='charLimit'></div>
-          <div className='minBlocks' id='minBl'></div>
-          <div className='vLimit' id='votesLimit' ></div>
-          <div className='vTime' id='votesTime' ></div>
+
+        <div className='cLimit' >
+        <span id='charLimit' className='st4'></span>
+
+        </div>
+          <div className='minBlocks'>
+            <span id='minBl' className='st4'></span>
+          </div>
+          <div className='vLimit'>
+          <span id='votesLimit' className='st4'></span>
+
+          </div>
+          <div className='vTime' >
+          <span id='votesTime' className='st4'></span>
+          </div>
         </div>
 
         {/* Change Time Button */}
