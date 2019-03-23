@@ -35,6 +35,7 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
+
         const title = req.body.title
 
         if ( title.length > 300 )
@@ -43,24 +44,31 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
-        const charlimit = req.body.charlimit
+        const storylen = parseInt(req.body.storylen, 10)
+        const charlimit = parseInt(req.body.charlimit, 10)
+        const minblock = parseInt(req.body.minblock, 10)
+        const votetime = parseInt(req.body.votetime, 10)
 
-        if ( charlimit > 65536 )
+        if ( isNaN( storylen )
+        ||   isNaN( charlimit )
+        ||   isNan( minblock )
+        ||   isNan( votetime ) )
         {
-            console.log( "story-create: charlimit too long: " + charlimit )
+            console.log( "story-create: invalid field" )
             return res.sendStatus(400)
         }
 
-        const minblock = req.body.minblock
-        const votetime = req.body.votetime
+        if ( charlimit > 65536 || charlimit < 0 )
+        {
+            console.log( "story-create: charlimit too long or short: " + charlimit )
+            return res.sendStatus(400)
+        }
 
         if ( votetime > 1440 || votetime < 5 )
         {
             console.log( "story-create: vote time too long or short: " + votetime )
             return res.sendStatus(400)
         }
-
-        const storylen = req.body.storylen
 
         var writers = req.body.writers.split(",")
 
@@ -151,7 +159,13 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
-        const votetime = req.body.votetime
+        const votetime = parseInt( req.body.votetime, 10 )
+
+        if ( isNaN( votetime ) )
+        {
+            console.log( "story-editvote: votetime is not a number" )
+            return res.sendStatus(400)
+        }
 
         if ( votetime > 1440 || votetime < 5 )
         {
