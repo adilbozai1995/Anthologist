@@ -84,23 +84,29 @@ class news extends Component {
         {/* Entry points */}
         <div className='inputs_new'>
             
-            <div><span className='st2'>Book Title : </span>
-                <input className='input_new' type="text" id="book_title"/>
+            <div class="label-div2">
+            <label className='st2'>Book Title : </label>
+                <input className='input_new1' type="text" id="book_title"/>
             </div>
-            <div><span className='st2'>Story Length : </span>
-                <input className='input_new' type="text" id="story_length"/>
+            <div class="label-div2">
+            <label className='st2'>Story Length : </label>
+                <input className='input_new1' type="text" id="story_length"/>
             </div>
-            <div><span className='st2'>Max Char count : </span>
-                <input className='input_new' type="text" id="max_char"/>
+            <div class="label-div2">
+            <label className='st2'>Max Char count : </label>
+                <input className='input_new1' type="text" id="max_char"/>
             </div>
-            <div><span className='st2'>Min Block for Vote : </span>
-                <input className='input_new' type="text" id="min_vote"/>
+            <div class="label-div2">
+            <label className='st2'>Min Block for Vote : </label>
+                <input className='input_new1' type="text" id="min_vote"/>
             </div>
-            <div><span className='st2'>Voting Time per block : </span>
-                <input className='input_new' type="text" id="vote_time"/>
+            <div class="label-div2">
+            <label className='st2'>Voting Time per block : </label>
+                <input className='input_new1' type="text" id="vote_time"/>
             </div>
-            <div><span className='st2'>Writers : </span>
-                <textarea className='input_new' type="text" id="writers_list"/>
+            <div class="label-div2">
+            <label className='st2'>Writers : </label>
+                <textarea className='input_new1' type="text" id="writers_list"/>
             </div>
 
                         
@@ -110,11 +116,11 @@ class news extends Component {
         {/* Add new Story */}
         <div className = 'new_story_text'>
 
-        <div><span className='st'></span>
+        <div>
                 <textarea className='add_text'  type="text" id="story"/>
             </div>
 
-            <div className = 'button_pos'  ><button className="add-button" id= "add_story" onClick={() => this.onAddClicked()}>Add</button></div>
+            
 
 
 
@@ -122,7 +128,7 @@ class news extends Component {
         </div>
   
           
-             
+        <button className="add-button" id= "add_story" onClick={() => this.onAddClicked()}>Add</button>
   
   
           

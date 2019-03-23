@@ -142,7 +142,7 @@ class story extends Component {
 
   }
   onFlag2(){
-    
+
   }
 
   render() {
