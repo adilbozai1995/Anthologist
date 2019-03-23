@@ -1,4 +1,4 @@
-const request = require("request");
+const request = require("request")
 const uuid = require("uuid/v4")
 const isuuid = require("is-uuid")
 
@@ -80,16 +80,14 @@ module.exports = (app) => {
             }
             else
             {
-                var vresb = JSON.parse( body )
-
-                if ( vresp.status === "fail" )
+                if ( String(body).indexOf("'fail'") > 0 )
                 {
                     console.log( "flag-profile: invalid authentication token for account: " + account )
                     res.json({"status":"fail","reason":"invalid authentication token"})
                 }
                 else
                 {
-                    sqlsec.query("UPDATE accounts SET flag=? WHERE id=? AND id='no_flag';", [ account, flag ], function( err, rsql )
+                    sqlsec.query("UPDATE accounts SET flag=? WHERE id=? AND flag='no_flag';", [ account, flag ], function( err, rsql )
                     {
                         if ( err )
                         {
