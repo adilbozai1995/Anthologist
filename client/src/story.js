@@ -136,6 +136,14 @@ class story extends Component {
                 document.getElementById('votesTime').innerHTML = "Vote Time (minutes): " + response.votetime
                 document.getElementById('nViews').innerHTML = response.views + " Views"
             }
+            else
+            {
+                window.location.replace("/")
+            }
+        }
+        else if ( this.status == 400 )
+        {
+            window.location.replace("/")
         }
      };
      xhttp.send(obj);
