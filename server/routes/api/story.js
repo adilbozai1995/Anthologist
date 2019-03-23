@@ -51,8 +51,8 @@ module.exports = (app) => {
 
         if ( isNaN( storylen )
         ||   isNaN( charlimit )
-        ||   isNan( minblock )
-        ||   isNan( votetime ) )
+        ||   isNaN( minblock )
+        ||   isNaN( votetime ) )
         {
             console.log( "story-create: invalid field" )
             return res.sendStatus(400)
