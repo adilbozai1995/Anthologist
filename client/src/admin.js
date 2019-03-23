@@ -76,7 +76,7 @@ class admin extends Component {
             {/* Search Bar */}
             <input id="search_input bar" className="in" type="text" ></input>
             <button className="notify"><img className="notimg" src='/notification-icon.png'></img> </button>
-            <button className="user"><img className="userimg" src='/avatar.png'></img> </button>
+            <button className="user"><Link to='/login'><img className="userimg" src='/avatar.png'></img></Link> </button>
              <button className="search"><img className="searchimg" src='/search.png'></img> </button>
     
             </div>
@@ -87,18 +87,14 @@ class admin extends Component {
           {/* Entry points */}
           <div className='a_inputs_new'>
               
-              <div><span className='st'>User ID : </span>
+              <div><span className='st5'>User ID : </span>
                   <input className='admin_input' type="text" id="admin_id_input"/>
               </div>
-              <div className = 'a_button_pos'  >
                   <button className="admin-button" 
                   id= "add_story" onClick={() => this.onDeleteAccount()}> Delete Account</button>
-                  </div>
 
-             <div className = 'a_button_pos'  >
                   <button className="admin-button" 
                   id= "add_story" onClick={() => this.onDeleteStory()}>Delete Story</button>
-                  </div>
          
   
                           
