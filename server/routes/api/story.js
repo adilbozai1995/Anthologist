@@ -14,7 +14,8 @@ module.exports = (app) => {
         || !req.body.minblock  // Min blocks before voting starts
         || !req.body.votetime  // How long to keep voting open for (minutes)
         || !req.body.storylen  // Min number of blocks before story can end
-        || typeof(req.body.writers) === 'undefined' ) // CSV of writers
+        || typeof(req.body.writers) === 'undefined' // CSV of writers
+        || typeof(req.body.block  ) === 'undefined' ) // Text of the first block
         {
             console.log( "story-create: missing fields" )
             return res.sendStatus(400)
@@ -70,6 +71,14 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
+        const blocktext = req.body.block
+
+        if ( blocktext.length > charlimit || blocktext.length <= 0 )
+        {
+            console.log( "story-create: starting block violates character limit" )
+            return res.sendStatus(400)
+        }
+
         var writers = req.body.writers.split(",")
 
         sqlcon.query( "SELECT token FROM accounts WHERE id=?;",
@@ -95,7 +104,7 @@ module.exports = (app) => {
             {
                 const storyid = uuid( )
 
-                sqlsec.query( "INSERT INTO stories (id, author, title, charlimit, minblock, votetime, storylen) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                sqlsec.query( "INSERT INTO stories (id, author, title, charlimit, minblock, votetime, storylen) VALUES (?, ?, ?, ?, ?, ?, ?);",
                 [
                     storyid,
                     account,
@@ -110,13 +119,25 @@ module.exports = (app) => {
                 {
                     if ( isuuid.v4( writers[i] ) )
                     {
-                        sqlsec.query( "INSERT INTO story_writers (writer, story) VALUES (?, ?)",
+                        sqlsec.query( "INSERT INTO story_writers (writer, story) VALUES (?, ?);",
                         [
                             writers[i],
                             storyid
                         ], function(ca,cb){});
                     }
                 }
+
+                const blockid = uuid()
+
+                sqlsec.query( "INSERT INTO blocks (id, content, story, order, author, ending) VALUES (?, ?, ?, ?, ?, ?);",
+                [
+                    blockid,
+                    blocktext,
+                    storyid,
+                    0,
+                    account,
+                    0
+                ], function(ca,cb){});
 
                 console.log("story-create: created new story: " + title );
                 res.json({"status":"okay","story":storyid});
@@ -208,7 +229,7 @@ module.exports = (app) => {
 
     app.post('/api/story-fetch', function(req, res)
     {
-        if( !req.body || !req.body.story )
+        if ( !req.body || !req.body.story )
         {
             console.log( "story-fetch: missing fields" )
             return res.sendStatus(400)
