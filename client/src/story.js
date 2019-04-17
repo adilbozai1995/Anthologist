@@ -314,7 +314,7 @@ class story extends Component {
         </div>
 
         {/* Add Block Button */}
-        <button className="addAButton" id ="addAButtonID" color="blue">Add a block </button>
+        <button className="addAButton" onClick={() => this.onBookmarkClicked()} id ="addAButtonID" color="blue">Add a block</button>
        
         {/* Add a bookmark button */}
         <button className="bookmark"><img className="bkimg" onClick={() => this.onBookmarkClicked()} src='/bookmark.png'></img> </button>
