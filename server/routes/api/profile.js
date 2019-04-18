@@ -245,6 +245,50 @@ module.exports = (app) => {
         });
     });
 
+    app.post('/api/profile-mycomments', function(req, res)
+    {
+        if( !req.body || !req.body.account )
+        {
+            console.log( "profile-mycomments: missing fields" )
+            return res.sendStatus(400)
+        }
+
+        const account = req.body.account
+
+        if ( !isuuid.v4( account ) )
+        {
+            console.log( "profile-mycomments: invalid account: " + account )
+            return res.sendStatus(400)
+        }
+
+        sqlcon.query("SELECT comments.*, accounts.username FROM comments INNER JOIN accounts ON comments.author = accounts.id WHERE comments.profile=?;",
+        [ account ], function( err, rsql )
+        {
+            if ( err )
+            {
+                console.log( "profile-mycomments: sql_error: ", err )
+                res.json({"status":"fail","reason":"un-caught sql error"});
+            }
+            else
+            {
+                var out = []
+
+                for ( var i = 0; i < rsql.length; i++ )
+                {
+                    out.push({
+                        "id": rsql[0].id,
+                        "text": rsql[0].content,
+                        "author": rsql[0].author,
+                        "username": rsql[0].username
+                    })
+                }
+
+                console.log( "profile-mycomments: got comments for account: " + account )
+                res.json({"status":"okay","data":out})
+            }
+        });
+    });
+
     app.post('/api/profile-remove', function(req, res)
     {
         if(!req.body
