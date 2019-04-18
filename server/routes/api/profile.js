@@ -21,7 +21,7 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
-        sqlcon.query( "SELECT username, description, flag FROM accounts WHERE id=?;", [ account ],
+        sqlcon.query( "SELECT * FROM accounts WHERE id=?;", [ account ],
             function (err, rsql)
             {
                 if ( err )
@@ -42,7 +42,8 @@ module.exports = (app) => {
                         "description": rsql[0].description,
                         "flag": rsql[0].flag,
                         "verify": rsql[0].verify,
-                        "admin": rsql[0].admin
+                        "admin": rsql[0].admin,
+                        "image": rsql[0].image
                     });
                 }
             }
@@ -298,6 +299,118 @@ module.exports = (app) => {
                 sqlsec.query("DELETE FROM story_writers WHERE writer=?;", [ profile ])
 
                 console.log( "profile-remove: admin: " + account + ", deleted account: " + profile )
+                res.json({"status":"okay"})
+            }
+        });
+    });
+
+    app.post('/api/profile-description', function(req, res)
+    {
+        if(!req.body
+        || !req.body.account
+        || !req.body.token
+        || typeof( req.body.text ) === 'undefined' )
+        {
+            console.log( "profile-description: missing field" )
+            return res.sendStatus(400)
+        }
+
+        const account = req.body.account
+
+        if ( !isuuid.v4( account ) )
+        {
+            console.log( "profile-description: invalid account: " + account )
+            return res.sendStatus(400)
+        }
+
+        const token = req.body.token
+
+        if ( token.length != 64 )
+        {
+            console.log( "profile-description: invalid token" )
+            return res.sendStatus(400)
+        }
+
+        const text = req.body.token
+
+        sqlcon.query( "SELECT token FROM accounts WHERE id=?;", [account], function( err, arsql )
+        {
+            if ( err )
+            {
+                console.log( "profile-description: sql_error: ", err );
+                res.json({"status":"fail","reason":"un-caught sql error"})
+            }
+            else if ( arsql.length <= 0 )
+            {
+                console.log( "profile-description: no account with id: " + account )
+                res.json({"status":"fail","reason":"no account with that id"})
+            }
+            else if ( arsql[0].token !== token )
+            {
+                console.log("profile-description: invalid security token for account: " + account )
+                res.json({"status":"fail","reason":"invalid security token"})
+            }
+            else
+            {
+                sqlcon.query( "UPDATE accounts SET description=? WHERE id=?;", [text, account], function( a, b ) {} )
+
+                console.log( "profile-description: updated description for account: " + account )
+                res.json({"status":"okay"})
+            }
+        });
+    });
+
+    app.post('/api/profile-image', function(req, res)
+    {
+        if(!req.body
+        || !req.body.account
+        || !req.body.token
+        || !req.body.image )
+        {
+            console.log( "profile-image: missing field" )
+            return res.sendStatus(400)
+        }
+
+        const account = req.body.account
+
+        if ( !isuuid.v4( account ) )
+        {
+            console.log( "profile-image: invalid account: " + account )
+            return res.sendStatus(400)
+        }
+
+        const token = req.body.token
+
+        if ( token.length != 64 )
+        {
+            console.log( "profile-image: invalid token" )
+            return res.sendStatus(400)
+        }
+
+        const image = req.body.image
+
+        sqlcon.query( "SELECT token FROM accounts WHERE id=?;", [account], function( err, arsql )
+        {
+            if ( err )
+            {
+                console.log( "profile-image: sql_error: ", err );
+                res.json({"status":"fail","reason":"un-caught sql error"})
+            }
+            else if ( arsql.length <= 0 )
+            {
+                console.log( "profile-image: no account with id: " + account )
+                res.json({"status":"fail","reason":"no account with that id"})
+            }
+            else if ( arsql[0].token !== token )
+            {
+                console.log("profile-image: invalid security token for account: " + account )
+                res.json({"status":"fail","reason":"invalid security token"})
+            }
+            else
+            {
+                sqlcon.query( "UPDATE accounts SET image=? WHERE id=?;", [image, account], function( a, b ) {} )
+
+                console.log( "profile-image: updated image for account: " + account )
                 res.json({"status":"okay"})
             }
         });
