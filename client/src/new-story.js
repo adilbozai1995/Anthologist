@@ -17,9 +17,8 @@ class news extends Component {
         "votetime": document.getElementById('vote_time').value,
         "storylen": document.getElementById('story_length').value,
         "writers": document.getElementById('writers_list').value,
+        "block": document.getElementById('story').value
     }
-
-    var a = document.getElementById('story').value
 
     document.getElementById('book_title').value = "";
     document.getElementById('max_char').value = "";

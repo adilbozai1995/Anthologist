@@ -93,7 +93,7 @@ class profile extends Component {
             window.location.replace("/")
           }
         }
-        else if ( this.status == 400 )
+        else if ( this.status === 400 )
         {
           window.location.replace("/")
         }
