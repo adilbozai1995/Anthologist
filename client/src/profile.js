@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
+import Modal from 'react-modal'
 import logo from './logo.svg';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +20,28 @@ class profile extends Component {
       isHidden: true
     }
   }
+    /*Modal declared*/
+  state = {
+    modalIsOpen: false,
+    secondModalIsOpen: false
+  };
 
+  openModal = () => {
+    this.setState({ modalIsOpen: true });
+  };
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  };
+
+  openSecondModal = () => {
+    this.setState({ secondModalIsOpen: true });
+  };
+
+  closeSecondModal = () => {
+    this.setState({ secondModalIsOpen: false });
+  };
+  
 
   toggleHidden () {
     this.setState({
@@ -210,9 +232,14 @@ onClickLike = () => {
 
   render() {
     return (
+
+
     
       <div className="App">
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+      
 
       
         {/* Menu top bar */}
@@ -239,7 +266,7 @@ onClickLike = () => {
         <div id ="2" className="Namecontainer">
             <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
             <button id='flag' className="notify"><img className="notimg" src='/flg.png' onClick={() => this.onFlag()} ></img> </button>
-            <button id='edit' className="edit_p">Edit Profile</button> {/*edir profile button*/}
+            <button id='edit' onClick={this.openModal} className="edit_p">Edit Profile</button> {/*edir profile button*/}
             <Link to='/'><button className="logout" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
             <div id = "n1" className="Name"> <a className="name" href> </a> </div>
             <div id = "n2" className="Rating"> <a className="rating" href> Marks: 4.2 </a></div>
@@ -347,6 +374,19 @@ onClickLike = () => {
 
 
       </div>
+
+      <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+          <button onClick={this.closeModal}>close</button>
+          <div>I am a modal</div>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.secondModalIsOpen}
+          onRequestClose={this.closeSecondModal}
+        >
+          <button onClick={this.closeSecondModal}>close</button>
+          <div>No dude</div>
+        </Modal>
 
 
 
