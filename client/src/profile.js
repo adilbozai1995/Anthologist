@@ -12,9 +12,13 @@ class profile extends Component {
   constructor () {
     super()
     this.state = {
+      blocks:[{index: 1, block : "Block1"}, {index: 2, block: "Block2"},{index: 3, block: "Block3"}],
+      storyBlocks:[{index: 1, block : "Story1"}, {index: 2, block: "Story2"},{index: 3, block: "Story3"}],
+
       isHidden: true
     }
   }
+
 
   toggleHidden () {
     this.setState({
@@ -182,6 +186,22 @@ onLogout() {
             localStorage.token =""
         }
 
+   changeState() {
+     this.setState({blocks:[{index: 1, block : "Block1"}, {index: 2, block: "Block2"},{index: 3, block: "Block3"}]})
+   }     
+
+   //-----------------------FUNCTION TO ADD A BLOCK DYNAMICALLY-------------------------
+   onAddItem = () =>{
+    this.setState(state => {
+        const blocks = state.blocks.concat(state.value);
+        return {
+            blocks,
+            value:{},
+        };
+    });
+};
+//-----------------------------------------------------------------------------------------
+        
   render() {
     return (
 
@@ -222,8 +242,41 @@ onLogout() {
         <div id ="3" className="Contributioncontainer">
                 <div id = "m0" className="contribution"> <a className="cont" href> Contributions </a></div> 
 
+              
+              
+              
+              
+              {/* -----------ADD A STORY UNDER CONTRIBUTIONS DYNAMICALLY-------- */}
+              <div className="StoryCont">Story Contributions</div>
+                 <div className='story-div2' >
+            {
+                // Iterates over each element in the blocks array in the state and makes a span
+              this.state.storyBlocks.map(({block,index})=>{
+                return (
+                  <span key={index.toString()} className='block' >{block.toString()}</span>
+                )
+              })
+            } </div>
+            
+              {/* ------------------------------------------------------------------------ */}
 
-              <div className='story-div' >
+
+              {/* -----------ADD A BLOCK UNDER CONTRIBUTIONS DYNAMICALLY-------- */}
+              <div className="BlocksCont">Blocks Contributions</div>
+                 <div className='story-div3' >
+            {
+                // Iterates over each element in the blocks array in the state and makes a span
+              this.state.blocks.map(({block,index})=>{
+                return (
+                  <span key={index.toString()} className='block' >{block.toString()}</span>
+                )
+              })
+            } </div>
+            
+              {/* ------------------------------------------------------------------------ */}
+
+
+               {/* <div className='story-div' >
                 <span className='block'>STORY 1</span>
                 <span className='block'>Block</span>
                 <span className='block'>Block</span>
@@ -257,7 +310,7 @@ onLogout() {
                 <span className='block'>Block</span>
                 <span className='block'>Block</span>
                 <span className='block'>Block</span>
-              </div>
+              </div>  */}
               
 
 

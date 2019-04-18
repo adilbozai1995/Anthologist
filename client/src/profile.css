@@ -286,7 +286,7 @@
                         text-align:center; 
                         font-display: center;  
                         font-weight: bold; 
-                        /* background-color: rgb(23, 50, 139);  */
+                         /* background-color: rgb(23, 50, 139);   */
                     }
     
                             .cont{
@@ -348,7 +348,7 @@
 
                           width: 92%;
                           margin-left: 4%;
-                          margin-top: 9%;
+                          margin-top: 15%;
                           margin-bottom: 4%;
 
                           height: 40%;
@@ -391,18 +391,55 @@
   margin-right: 3%;
   
 }
+
+.story-div2 {
+  width: 40%;
+  height: 100%;
+  background-color: transparent;
+  overflow: hidden;
+  overflow-y: scroll;
+  float: left;
+  margin-right: 3%;
+  background-color: #ffffff;
+                          border-style: solid;
+                          border-width: 4pt;
+                          border-color: black;
+                          overflow: hidden;
+                          overflow-y: scroll;
+  
+}
+
+.story-div3 {
+  width: 40%;
+  height: 100%;
+  background-color: transparent;
+  overflow: hidden;
+  overflow-y: scroll;
+  float: right;
+  margin-right: 10%;
+  margin-top: -30%;
+  background-color: #ffffff;
+                          border-style: solid;
+                          border-width: 4pt;
+                          border-color: black;
+                          overflow: hidden;
+                          overflow-y: scroll;
+  
+}
+
 .block {
-                        border-radius: 10px;
+                        border-radius: 10%;
                         font-family: 'SignPainter';
-                        font-size: 300%;
+                        font-size: 600%;
                         text-align: center;
                         font-weight: bold;
                         border-radius: 10px;
                         float: left;
-                        margin-top: 10%;
-                        margin-bottom: 10%;
-                        width: 150px;
-                        height: 100px;
+                        margin-left: 10%;
+                        margin-top: 5%;
+                        margin-bottom: 5%;
+                        width: 80%;
+                        height: 50%;
                         background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
                         box-shadow: 10px 10px grey;
                          -webkit-transition-duration: 0.4s;
@@ -413,3 +450,28 @@
 .block:hover {
   color: white;
 }
+
+.StoryCont{
+  height: 30%;
+  width: 30%;
+  font-display: bold;
+  font-size: 300%;
+  margin-left: 10%;
+  font-family:'SignPainter';
+  color: black;
+/*   background-color: rgb(23, 50, 139);
+ */
+}
+
+.BlocksCont {
+  height: 30%;
+  width: 30%;
+  margin-top: -7.1%;
+  font-display: bold;
+  font-size: 300%;
+  margin-left: 57%;
+  margin-bottom: 30%;
+  font-family:'SignPainter';
+  color: black;
+/*   background-color: rgb(23, 50, 139);
+ */}
