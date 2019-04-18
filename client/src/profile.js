@@ -412,7 +412,11 @@ onClickLike = () => {
 
           <div>Change Profile Picture</div>
           <button id = "n0" > <img src='/avatar.png' alt = "Nothing"></img> </button> 
-          <button> <img src='/avatar.png' alt = "Nothing"></img> </button> 
+          <button> <img src='/man.png' alt = "Nothing"></img> </button> 
+          <button> <img src='/man2.png' alt = "Nothing"></img> </button> 
+          <button> <img src='/man3.png' alt = "Nothing"></img> </button> 
+          <button> <img src='/man4.png' alt = "Nothing"></img> </button> 
+          <button> <img src='/man5.png' alt = "Nothing"></img> </button> 
         </Modal>
 
 
