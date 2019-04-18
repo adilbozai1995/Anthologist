@@ -470,7 +470,6 @@
                         box-shadow: 10px 10px grey;
                          -webkit-transition-duration: 0.4s;
                         transition-duration: 0.4s;
-                        cursor: pointer;
 }
 
 .block:hover {
@@ -492,7 +491,7 @@
 .BlocksCont {
   height: 30%;
   width: 30%;
-  margin-top: -7.1%;
+  margin-top: -8.1%;
   font-display: bold;
   font-size: 300%;
   margin-left: 57%;
@@ -501,3 +500,14 @@
   color: black;
 /*   background-color: rgb(23, 50, 139);
  */}
+
+ .likeButton {
+  background-color: transparent;
+   float: right;
+   margin-top: 33%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  
+}
+

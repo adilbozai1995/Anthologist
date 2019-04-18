@@ -12,6 +12,7 @@ class profile extends Component {
   constructor () {
     super()
     this.state = {
+      value : {},
       blocks:[{index: 1, block : "Block1"}, {index: 2, block: "Block2"},{index: 3, block: "Block3"}],
       storyBlocks:[{index: 1, block : "Story1"}, {index: 2, block: "Story2"},{index: 3, block: "Story3"}],
 
@@ -201,11 +202,18 @@ onLogout() {
     });
 };
 //-----------------------------------------------------------------------------------------
-        
+
+// -----LIKE BUTTON FUNCTION------
+onClickLike = () => {
+  
+}
+
   render() {
     return (
-
+    
       <div className="App">
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
       
         {/* Menu top bar */}
         <div className="notification-bar">
@@ -254,7 +262,9 @@ onLogout() {
                 // Iterates over each element in the blocks array in the state and makes a span
               this.state.storyBlocks.map(({block,index})=>{
                 return (
-                  <span key={index.toString()} className='block' >{block.toString()}</span>
+                  <span key={index.toString()} className='block' >{block.toString()}
+                    <button className="likeButton" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
+                  </span>
                 )
               })
             } </div>
@@ -269,7 +279,9 @@ onLogout() {
                 // Iterates over each element in the blocks array in the state and makes a span
               this.state.blocks.map(({block,index})=>{
                 return (
-                  <span key={index.toString()} className='block' >{block.toString()}</span>
+                  <span key={index.toString()} className='block' >{block.toString()}
+                  <button className="likeButton" onClick={() => this.onClickLike} ><i class="far fa-thumbs-up fa-2x"></i></button>
+                  </span>
                 )
               })
             } </div>

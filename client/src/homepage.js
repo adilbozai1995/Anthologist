@@ -5,6 +5,16 @@ import './homepage.css';
 
 
 class homepage extends Component {
+
+  constructor () {
+    super()
+    this.state = {
+      value : {},
+      //blocks:[{index: 1, block : "Block1"}, {index: 2, block: "Block2"},{index: 3, block: "Block3"}],
+      storyBlocks:[{index: 1, block : "Story1"}, {index: 2, block: "Story2"},{index: 3, block: "Story3"}],
+    }
+  }
+
   render() {
     return (
 
@@ -44,7 +54,20 @@ class homepage extends Component {
       {/* Stories on the page */}
       <div className='stories'>
 
-        <span className='story-cover1'>STORY 1</span>
+      {/* -----------ADD A STORY UNDER CONTRIBUTIONS DYNAMICALLY-------- */}
+                 
+            {
+                // Iterates over each element in the blocks array in the state and makes a span
+              this.state.storyBlocks.map(({block,index})=>{
+                return (
+                  <span key={index.toString()} className='block' >{block.toString()}</span>
+                )
+              })
+            } 
+            
+              {/* ------------------------------------------------------------------------ */}
+
+        {/* <span className='story-cover1'>STORY 1</span>
         <span className='story-cover2'>STORY 2</span>
         <span className='story-cover3'> STORY 3</span>
         <span className='story-cover4'>STORY 4</span>
@@ -57,7 +80,7 @@ class homepage extends Component {
         <span className='story-cover9'>STORY 9</span>
         <span className='story-cover10'>STORY 10</span>
         <span className='story-cover11'> STORY 11</span>
-        <span className='story-cover12'>STORY 12</span>
+        <span className='story-cover12'>STORY 12</span> */}
         
 
       </div>
