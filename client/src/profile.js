@@ -23,7 +23,8 @@ class profile extends Component {
     /*Modal declared*/
   state = {
     modalIsOpen: false,
-    secondModalIsOpen: false
+    secondModalIsOpen: false,
+    editStoryIsOpen:false
   };
 
   openModal = () => {
@@ -40,6 +41,13 @@ class profile extends Component {
 
   closeSecondModal = () => {
     this.setState({ secondModalIsOpen: false });
+  };
+  open_editstory = () => {
+    this.setState({ editStoryIsOpen: true });
+  };
+
+  close_editstory = () => {
+    this.setState({ editStoryIsOpen: false });
   };
   
 
@@ -266,7 +274,7 @@ onClickLike = () => {
         <div id ="2" className="Namecontainer">
             <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
             <button id='flag' className="notify"><img className="notimg" src='/flg.png' onClick={() => this.onFlag()} ></img> </button>
-            <button id='edit' onClick={this.openModal} className="edit_p">Edit Profile</button> {/*edir profile button*/}
+            <button id='edit' onClick={this.open_editstory} className="edit_p">Edit Profile</button> {/*edir profile button*/}
             <Link to='/'><button className="logout" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
             <div id = "n1" className="Name"> <a className="name" href> </a> </div>
             <div id = "n2" className="Rating"> <a className="rating" href> Marks: 4.2 </a></div>
@@ -386,6 +394,22 @@ onClickLike = () => {
         >
           <button onClick={this.closeSecondModal}>close</button>
           <div>No dude</div>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.editStoryIsOpen}
+          onRequestClose={this.close_editstory}
+        >
+
+        <div class="change-description">
+        <label className='change-descp' > Add new descritpion   </label>
+        <input className='change-descp' type="text" id="new-description"/>
+        </div>      
+            <button>Update Description</button>
+          <button onClick={this.close_editstory}>close</button>
+          <div>Edit Story</div>
+
+          <div>Change Profile Picture</div>
         </Modal>
 
 
