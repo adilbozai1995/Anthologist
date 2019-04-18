@@ -118,6 +118,32 @@
     
         
       }
+
+      .edit_p{
+        float: right;
+        width: 14%;
+        background-color: transparent;
+        background-attachment: fixed;
+        font-family:'SignPainter';
+        border: none;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 25px;
+        margin: 10px 2px;
+        font-weight: bold;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s;
+        transition-duration: 0.4s;
+        outline: none;
+        margin-top: 1.68%;
+        margin-right: -15%
+
+      }
+      .edit_p:hover {
+        color: white;
+      }
       
       .in {
         background-color: #81c5d6;

@@ -61,6 +61,9 @@ class Popup extends React.Component {
 }
 
 
+
+
+
 class story extends Component {
   
   constructor() {
@@ -317,7 +320,7 @@ class story extends Component {
         <button className="addAButton" onClick={() => this.onBookmarkClicked()} id ="addAButtonID" color="blue">Add a block</button>
        
         {/* Add a bookmark button */}
-        <button className="bookmark"><img className="bkimg" onClick={() => this.onBookmarkClicked()} src='/bookmark.png'></img> </button>
+        <button className="bookmark"><img className="bkimg" onClick={() => this.addBlock()} src='/bookmark.png'></img> </button>
 
         {this.state.showPopup ? 
           <Popup
