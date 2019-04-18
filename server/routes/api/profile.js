@@ -4,8 +4,8 @@ const isuuid = require("is-uuid")
 
 module.exports = (app) => {
 
-    app.post('/api/fetch-profile', function(req, res) {
-
+    app.post('/api/fetch-profile', function(req, res)
+    {
         if(!req.body
         || !req.body.account )
         {
@@ -151,6 +151,95 @@ module.exports = (app) => {
 
                 console.log("profile-bookmark: requested bookmarks for account: " + account)
                 res.json({"status":"okay","data":out})
+            }
+        });
+    });
+
+    app.post('/api/profile-myblocks', function(req, res)
+    {
+        if( !req.body || !req.body.account )
+        {
+            console.log( "profile-myblocks: missing fields" )
+            return res.sendStatus(400)
+        }
+
+        const account = req.body.account
+
+        if ( !isuuid.v4( account ) )
+        {
+            console.log( "profile-myblocks: invalid account: " + account )
+            return res.sendStatus(400)
+        }
+
+        sqlcon.query("SELECT * FROM blocks WHERE author=?;",
+        [ account ], function( err, rsql )
+        {
+            if ( err )
+            {
+                console.log( "profile-myblocks: sql_error: ", err )
+                res.json({"status":"fail","reason":"un-caught sql error"});
+            }
+            else
+            {
+                var out = []
+
+                for ( var i = 0; i < rsql.length; i++ )
+                {
+                    out.push({
+                        "id":rsql[i].id,
+                        "story":rsql[i].story,
+                        "text":rsql[i].text,
+                        "rating":rsql[i].rating,
+                        "ending":rsql[i].ending
+                    })
+                }
+
+                console.log( "profile-myblocks: requested blocks authored by account: " + account )
+                return res.json({"status":"okay","data":out})
+            }
+        });
+    });
+
+    app.post('/api/profile-mystories', function(req, res)
+    {
+        if( !req.body || !req.body.account )
+        {
+            console.log( "profile-mystories: missing fields" )
+            return res.sendStatus(400)
+        }
+
+        const account = req.body.account
+
+        if ( !isuuid.v4( account ) )
+        {
+            console.log( "profile-mystories: invalid account: " + account )
+            return res.sendStatus(400)
+        }
+
+        sqlcon.query("SELECT * FROM stories WHERE author=?;",
+        [ account ], function( err, rsql )
+        {
+            if ( err )
+            {
+                console.log( "profile-mystories: sql_error: ", err )
+                res.json({"status":"fail","reason":"un-caught sql error"});
+            }
+            else
+            {
+                var out = []
+
+                for ( var i = 0; i < rsql.length; i++ )
+                {
+                    out.push({
+                        "id":rsql[i].id,
+                        "title":rsql[i].title,
+                        "author":rsql[i].author,
+                        "views":rsql[i].views
+                    })
+                }
+
+                console.log( "profile-mystories: requested stories authored by account: " + account )
+                return res.json({"status":"okay","data":out})
             }
         });
     });
