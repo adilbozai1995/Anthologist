@@ -390,7 +390,7 @@ class story extends Component {
         </div>      
         <button >Update Description</button>
         <label>
-        <input type="radio" value="option3" />
+        <input type="radio" value="ES" />
         End of Story
       </label>
         <button >End of Story</button> 
