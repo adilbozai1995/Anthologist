@@ -405,11 +405,14 @@ onClickLike = () => {
         <label className='change-descp' > Add new descritpion   </label>
         <input className='change-descp' type="text" id="new-description"/>
         </div>      
-            <button>Update Description</button>
+        <button >Update Description</button>
+            <div>Edit Story</div>
           <button onClick={this.close_editstory}>close</button>
-          <div>Edit Story</div>
+          
 
           <div>Change Profile Picture</div>
+          <button id = "n0" > <img src='/avatar.png' alt = "Nothing"></img> </button> 
+          <button> <img src='/avatar.png' alt = "Nothing"></img> </button> 
         </Modal>
 
 
