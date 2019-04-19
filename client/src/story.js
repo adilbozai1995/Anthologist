@@ -414,7 +414,7 @@ onClickLike = (blockId) => {
               this.state.blocks.map(({id, iteration, content, author, username, flag, rating, ending}) =>{
                 return(
                   <div className='blocks' key={id.toString()}>
-                      <button onClick={() => this.StoryopenModal(content)} className='st'>{content.toString().substring(0,15) + "..."}</button>
+                      <button onClick={() => this.StoryopenModal(content)} className='st'>{content.toString().substring(0,15) + " ..."}</button>
                       <a href={"/profile/" + author.toString()} className='author'>{username.toString()}</a>
                       <div className='slash'>/</div>
                       <button className="likeButton2" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
@@ -522,30 +522,7 @@ onClickLike = (blockId) => {
         }
 
       
-      <Modal style={{
-    overlay: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(255, 255, 255, 0.75)'
-    },
-    content: {
-      position: 'absolute',
-      top: '40px',
-      left: '40px',
-      right: '40px',
-      bottom: '40px',
-      border: '1px solid #ccc',
-      background: '#fff',
-      overflow: 'auto',
-      WebkitOverflowScrolling: 'touch',
-      borderRadius: '4px',
-      outline: 'none',
-      padding: '20px'
-    }
-  }}/*THIS A STORY YOU NEED TO CHANGE*/
+      <Modal /*THIS A STORY YOU NEED TO CHANGE*/
           isOpen={this.state.StorymodalIsOpen} onRequestClose={this.StorycloseModal}>
           <button onClick={this.StorycloseModal}>close</button>
           <div>{this.state.StoryModalText}</div>
