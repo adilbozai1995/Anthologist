@@ -26,10 +26,22 @@ class homepage extends Component {
 
     componentDidMount( )
     {
-        var obj = JSON.stringify({
-            "mode":0
-        });
+        if ( typeof( localStorage.homepage_mode ) === 'undefined' )
+        {
+            localStorage.homepage_mode = 0;
+        }
 
+        var tmpobj = {
+            "mode": localStorage.homepage_mode
+        }
+
+        if ( localStorage.account && localStorage.token )
+        {
+            tmpobj["account"] = localStorage.account
+            tmpobj["token"] = localStorage.token
+        }
+
+        var obj = JSON.stringify(tmpobj)
         const updateStory = this.onAddItem;
 
         var xhttp = new XMLHttpRequest();
@@ -74,21 +86,20 @@ class homepage extends Component {
         </div>
         
         {/* Search Bar */}
-    
         
-        <button className="user"><Link to='/login'><img className="userimg" src='avatar.png'></img></Link> </button>
-      
-
-        </div>  
+        <button className="user"><Link to='/login'><img className="userimg" src='/man.png' alt = "No logo"></img></Link> </button>
+        </div>
         
         {/* Top buttons under menu bar */}
         <div className='top-buttons'>
-        <button className="submit-buttons_2" id ="new-story" color="blue">New </button>
+        <button className="submit-buttons_2" id ="new-story" color="blue">New</button>
         <div className="black_line_2"></div>
-        <button className="submit-buttons_2" id ="popular-stories" color="blue"> Popular</button>
-        <button className="submit-buttons_2" id ="popular-stories" color="blue"> Following</button>
+        <button className="submit-buttons_2" id ="popular-stories" color="blue">Popular</button>
+        <button className="submit-buttons_2" id ="popular-stories" color="blue">Following</button>
         <div className="black_line_3"></div>
-        <button className="create-story" id ="create-story-button" color="blue"><Link className="create-story" to='/new-story'> create a story</Link></button>
+        <button className="create-story" id ="create-story-button" color="blue">
+            <Link className="create-story" to='/new-story'> create a story</Link>
+        </button>
         </div>
 
 

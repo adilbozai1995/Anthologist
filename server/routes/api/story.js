@@ -65,7 +65,7 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
-        if ( votetime > 1440 || votetime < 5 )
+        if ( votetime > 1440 || votetime < 1 )
         {
             console.log( "story-create: vote time too long or short: " + votetime )
             return res.sendStatus(400)
@@ -190,7 +190,7 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
-        if ( votetime > 1440 || votetime < 5 )
+        if ( votetime > 1440 || votetime < 1 )
         {
             console.log( "story-editvote: vote time too long or short: " + votetime )
             return res.sendStatus(400)
@@ -543,15 +543,63 @@ module.exports = (app) => {
 
         if ( mode == 2 )
         {
+            sqlcon.query( "SELECT token FROM accounts WHERE id=?;",
+            [ account ],
+            function( aerr, arsql )
+            {
+                if ( aerr )
+                {
+                    console.log( "story-homepage: sql_error: ", aerr );
+                    res.json({"status":"fail","reason":"un-caught sql error"})
+                }
+                else if ( arsql.length == 0 )
+                {
+                    console.log( "story-homepage: no account with id: " + account )
+                    res.json({"status":"fail","reason":"no account with that id"})
+                }
+                else if ( arsql[0].token !== token )
+                {
+                    console.log("story-homepage: invalid security token for account: " + account )
+                    res.json({"status":"fail","reason":"invalid security token"})
+                }
+                else
+                {
+                    sqlcon.query( "SELECT stories.* FROM story_bookmark INNER JOIN stories ON story_bookmark.story=stories.id WHERE story_bookmark.user=?;",
+                    [ account ], function ( err, rsql )
+                    {
+                        if ( err )
+                        {
+                            console.log( "story-homepage: sql_error: ", err )
+                            res.json({"status":"fail","reason":"un-caught sql error"})
+                        }
+                        else
+                        {
+                            var out = []
 
-        }
-        else if ( mode == 1 )
-        {
-            
+                            for ( var i = 0; i < rsql.length; i++ )
+                            {
+                                out.push({
+                                    "id":rsql[i].id,
+                                    "author":rsql[i].author,
+                                    "username":rsql[i].username,
+                                    "title":rsql[i].title,
+                                    "views":rsql[i].views
+                                })
+                            }
+
+                            console.log( "story-homepage: fetched bookmarked stories for account: " + account )
+                            res.json({"status":"okay","stories":out})
+                        }
+                    });
+                }
+            });
         }
         else
         {
-            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id ORDER BY stories.born DESC;", [], function( err, rsql )
+            var orderval = "stories.born"
+            if ( mode == 1 ) orderval = "stories.views"
+
+            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id ORDER BY ?;", [orderval], function( err, rsql )
             {
                 if ( err )
                 {
@@ -573,7 +621,15 @@ module.exports = (app) => {
                         })
                     }
 
-                    console.log( "story-homepage: fetched most recent stories" )
+                    if ( mode == 1 )
+                    {
+                        console.log( "story-homepage: fetched most viewed stories" )
+                    }
+                    else
+                    {
+                        console.log( "story-homepage: fetched most recent stories" )
+                    }
+
                     res.json({"status":"okay","stories":out})
                 }
             });
