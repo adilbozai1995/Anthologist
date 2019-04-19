@@ -523,7 +523,10 @@ onClickLike = (blockId) => {
 
       
       <Modal  /*THIS A STORY YOU NEED TO CHANGE*/
-          isOpen={this.state.StorymodalIsOpen} onRequestClose={this.StorycloseModal}>
+          isOpen={this.state.StorymodalIsOpen} onRequestClose={this.StorycloseModal}
+          style={{width:'100px'}}
+          
+          >
           <button onClick={this.StorycloseModal}>close</button>
           <div>{this.state.StoryModalText}</div>
         </Modal>

@@ -16,6 +16,7 @@ div {
   display: block;
 }
 
+
 .notification-bar {
   display: flex;
   justify-content: space-between;
