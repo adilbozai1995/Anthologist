@@ -381,6 +381,21 @@ onClickLike = (blockId) => {
     xhttp.send(obj)
 }
 
+// -----FLAG BUTTON FUNCTION------
+onClickFlag(id) {
+
+}
+
+//-----DELETE BUTTON FUNCTION------
+onClickDelete(id) {
+
+}
+
+//-----EDIT BUTTON FUNCTION------
+onClickEdit(id) {
+
+}
+
   render() {
     return (
       
@@ -482,6 +497,10 @@ onClickLike = (blockId) => {
                  <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>  
                       <div className='slash1'>/</div>
                       <button className="likeButton3" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
+                      <button className="flagButton" onClick={() => this.onClickFlag(id)} ><i id="flag" className="far fa-flag fa-2x"></i></button>
+                      <button className="deleteButton" onClick={() => this.onClickDelete(id)} ><i id="delete" className="fas fa-trash-alt fa-2x"></i></button>
+                      <button className="editButton" onClick={() => this.onClickEdit(id)} ><i id="edit" className="fas fa-edit fa-2x"></i></button>
+
                       <div className='likes1'>{rating.toString()} Likes</div>
                   </div>
                 )
