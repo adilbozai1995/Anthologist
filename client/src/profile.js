@@ -238,6 +238,11 @@ onClickLike = () => {
   
 }
 
+// -----EDIT BUTTON FUNCTION------
+onClickEditDescription() {
+
+}
+
   render() {
     return (
 
@@ -278,7 +283,11 @@ onClickLike = () => {
             <div id = "n1" className="Name"> <a className="name" href> </a> </div>
             <div id = "n2" className="Rating"> <a className="rating" href> Marks: 4.2 </a></div>
             <div id = "n3" className="Box">
-                <div id = "user_description" className="typetext"> This is an example User Description</div>
+                <div id = "user_description" className="typetext"> 
+                This is an example User Description
+              
+                </div>
+                <button className="editDescriptionButton" onClick={() => this.onClickEditDescription()} ><i  className="fas fa-edit fa-2x"></i></button>
             </div>
         </div>
 

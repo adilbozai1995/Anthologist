@@ -144,6 +144,14 @@
       .edit_p:hover {
         color: white;
       }
+
+      .editDescriptionButton {
+        background-color: transparent;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
       
       .in {
         background-color: #81c5d6;
