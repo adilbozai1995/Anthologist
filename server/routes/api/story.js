@@ -507,4 +507,75 @@ module.exports = (app) => {
             }
         });
     });
+
+    app.post('/api/story-homepage', function(req, res)
+    {
+        if ( !req.body || typeof( req.body.mode ) === 'undefined' )
+        {
+            console.log("story-homepage: missing field")
+            return res.sendStatus(400)
+        }
+
+        var mode = req.body.mode
+
+        if ( isNaN( mode ) || mode < 0 || mode > 2 )
+        {
+            console.log("story-homepage: invalid mode: " + mode)
+            return res.sendStatus(400)
+        }
+
+        var account = "";
+        var token = "";
+
+        if ( req.body.account && req.body.token )
+        {
+            if ( isuuid.v4( req.body.account ) && req.body.token.length == 64 )
+            {
+                account = req.body.account
+                token = req.body.token
+            }
+        }
+        else if ( mode == 2 )
+        {
+            mode = 0;
+        }
+
+        if ( mode == 2 )
+        {
+
+        }
+        else if ( mode == 1 )
+        {
+            
+        }
+        else
+        {
+            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id ORDER BY stories.born DESC;", [], function( err, rsql )
+            {
+                if ( err )
+                {
+                    console.log( "story-homepage: sql_error: ", err )
+                    res.json({"status":"fail","reason":"un-caught sql error"})
+                }
+                else
+                {
+                    var out = []
+
+                    for ( var i = 0; i < rsql.length; i++ )
+                    {
+                        out.push({
+                            "id":rsql[i].id,
+                            "author":rsql[i].author,
+                            "username":rsql[i].username,
+                            "title":rsql[i].title,
+                            "views":rsql[i].views
+                        })
+                    }
+
+                    console.log( "story-homepage: fetched most recent stories" )
+                    res.json({"status":"okay","stories":out})
+                }
+            });
+        }
+    });
 }

@@ -9,11 +9,52 @@ class homepage extends Component {
   constructor () {
     super()
     this.state = {
-      value : {},
-      //blocks:[{index: 1, block : "Block1"}, {index: 2, block: "Block2"},{index: 3, block: "Block3"}],
-      storyBlocks:[{index: 1, block : "Story1"}, {index: 2, block: "Story2"},{index: 3, block: "Story3"}],
+      value: {},
+      stories: [],
     }
   }
+
+  onAddItem = ( updateVal ) => {
+      this.setState(state => {
+          const stories = state.stories.concat(updateVal);
+          return {
+              stories,
+              value:{},
+          };
+      })
+  };
+
+    componentDidMount( )
+    {
+        var obj = JSON.stringify({
+            "mode":0
+        });
+
+        const updateStory = this.onAddItem;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/api/story-homepage" , true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.onreadystatechange = function ()
+        {
+            if ( this.readyState === 4 && this.status === 200 )
+            {
+                var response = JSON.parse(this.responseText);
+                console.log(response);
+
+                if ( response.status === 'okay' )
+                {
+                    for ( var i = 0; i < response.stories.length; i++ )
+                    {
+                        var story = response.stories[i]
+
+                        updateStory(story)
+                    }
+                }
+            }
+        };
+        xhttp.send(obj);
+    }
 
   render() {
     return (
@@ -58,16 +99,21 @@ class homepage extends Component {
                  
             {
                 // Iterates over each element in the blocks array in the state and makes a span
-              this.state.storyBlocks.map(({block,index})=>{
+              this.state.stories.map(({id, author, username, title, views})=>{
                 return (
-                  <a href=""  key={index.toString()} className='block' >{block.toString()}</a>
+                  <div>
+                      <a href={"/story/" + id.toString()} className='block' >{title.toString()}</a>
+                      <a href={"/profile/" + author.toString()} >{username.toString()}</a>
+                      <div>{views.toString()} Views</div>
+                  </div>
                 )
               })
-            } 
+            }
             
               {/* ------------------------------------------------------------------------ */}
 
-        {/* <span className='story-cover1'>STORY 1</span>
+        {
+     /* <span className='story-cover1'>STORY 1</span>
         <span className='story-cover2'>STORY 2</span>
         <span className='story-cover3'> STORY 3</span>
         <span className='story-cover4'>STORY 4</span>
