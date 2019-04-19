@@ -313,6 +313,7 @@ module.exports = (app) => {
                             "votestart":rsql[0].votestart,
                             "votemode":rsql[0].votemode,
                             "iteration":rsql[0].iteration,
+                            "ended":rsql[0].ended,
                             "rating":storyRating,
                             "blocks":out
                         });
@@ -441,6 +442,7 @@ module.exports = (app) => {
                 sqlsec.query("DELETE FROM stories WHERE id=?;", [ story ])
                 sqlsec.query("DELETE FROM story_bookmark WHERE story=?;", [ story ])
                 sqlsec.query("DELETE FROM story_writers WHERE story=?;", [ story ])
+                sqlsec.query("DELETE FROM blocks WHERE story=?;", [ story ])
 
                 console.log( "story-remove: admin: " + account + ", deleted story: " + story )
                 res.json({"status":"okay"})
