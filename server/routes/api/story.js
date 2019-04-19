@@ -599,7 +599,7 @@ module.exports = (app) => {
             var orderval = "stories.born"
             if ( mode == 1 ) orderval = "stories.views"
 
-            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id ORDER BY ? DESC;", [orderval], function( err, rsql )
+            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id ORDER BY ?;", [orderval], function( err, rsql )
             {
                 if ( err )
                 {
