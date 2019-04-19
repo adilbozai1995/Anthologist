@@ -136,7 +136,7 @@ class story extends Component {
 
             if ( response.status === 'okay' )
             {
-
+            
             }
         }
     };
@@ -185,6 +185,11 @@ class story extends Component {
      };
      xhttp.send(obj);
 
+  }
+
+  onAddBlock(){   /*UPDATE THE STORY HERE*/
+
+    document.getElementById('new_block').value = ""; 
   }
 
   onFlag2()
@@ -403,12 +408,12 @@ onClickLike = () => {
         <label className='change-descp' > Add Block   </label>
         <textarea className='add_block'  type="text" id="new_block"/>
         </div>      
-        <button >Update Description</button>
+        <button onClick={() => this.onAddBlock()}>Add Block</button>
         <label>
-        <input type="radio" value="ES" />
+        <input type="checkbox" id="eos_check" value="ES" />
         End of Story
       </label>
-        <button >End of Story</button> 
+         
         <button onClick={this.close_addBlock}>close</button>
           
 

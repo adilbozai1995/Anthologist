@@ -129,7 +129,7 @@ module.exports = (app) => {
 
                 const blockid = uuid()
 
-                sqlsec.query( "INSERT INTO blocks (id, content, story, order, author, ending) VALUES (?, ?, ?, ?, ?, ?);",
+                sqlsec.query( "INSERT INTO blocks (id, content, story, iteration, author, ending) VALUES (?, ?, ?, ?, ?, ?);",
                 [
                     blockid,
                     blocktext,
@@ -137,7 +137,7 @@ module.exports = (app) => {
                     0,
                     account,
                     0
-                ], function(ca,cb){});
+                ]);
 
                 console.log("story-create: created new story: " + title );
                 res.json({"status":"okay","story":storyid});
