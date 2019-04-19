@@ -602,3 +602,32 @@ text-align: center
   cursor: pointer;
 }
 
+.flagButton {
+  background-color: transparent;
+  float: left;
+ border: none;
+ margin-top: 12%;
+ margin-left: -80%;
+ outline: none;
+ cursor: pointer;
+}
+
+.deleteButton {
+  background-color: transparent;
+  float: left;
+ border: none;
+ margin-top: 12%;
+ margin-left: -75%;
+ outline: none;
+ cursor: pointer;
+}
+
+.editButton {
+  background-color: transparent;
+  float: left;
+ border: none;
+ margin-top: 12%;
+ margin-left: -70%;
+ outline: none;
+ cursor: pointer;
+}
