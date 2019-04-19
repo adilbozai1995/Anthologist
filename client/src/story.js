@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link,Prompt } from 'react-router-dom';
 import './story.css';
-
+import Modal from 'react-modal'
 
 class Popup extends React.Component {
     ViewStory(){
@@ -74,6 +74,37 @@ class story extends Component {
       blocks:[{index: 1, block : "Completed Block1", author:"Author1"}, {index: 2, block: " Completed Block2", author:"Author2"},{index: 3, block: "Completed Block3", author:"Author3"}],
     };
   }
+
+   /*Modal declared*/
+   state = {
+    modalIsOpen: false,
+    secondModalIsOpen: false,
+    addBlockIsOpen:false
+  };
+
+  openModal = () => {
+    this.setState({ modalIsOpen: true });
+  };
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  };
+
+  openSecondModal = () => {
+    this.setState({ secondModalIsOpen: true });
+  };
+
+  closeSecondModal = () => {
+    this.setState({ secondModalIsOpen: false });
+  };
+  open_addBlock = () => {
+    this.setState({ addBlockIsOpen: true });
+  };
+
+  close_addBlock = () => {
+    this.setState({ addBlockIsOpen: false });
+  };
+  
 
   togglePopup() {
     this.setState({
@@ -205,6 +236,7 @@ onClickLike = () => {
 
   render() {
     return (
+      
      
       <div className="App">
       
@@ -319,10 +351,13 @@ onClickLike = () => {
         </div>
 
         {/* Add Block Button */}
-        <button className="addAButton" onClick={() => this.onBookmarkClicked()} id ="addAButtonID" color="blue">Add a block</button>
+        <button className="addAButton" onClick={this.open_addBlock} id ="addAButtonID" color="blue">Add a block</button>
        
         {/* Add a bookmark button */}
         <button className="bookmark"><img className="bkimg" onClick={() => this.addBlock()} src='/bookmark.png'></img> </button>
+
+
+          
 
         {this.state.showPopup ? 
           <Popup
@@ -332,7 +367,41 @@ onClickLike = () => {
           : null
         }
 
+      
+      <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
+          <button onClick={this.closeModal}>close</button>
+          <div>I am a modal</div>
+        </Modal>
 
+        <Modal
+          isOpen={this.state.secondModalIsOpen}
+          onRequestClose={this.closeSecondModal}
+        >
+          <button onClick={this.closeSecondModal}>close</button>
+          <div>No dude</div>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.addBlockIsOpen}
+          onRequestClose={this.close_addBlock}
+        >
+
+        <div class="change-description">
+        <label className='change-descp' > Add Block   </label>
+        <textarea className='add_block'  type="text" id="new_block"/>
+        </div>      
+        <button >Update Description</button>
+        <label>
+        <input type="radio" value="ES" />
+        End of Story
+      </label>
+        <button >End of Story</button> 
+        <button onClick={this.close_addBlock}>close</button>
+          
+
+         
+          
+        </Modal>
         
 
       </div>
