@@ -72,6 +72,7 @@ class story extends Component {
       showPopup: false,
       value : {},
       blocks:[{index: 1, block : "Completed Block1", author:"Author1"}, {index: 2, block: " Completed Block2", author:"Author2"},{index: 3, block: "Completed Block3", author:"Author3"}],
+      proposed:[{index: 1, block : "Proposed Block1", author:"Author1"},{index: 1, block : "Proposed Block2", author:"Author2"}, {index: 2, block: " Proposed Block3", author:"Author3"},{index: 3, block: "Proposed Block4", author:"Author4"}]
     };
   }
 
@@ -324,29 +325,41 @@ onClickLike = () => {
                     <button id='flagID' className="flagStory"><img className="flagimg" src='/flg.png' onClick={() => this.onFlag2()} ></img> </button>
 
 
-        {/* Proposed Blocks */}
+        {/* ------------DYNAMICALLY PROPOSED BLOCKS---------------- */}
         <div className='proposed'>
-            <div className='p-blocks'>
+
+        {
+              this.state.proposed.map(({block, index, author}) =>{
+                return(
+                  
+                  <div className='p-blocks'>
+                  <button className='st1' key={index.toString()}>{block.toString()}</button>
+                  <div className='author1'>{author.toString()}</div>
+                  <div className='slash1'>/</div>
+                  <button className="likeButton3" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
+                   <div className='likes1'>Likes</div>
+                  </div>
+                )
+              })
+            }
+
+            {/* ----------------------------------------------------------- */}
+
+            {/* <div className='p-blocks'>
                 <span className='st1'>Proposed Block 1</span>
                 <div className='author1'>Author</div>
                 <div className='slash1'>/</div>
                 <div className='likes1'>Likes</div>
-
-
             </div>
+
               <div className='p-blocks'>
                 <span className='st1'>Proposed Block 2</span>
                 <div className='author1'>Author</div>
                 <div className='slash1'>/</div>
                 <div className='likes1'>Likes</div>
 
-            </div>
-            <div className='p-blocks'>
-                <span className='st1'>Proposed Block 3</span>
-                <div className='author1'>Author</div>
-                <div className='slash1'>/</div>
-                <div className='likes1'>Likes</div>
-            </div>
+            </div> */}
+            
             
         </div>
 
