@@ -290,16 +290,13 @@ text-align: center
 }
 
 .proposed {
-    
     width: 100%;
     position: absolute;
     top: 100%;
     overflow-x: auto;
-    overflow: hidden;
-
+    overflow-y: auto;
     height: 20%;
-    background-color: transparent;
-
+    background-color: transparent;   
 }
 
 .p-blocks {
@@ -424,6 +421,8 @@ text-align: center
 .st1 {
     font-family: 'SignPainter';
     font-size: 300%;
+    background-color: transparent;
+    border: none;
     margin-top: 0%;
     margin-left: 3%;
     margin-bottom: 2%;
@@ -567,6 +566,15 @@ text-align: center
    float: left;
   border: none;
   margin-top: -4.5%;
+  outline: none;
+  cursor: pointer;
+}
+
+.likeButton3 {
+  background-color: transparent;
+   float: left;
+  border: none;
+  margin-top: -8%;
   outline: none;
   cursor: pointer;
 }
