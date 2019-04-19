@@ -474,7 +474,7 @@ onClickLike = (blockId) => {
               this.state.proposed.map(({id, iteration, content, author, username, flag, rating, ending}) =>{
                 return(
                   <div className='p-blocks' key={id.toString()}>
-                      <button className='st1'>{content.toString()}</button>
+                      <button onClick={this.StoryopenModal} className='st1'>{content.toString()}</button>
                 {/* <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>  */ }
                       <div className='slash1'>/</div>
                       <button className="likeButton3" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
@@ -522,7 +522,7 @@ onClickLike = (blockId) => {
         }
 
       
-      <Modal 
+      <Modal  /*THIS A STORY YOU NEED TO CHANGE*/
           isOpen={this.state.StorymodalIsOpen} onRequestClose={this.StorycloseModal}>
           <button onClick={this.StorycloseModal}>close</button>
           <div>This is a story</div>
