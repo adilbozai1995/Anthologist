@@ -319,13 +319,15 @@ onClickEditDescription() {
               {/* -----------ADD A BLOCK UNDER CONTRIBUTIONS DYNAMICALLY-------- */}
               <div className="BlocksCont">Blocks Contributions</div>
                  <div className='story-div3' >
-            {
-                // Iterates over each element in the blocks array in the state and makes a span
-              this.state.blocks.map(({block,index})=>{
-                return (
-                  <span key={index.toString()} className='block' >{block.toString()}
-                  <button className="likeButton" onClick={() => this.onClickLike} ><i class="far fa-thumbs-up fa-2x"></i></button>
-                  </span>
+                 {
+              this.state.blocks.map(({block,index}) =>{
+                return(
+                  <div className='blocks' key={index.toString()} style={{"border-color":index.toString()}}>
+                      <button onClick={() => this.StoryopenModal()} className='st'>{}</button>
+                      <a href={"/profile/" + index.toString()} className='author'>{index.toString()}</a>
+                      <div className='slash'>/</div>
+                      <div className='likes'>{index.toString()} Likes</div>
+                  </div>
                 )
               })
             } </div>
