@@ -93,7 +93,7 @@ class homepage extends Component {
         
         {/* Search Bar */}
         
-        <button className="user"><Link to='/login'><img className="userimg" src='/man.png' alt = "No logo"></img></Link> </button>
+        <button className="user"><Link to='/login'><img className="userimg" src='/picon.png' alt = "No logo"></img></Link> </button>
         </div>
         
         {/* Top buttons under menu bar */}
