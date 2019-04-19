@@ -357,11 +357,16 @@ onClickEditDescription() {
                 // Iterates over each element in the blocks array in the state and makes a span
               this.state.stories.map(({id, title, author, username, views})=>{
                 return (
-                    <div>
-                        <a href={"/story/" + id.toString()}>{title.toString()}</a>
-                        <p>{username.toString()}</p>
-                        <p>{views.toString()} Views</p>
-                    </div>
+                  <div>
+                      
+                  <a href={"/story/" + id.toString()} className='storyBlock' >
+                  <div className="titleText">{title.toString()}</div>
+                  <p  className="author3">{username.toString()}</p>
+                  <a className="views">{views.toString()} Views</a>
+                  </a>
+                  
+                  
+              </div>
                 )
               })
             }</div>
