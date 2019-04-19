@@ -292,7 +292,35 @@ onClickLike = () => {
 
 // -----EDIT BUTTON FUNCTION------
 onClickEditDescription() {
+    if ( !localStorage.account || !localStorage.token )return;
 
+    var desc = document.getElementById("new-description")
+
+    var obj = JSON.stringify({
+        "account":localStorage.account,
+        "token":localStorage.token,
+        "text":desc.value
+    })
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/profile-description" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if(this.readyState === 4 && this.status === 200)
+        {
+
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if (response.status === 'okay')
+            {
+                document.getElementById('user_description').innerHTML = desc.value
+                desc.value = "";
+            }
+        }
+    }
+    xhttp.send(obj)
 }
 
   render() {
@@ -339,7 +367,6 @@ onClickEditDescription() {
                 This is an example User Description
               
                 </div>
-                <button className="editDescriptionButton" onClick={() => this.onClickEditDescription()} ><i  className="fas fa-edit fa-2x"></i></button>
             </div>
         </div>
 
@@ -475,8 +502,8 @@ onClickEditDescription() {
         <div class="change-description">
         <label className='change-descp' > Add new descritpion   </label>
         <input className='change-descp' type="text" id="new-description"/>
-        </div>      
-        <button >Update Description</button>
+        </div>
+        <button onClick={() => this.onClickEditDescription()}>Update Description</button>
             <div>Edit Story</div>
           <button onClick={this.close_editstory}>close</button>
           
