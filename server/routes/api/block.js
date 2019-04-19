@@ -342,6 +342,76 @@ module.exports = (app) => {
         });
     });
 
+    app.post('/api/block-flag', function(req, res)
+    {
+        if(!req.body
+        || !req.body.account
+        || !req.body.token
+        || !req.body.flag)
+        {
+            console.log( "block-flag: missing fields" )
+            return res.sendStatus(400)
+        }
+
+        const account = req.body.account
+        const token = req.body.token
+
+        if ( !isuuid.v4( account ) )
+        {
+            console.log( "block-flag: invalid account: " + account )
+            return res.sendStatus(400)
+        }
+
+        if ( token.length != 64 )
+        {
+            console.log( "block-flag: invalid token" )
+            return res.sendStatus(400)
+        }
+
+        const flag = req.body.flag
+
+        if ( !isuuid.v4( flag ) )
+        {
+            console.log( "block-flag: invalid block: " + flag )
+            return res.sendStatus(400)
+        }
+
+        request.post( "http://localhost:3070/api/validate", {json:{"account":account,"token":token}}, function(verr, vres, body)
+        {
+            if ( verr )
+            {
+                console.log( "block-flag: validate request error: ", verr )
+                res.json({"status":"fail","reason":"unable to authenticate"})
+            }
+            else if ( String(body).indexOf("'fail'") > 0 )
+            {
+                console.log( "block-flag: invalid authentication token for account: " + account )
+                res.json({"status":"fail","reason":"invalid authentication token"})
+            }
+            else
+            {
+                sqlsec.query("UPDATE blocks SET flag=? WHERE id=? AND flag='no_flag';", [ account, flag ], function( err, rsql )
+                {
+                    if ( err )
+                    {
+                        console.log( "block-flag: sql_error: ", err )
+                        res.json({"status":"fail","reason":"un-caught sql error"})
+                    }
+                    else if ( rsql.affectedRows < 1 )
+                    {
+                        console.log("block-flag: block already flagged or doesn't exist: (FLAG:" + flag + "|ACCT:" + account + ")" )
+                        res.json({"status":"fail","reason":"block already flaged or doesn't exist"})
+                    }
+                    else
+                    {
+                        console.log("block-flag: block: " + flag + " flagged by: " + account)
+                        res.json({"status":"okay"})
+                    }
+                });
+            }
+        });
+    });
+
     app.post('/api/block-vote', function(req, res)
     {
         if(!req.body

@@ -478,34 +478,31 @@ module.exports = (app) => {
                 console.log( "story-flag: validate request error: ", verr )
                 res.json({"status":"fail","reason":"unable to authenticate"})
             }
+            else if ( String(body).indexOf("'fail'") > 0 )
+            {
+                console.log( "story-flag: invalid authentication token for account: " + account )
+                res.json({"status":"fail","reason":"invalid authentication token"})
+            }
             else
             {
-                if ( String(body).indexOf("'fail'") > 0 )
+                sqlsec.query("UPDATE stories SET flag=? WHERE id=? AND flag='no_flag';", [ account, flag ], function( err, rsql )
                 {
-                    console.log( "story-flag: invalid authentication token for account: " + account )
-                    res.json({"status":"fail","reason":"invalid authentication token"})
-                }
-                else
-                {
-                    sqlsec.query("UPDATE stories SET flag=? WHERE id=? AND flag='no_flag';", [ account, flag ], function( err, rsql )
+                    if ( err )
                     {
-                        if ( err )
-                        {
-                            console.log( "story-flag: sql_error: ", err )
-                            res.json({"status":"fail","reason":"un-caught sql error"})
-                        }
-                        else if ( rsql.affectedRows < 1 )
-                        {
-                            console.log("story-flag: story already flagged or doesn't exist: (FLAG:" + flag + "|ACCT:" + account + ")" )
-                            res.json({"status":"fail","reason":"story already flaged or doesn't exist"})
-                        }
-                        else
-                        {
-                            console.log("story-flag: story: " + flag + " flagged by: " + account)
-                            res.json({"status":"okay"})
-                        }
-                    });
-                }
+                        console.log( "story-flag: sql_error: ", err )
+                        res.json({"status":"fail","reason":"un-caught sql error"})
+                    }
+                    else if ( rsql.affectedRows < 1 )
+                    {
+                        console.log("story-flag: story already flagged or doesn't exist: (FLAG:" + flag + "|ACCT:" + account + ")" )
+                        res.json({"status":"fail","reason":"story already flaged or doesn't exist"})
+                    }
+                    else
+                    {
+                        console.log("story-flag: story: " + flag + " flagged by: " + account)
+                        res.json({"status":"okay"})
+                    }
+                });
             }
         });
     });
