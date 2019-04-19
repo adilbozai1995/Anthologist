@@ -14,8 +14,9 @@ class profile extends Component {
     super()
     this.state = {
       value : {},
-      blocks:[{index: 1, block : "Block1"}, {index: 2, block: "Block2"},{index: 3, block: "Block3"}],
-      storyBlocks:[{index: 1, block : "Story1"}, {index: 2, block: "Story2"},{index: 3, block: "Story3"}],
+      blocks:[],
+      stories:[],
+      comments:[],
 
       isHidden: true
     }
@@ -60,13 +61,13 @@ class profile extends Component {
 
   componentDidMount() {
 
-    var account = this.props.match.params.account;
+     var account = this.props.match.params.account;
 
-    var obj = JSON.stringify({
-      "account":account
-   });
+     var obj = JSON.stringify({
+         "account":account
+     });
 
-    console.log(this.props)
+     const updateBlock = this.onAddItem;
 
      var xhttp = new XMLHttpRequest();
      xhttp.open("POST", "/api/fetch-profile" , true);
@@ -83,6 +84,24 @@ class profile extends Component {
             document.getElementById('n1').innerHTML = response.username;
             document.getElementById('user_description').innerHTML = response.description;
             document.getElementById("likeScore").innerHTML = response.rating + " Likes";
+
+            for ( var i = 0; i < response.blocks.length; i++ )
+            {
+                var cblock = response.blocks[i]
+
+                var endingColor = "white";
+                if ( cblock.ending ) endingColor = "red";
+
+                updateBlock({
+                    "id":cblock.id,
+                    "story":cblock.story,
+                    "content":cblock.content,
+                    "author":cblock.author,
+                    "username":cblock.username,
+                    "rating":cblock.rating,
+                    "ending":endingColor
+                }, 0 );
+            }
 
             if(response.verify === "verified"){
               document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));
@@ -222,14 +241,33 @@ onLogout() {
      this.setState({blocks:[{index: 1, block : "Block1"}, {index: 2, block: "Block2"},{index: 3, block: "Block3"}]})
    }     
 
-   //-----------------------FUNCTION TO ADD A BLOCK DYNAMICALLY-------------------------
-   onAddItem = () =>{
+//-----------------------FUNCTION TO ADD A BLOCK DYNAMICALLY-------------------------
+onAddItem = ( updateVal, upmode ) =>{
     this.setState(state => {
-        const blocks = state.blocks.concat(state.value);
-        return {
-            blocks,
-            value:{},
-        };
+        if ( upmode == 0 )
+        {
+            const blocks = state.blocks.concat(updateVal);
+            return {
+                blocks,
+                value:{},
+            };
+        }
+        else if ( upmode == 1 )
+        {
+            const stories = state.stories.concat(updateVal);
+            return {
+                stories,
+                value:{},
+            };
+        }
+        else if ( upmode == 2 )
+        {
+            const comments = state.comments.concat(updateVal);
+            return {
+                comments,
+                value:{},
+            };
+        }
     });
 };
 //-----------------------------------------------------------------------------------------
