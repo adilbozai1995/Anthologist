@@ -508,7 +508,7 @@ onClickLike = (blockId) => {
         <button className="addAButton" onClick={this.open_addBlock} id="addAButtonID" color="blue">Add a block</button>
        
         {/* Add a bookmark button */}
-        <button className="bookmark"><img className="bkimg" onClick={() => this.addBlock()} src='/bookmark.png'></img> </button>
+        <button className="bookmark"><img className="bkimg" onClick={() => this.onBookmarkClicked()} src='/bookmark.png'></img> </button>
 
 
         
