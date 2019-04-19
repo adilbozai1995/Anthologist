@@ -478,3 +478,60 @@ div {
     font-style: normal;
     text-decoration: none;
   }
+
+  .storyBlock {
+    border-radius: 10%;
+    font-family: 'SignPainter';
+    font-size: 400%;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+    float: left;
+    margin-left: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 85%;
+    overflow: auto;
+    height: auto;
+    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
+    box-shadow: 10px 10px grey;
+    
+}
+
+.titleText:hover {
+color: white;
+}
+
+.author3 {
+  font-family: 'SignPainter';
+    width: auto;
+    margin-top: 20%;
+    margin-right: 3%;
+    float: right;
+    height: auto;
+    font-size: 40%;
+    font-weight: bold;
+    -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.author3:hover {
+  color: white;
+  }
+
+.views {
+  font-family: 'SignPainter';
+    width: auto;
+    margin-top: 20%;
+    margin-left: 3%;
+    float: left;
+    font-size: 40%;
+    font-weight: bold;
+}
+
+.titleText {
+  font-family: 'SignPainter';
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  font-size: 150%;
+}

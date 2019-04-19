@@ -102,9 +102,14 @@ class homepage extends Component {
               this.state.stories.map(({id, author, username, title, views})=>{
                 return (
                   <div>
-                      <a href={"/story/" + id.toString()} className='block' >{title.toString()}</a>
-                      <a href={"/profile/" + author.toString()} >{username.toString()}</a>
-                      <div>{views.toString()} Views</div>
+                      
+                      <a href={"/story/" + id.toString()} className='storyBlock' >
+                      <div className="titleText">{title.toString()}</div>
+                      <a href={"/profile/" + author.toString()} className="author3">{username.toString()}</a>
+                      <a className="views">{views.toString()} Views</a>
+                      </a>
+                      
+                      
                   </div>
                 )
               })
