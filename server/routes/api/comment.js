@@ -64,13 +64,15 @@ module.exports = (app) => {
             else
             {
                 const comment = uuid();
+                const rightnow = Date.now() / 1000;
 
-                sqlsec.query( "INSERT INTO comments (id, content, author, profile) VALUES (?, ?, ?, ?);",
+                sqlsec.query( "INSERT INTO comments (id, content, author, profile, born) VALUES (?, ?, ?, ?, ?);",
                 [
                     comment,
                     text,
                     account,
-                    profile
+                    profile,
+                    rightnow
                 ], function( a, b ) {} );
             }
         });
