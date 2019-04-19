@@ -78,17 +78,17 @@ class story extends Component {
 
    /*Modal declared*/
    state = {
-    modalIsOpen: false,
+    StoryIsOpen: false,
     secondModalIsOpen: false,
     addBlockIsOpen:false
   };
 
-  openModal = () => {
-    this.setState({ modalIsOpen: true });
+  StoryopenModal = () => {
+    this.setState({ StorymodalIsOpen: true });
   };
 
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
+  StorycloseModal = () => {
+    this.setState({ StorymodalIsOpen: false });
   };
 
   openSecondModal = () => {
@@ -414,7 +414,7 @@ onClickLike = (blockId) => {
               this.state.blocks.map(({id, iteration, content, author, username, flag, rating, ending}) =>{
                 return(
                   <div className='blocks' key={id.toString()}>
-                      <button className='st'>{content.toString()}</button>
+                      <button onClick={this.StoryopenModal} className='st'>{content.toString()}</button>
                       <a href={"/profile/" + author.toString()} className='author'>{username.toString()}</a>
                       <div className='slash'>/</div>
                       <button className="likeButton2" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
@@ -511,7 +511,7 @@ onClickLike = (blockId) => {
         <button className="bookmark"><img className="bkimg" onClick={() => this.addBlock()} src='/bookmark.png'></img> </button>
 
 
-          
+        
 
         {this.state.showPopup ? 
           <Popup
@@ -522,9 +522,10 @@ onClickLike = (blockId) => {
         }
 
       
-      <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
-          <button onClick={this.closeModal}>close</button>
-          <div>I am a modal</div>
+      <Modal 
+          isOpen={this.state.StorymodalIsOpen} onRequestClose={this.StorycloseModal}>
+          <button onClick={this.StorycloseModal}>close</button>
+          <div>This is a story</div>
         </Modal>
 
         <Modal
@@ -534,6 +535,7 @@ onClickLike = (blockId) => {
           <button onClick={this.closeSecondModal}>close</button>
           <div>No dude</div>
         </Modal>
+
 
         <Modal
           isOpen={this.state.addBlockIsOpen}
