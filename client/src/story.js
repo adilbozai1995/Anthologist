@@ -177,7 +177,11 @@ class story extends Component {
                 document.getElementById('nViews').innerHTML = response.views + " Views"
                 document.getElementById('nLikes').innerHTML = response.rating + " Likes"
 
-                if ( response.votemode )
+                if ( response.ended )
+                {
+                    document.getElementById('nCount').innerHTML = "Story has ended"
+                }
+                else if ( response.votemode )
                 {
                     setInterval( function()
                     {

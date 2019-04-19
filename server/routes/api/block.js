@@ -87,6 +87,11 @@ module.exports = (app) => {
                         console.log( "block-create: no story with id: " + story )
                         res.json({"status":"fail","reason":"no story with that id"})
                     }
+                    else if ( srsql[0].ended == 1 )
+                    {
+                        console.log( "block-create: cannot add block to ended story: " + story )
+                        res.json({"status":"fail","reason":"story has ended"})
+                    }
                     else if ( blocktext.length > srsql[0].charlimit )
                     {
                         console.log( "block-create: block excedes character limit: " + blocktext.length )
