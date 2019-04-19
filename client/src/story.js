@@ -202,6 +202,12 @@ class story extends Component {
                             document.getElementById('nCount').innerHTML = seconds + " Until voting ends";
                         }
 
+                        if ( response.votestart + (response.votetime * 60 ) + 10 < Date.now() / 1000 )
+                        {
+                            // Story should have update by now
+                            window.location.reload()
+                        }
+
                     }, 1000 );
                 }
                 else
