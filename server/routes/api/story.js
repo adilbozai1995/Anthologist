@@ -594,13 +594,12 @@ module.exports = (app) => {
                 }
             });
         }
-        else if ( mode == 1 )
-        {
-            
-        }
         else
         {
-            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id ORDER BY stories.born DESC;", [], function( err, rsql )
+            var orderval = "stories.born"
+            if ( mode === 1 ) orderval = "stories.views"
+
+            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id ORDER BY ? DESC;", [orderval], function( err, rsql )
             {
                 if ( err )
                 {
@@ -622,7 +621,15 @@ module.exports = (app) => {
                         })
                     }
 
-                    console.log( "story-homepage: fetched most recent stories" )
+                    if ( mode === 1 )
+                    {
+                        console.log( "story-homepage: fetched most viewed stories" )
+                    }
+                    else
+                    {
+                        console.log( "story-homepage: fetched most recent stories" )
+                    }
+
                     res.json({"status":"okay","stories":out})
                 }
             });
