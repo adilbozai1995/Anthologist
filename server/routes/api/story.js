@@ -190,7 +190,7 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
-        if ( votetime > 1440 || votetime < 5 )
+        if ( votetime > 1440 || votetime < 1 )
         {
             console.log( "story-editvote: vote time too long or short: " + votetime )
             return res.sendStatus(400)
@@ -596,10 +596,10 @@ module.exports = (app) => {
         }
         else
         {
-            var orderval = "stories.born"
-            if ( mode === 1 ) orderval = "stories.views"
+            var orderval = "stories.born DESC"
+            if ( mode === 1 ) orderval = "stories.views ASC"
 
-            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id ORDER BY ? DESC;", [orderval], function( err, rsql )
+            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id ORDER BY ?;", [orderval], function( err, rsql )
             {
                 if ( err )
                 {
