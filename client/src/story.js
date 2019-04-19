@@ -2,6 +2,27 @@ import React, { Component } from 'react';
 import { Link,Prompt } from 'react-router-dom';
 import './story.css';
 import Modal from 'react-modal'
+import ReactDOM from 'react-dom';
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    color                 : 'red',
+    centered              : 'true',
+    backgroundColor       : 'white',
+    marginRight           : '10%',
+    height                : '50%',
+    max_height            : '100%',  //check this line
+    width                 : '50%',
+    max_width             : '100%',   //check this line
+    borderRadius          : '4%',
+    position              : 'fixed',
+    overflow              : 'auto',
+    transform             : 'translate(-50%, -50%)'
+  }
+
+};
 
 class Popup extends React.Component {
     ViewStory(){
@@ -647,19 +668,40 @@ onClickEdit(blockId) {
 
       
       <Modal /*THIS A STORY YOU NEED TO CHANGE*/
-          isOpen={this.state.StorymodalIsOpen} onRequestClose={this.StorycloseModal}>
-          <button onClick={this.StorycloseModal}>close</button>
-          <div>{this.state.StoryModalText}</div>
-        </Modal>
+          isOpen={this.state.StorymodalIsOpen} 
+          onRequestClose={this.StorycloseModal}
+          style={customStyles}
+          >
+          <div className="textModal">{this.state.StoryModalText}</div>
+          <button className="button" onClick={this.StorycloseModal}>close</button>
+       </Modal>
 
         <Modal
           isOpen={this.state.secondModalIsOpen}
-          onRequestClose={this.closeSecondModal}
-        >
-          <button onClick={this.closeSecondModal}>close</button>
+          onRequestClose={this.closeSecondModal}>
+         
+          <button onClick={this.closeSecondModal} > close </button>
           <div>No dude</div>
+
+<<<<<<< HEAD
         </Modal>
 
+        <Modal
+          isOpen={this.state.addBlockIsOpen}
+          onRequestClose={this.close_addBlock}>
+
+              <div class="change-description">
+              <label className='change-descp' > Add Block   </label>
+              <textarea className='add_block'  type="text" id="new_block"/>
+              </div>
+              <button onClick={() => this.onAddBlock()}>Add Block</button>
+              <label>
+              <input type="checkbox" id="eos_check" disabled={sessionStorage.canEndStory} value="ES" />
+              End of Story
+              </label>
+
+              <button onClick={this.close_addBlock}>close</button>
+=======
       
         <Modal
           isOpen={this.state.overwriteIsOpen}
@@ -694,6 +736,7 @@ onClickEdit(blockId) {
       </label>
 
         <button onClick={this.close_addBlock}>close</button>
+>>>>>>> af88d7e3d7b822321a2d25d40bc2066e20c7a067
 
         </Modal>
 
