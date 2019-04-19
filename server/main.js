@@ -82,6 +82,9 @@ setInterval( function( )
             {
                 const story = srsql[i]
 
+                // Skip finished stories
+                if ( story.ended == 1 ) continue;
+
                 sqlcon.query( "SELECT COUNT(id) AS blockCount, MAX(rating) AS blockRating FROM blocks WHERE story=? AND iteration=?;",
                 [ story.id, story.iteration ], function( err, brsql )
                 {
@@ -93,7 +96,7 @@ setInterval( function( )
                     }
                     else if ( story.votemode == 1 && story.votestart + (story.votetime * 60) < rightnow )
                     {
-                        sqlcon.query( "SELECT id FROM blocks WHERE story=? AND iteration=? AND rating=? LIMIT 1;",
+                        sqlcon.query( "SELECT id, ending FROM blocks WHERE story=? AND iteration=? AND rating=? LIMIT 1;",
                         [
                             story.id,
                             story.iteration,
@@ -125,8 +128,9 @@ setInterval( function( )
                                     else
                                     {
                                         // Move to next iteration
-                                        sqlsec.query( "UPDATE stories SET votemode=0, iteration=iteration+1 WHERE id=?;",
+                                        sqlsec.query( "UPDATE stories SET votemode=0, iteration=iteration+1, ended=? WHERE id=?;",
                                         [
+                                            vrsql[0].ending,
                                             story.id
                                         ]);
 

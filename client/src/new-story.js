@@ -72,7 +72,7 @@ class news extends Component {
           {/* Search Bar */}
     
         
-        <button className="user"><Link to='/login'><img className="userimg" src='avatar.png'></img></Link> </button>
+        <button className="user"><Link to='/login'><img className="userimg" src='/picon.png'></img></Link> </button>
       
 
         </div> 

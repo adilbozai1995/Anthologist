@@ -82,6 +82,7 @@ class profile extends Component {
             //update dom with new data
             document.getElementById('n1').innerHTML = response.username;
             document.getElementById('user_description').innerHTML = response.description;
+            document.getElementById("likeScore").innerHTML = response.rating + " Likes";
 
             if(response.verify === "verified"){
               document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));
@@ -238,6 +239,11 @@ onClickLike = () => {
   
 }
 
+// -----EDIT BUTTON FUNCTION------
+onClickEditDescription() {
+
+}
+
   render() {
     return (
 
@@ -262,7 +268,7 @@ onClickLike = () => {
         
         {/* Search Bar */}
         
-        <button className="user"><Link to='/login'><img className="userimg" src='/man.png' alt = ""></img></Link> </button>
+        <button className="user"><Link to='/login'><img className="userimg" src='/picon.png' alt = ""></img></Link> </button>
         
         </div>
 
@@ -271,14 +277,18 @@ onClickLike = () => {
         </div>
 
         <div id ="2" className="Namecontainer">
-            <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div> 
+            <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div>
             <button id='flag' className="notify"><img className="notimg" src='/flg.png' onClick={() => this.onFlag()} ></img> </button>
             <button id='edit' onClick={this.open_editstory} className="edit_p">Edit Profile</button> {/*edir profile button*/}
             <Link to='/'><button className="logout" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
             <div id = "n1" className="Name"> <a className="name" href> </a> </div>
-            <div id = "n2" className="Rating"> <a className="rating" href> Marks: 4.2 </a></div>
+            <div id = "n2" className="Rating"> <a className="rating" id="likeScore" href></a></div>
             <div id = "n3" className="Box">
-                <div id = "user_description" className="typetext"> This is an example User Description</div>
+                <div id = "user_description" className="typetext"> 
+                This is an example User Description
+              
+                </div>
+                <button className="editDescriptionButton" onClick={() => this.onClickEditDescription()} ><i  className="fas fa-edit fa-2x"></i></button>
             </div>
         </div>
 

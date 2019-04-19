@@ -101,7 +101,8 @@ class story extends Component {
    state = {
     StoryIsOpen: false,
     secondModalIsOpen: false,
-    addBlockIsOpen:false
+    addBlockIsOpen:false,
+    overwriteIsOpen:false
   };
 
   StoryopenModal = (storyText) => {
@@ -125,6 +126,14 @@ class story extends Component {
 
   close_addBlock = () => {
     this.setState({ addBlockIsOpen: false });
+  };
+
+  openoverwrite = (blockId,content) => {
+    this.setState({ overwriteIsOpen: true, StoryModalText: content, StoryModalBlock: blockId });
+  };
+
+  closeoverwrite = () => {
+    this.setState({ overwriteIsOpen: false });
   };
   
 
@@ -198,7 +207,11 @@ class story extends Component {
                 document.getElementById('nViews').innerHTML = response.views + " Views"
                 document.getElementById('nLikes').innerHTML = response.rating + " Likes"
 
-                if ( response.votemode )
+                if ( response.ended )
+                {
+                    document.getElementById('nCount').innerHTML = "Story has ended"
+                }
+                else if ( response.votemode )
                 {
                     setInterval( function()
                     {
@@ -223,6 +236,11 @@ class story extends Component {
                             document.getElementById('nCount').innerHTML = seconds + " Until voting ends";
                         }
 
+                        if ( response.votestart + (response.votetime * 60 ) + 10 < Date.now() / 1000 )
+                        {
+                            window.location.reload()
+                        }
+
                     }, 1000 );
                 }
                 else
@@ -243,11 +261,14 @@ class story extends Component {
                 }
 
                 // Check if we can end the story
-                sessionStorage.canEndStory = (response.iteration < response.storylen)
+                if ( response.iteration >= response.storylen ) sessionStorage.canEndStory = true;
 
                 for ( var i = 0; i < response.blocks.length; i++ )
                 {
                     var cblock = response.blocks[i]
+
+                    var endingColor = "white";
+                    if ( cblock.ending ) endingColor = "red";
 
                     updateBlock({
                         "id":cblock.id,
@@ -257,7 +278,7 @@ class story extends Component {
                         "username":cblock.username,
                         "flag":cblock.flag,
                         "rating":cblock.rating,
-                        "ending":cblock.ending
+                        "ending":endingColor
                     }, cblock.iteration < response.iteration );
                 }
             }
@@ -312,6 +333,11 @@ class story extends Component {
         }
     };
     xhttp.send(obj);
+  }
+
+  onClickRecent(){
+    var scroller = document.getElementById("mainStoryContainer")
+    scroller.scrollTop = scroller.scrollHeight;
   }
 
   onFlag2()
@@ -398,6 +424,98 @@ onClickLike = (blockId) => {
     xhttp.send(obj)
 }
 
+// -----FLAG BUTTON FUNCTION------
+onClickFlag(blockId)
+{
+    if ( !localStorage.account || !localStorage.token ) return;
+
+    var obj = JSON.stringify({
+        "account": localStorage.account,
+        "token": localStorage.token,
+        "flag": blockId
+    });
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/block-flag" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+
+            }
+        }
+    }
+    xhttp.send(obj)
+}
+
+//-----DELETE BUTTON FUNCTION------
+onClickDelete(blockId)
+{
+    if ( !localStorage.account || !localStorage.token ) return;
+
+    var obj = JSON.stringify({
+        "account": localStorage.account,
+        "token": localStorage.token,
+        "block": blockId
+    });
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/block-delete" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+                window.location.reload()
+            }
+        }
+    }
+    xhttp.send(obj)
+}
+
+//-----EDIT BUTTON FUNCTION------
+onClickEdit(blockId) {
+    if ( !localStorage.account || !localStorage.token ) return;
+
+    var obj = JSON.stringify({
+        "account": localStorage.account,
+        "token": localStorage.token,
+        "block": blockId,
+        "text": document.getElementById("edit_new_block").value
+    });
+
+    document.getElementById("edit_new_block").value = "";
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/block-edit" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+                window.location.reload()
+            }
+        }
+    }
+    xhttp.send(obj)
+}
+
   render() {
     return (
       
@@ -418,7 +536,7 @@ onClickLike = (blockId) => {
         
         {/* Search Bar */}
         
-        <button className="user"><Link to='/login'><img className="userimg" src='/man.png'></img></Link> </button>
+        <button className="user"><Link to='/login'><img className="userimg" src='/picon.png'></img></Link> </button>
         
 
         </div>
@@ -430,11 +548,11 @@ onClickLike = (blockId) => {
         
 
         {/* ------------DYNAMICALLY COMPLETED BLOCKS---------------- */}
-        <div className='blocks-container'>
+        <div id="mainStoryContainer" className='blocks-container'>
             {
               this.state.blocks.map(({id, iteration, content, author, username, flag, rating, ending}) =>{
                 return(
-                  <div className='blocks' key={id.toString()}>
+                  <div className='blocks' key={id.toString()} style={{"border-color":ending.toString()}}>
                       <button onClick={() => this.StoryopenModal(content)} className='st'>{content.toString().substring(0,15) + " ..."}</button>
                       <a href={"/profile/" + author.toString()} className='author'>{username.toString()}</a>
                       <div className='slash'>/</div>
@@ -488,17 +606,23 @@ onClickLike = (blockId) => {
         {/* Flag button */}
                     <button id='flagID' className="flagStory"><img className="flagimg" src='/flg.png' onClick={() => this.onFlag2()} ></img> </button>
 
+        {/* Recent */}
+                    <button className="flagStory2" onClick={() => this.onClickRecent()}> Recent </button>
 
         {/* ------------DYNAMICALLY PROPOSED BLOCKS---------------- */}
         <div className='proposed'>
         {
               this.state.proposed.map(({id, iteration, content, author, username, flag, rating, ending}) =>{
                 return(
-                  <div className='p-blocks' key={id.toString()}>
+                  <div className='p-blocks' key={id.toString()} style={{"border-color":ending.toString()}}>
                       <button onClick={() => this.StoryopenModal(content)} className='st1'>{content.toString().substring(0,15) + "..."}</button>
-                 <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>  
+                 <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>
                       <div className='slash1'>/</div>
                       <button className="likeButton3" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
+                      <button className="flagButton" onClick={() => this.onClickFlag(id)} ><i id="flag" className="far fa-flag fa-2x"></i></button>
+                      <button className="deleteButton" onClick={() => this.onClickDelete(id)} ><i id="delete" className="fas fa-trash-alt fa-2x"></i></button>
+                      <button className="editButton" onClick={() => this.openoverwrite(id,content)}><i id="edit" className="fas fa-edit fa-2x"></i></button>
+
                       <div className='likes1'>{rating.toString()} Likes</div>
                   </div>
                 )
@@ -559,6 +683,7 @@ onClickLike = (blockId) => {
           <button onClick={this.closeSecondModal} > close </button>
           <div>No dude</div>
 
+<<<<<<< HEAD
         </Modal>
 
         <Modal
@@ -576,6 +701,42 @@ onClickLike = (blockId) => {
               </label>
 
               <button onClick={this.close_addBlock}>close</button>
+=======
+      
+        <Modal
+          isOpen={this.state.overwriteIsOpen}
+          onRequestClose={this.closeoverwrite}
+        >
+
+        <div class="change-description">
+        <label className='change-descp' > Update Block   </label>
+        <textarea className='add_block' type="text" id="edit_new_block">{this.state.StoryModalText}</textarea>
+        </div>
+        <button onClick={() => this.onClickEdit(this.state.StoryModalBlock)}>Update Block</button>
+
+        <button onClick={this.closeoverwrite}>close</button>
+
+        </Modal>
+
+
+
+        <Modal
+          isOpen={this.state.addBlockIsOpen}
+          onRequestClose={this.close_addBlock}
+        >
+
+        <div class="change-description">
+        <label className='change-descp' > Add Block   </label>
+        <textarea className='add_block'  type="text" id="new_block"/>
+        </div>
+        <button onClick={() => this.onAddBlock()}>Add Block</button>
+        <label>
+        <input type="checkbox" id="eos_check" disabled={!sessionStorage.canEndStory} value="ES" />
+        End of Story
+      </label>
+
+        <button onClick={this.close_addBlock}>close</button>
+>>>>>>> af88d7e3d7b822321a2d25d40bc2066e20c7a067
 
         </Modal>
 

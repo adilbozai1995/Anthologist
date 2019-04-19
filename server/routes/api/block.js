@@ -87,6 +87,11 @@ module.exports = (app) => {
                         console.log( "block-create: no story with id: " + story )
                         res.json({"status":"fail","reason":"no story with that id"})
                     }
+                    else if ( srsql[0].ended == 1 )
+                    {
+                        console.log( "block-create: cannot add block to ended story: " + story )
+                        res.json({"status":"fail","reason":"story has ended"})
+                    }
                     else if ( blocktext.length > srsql[0].charlimit )
                     {
                         console.log( "block-create: block excedes character limit: " + blocktext.length )
@@ -196,7 +201,7 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
-        sqlcon.query( "SELECT token FROM accounts WHERE id=?;", [account], function( err, arsql )
+        sqlcon.query( "SELECT token, admin FROM accounts WHERE id=?;", [account], function( err, arsql )
         {
             if ( err )
             {
@@ -208,7 +213,7 @@ module.exports = (app) => {
                 console.log( "block-delete: no account with id: " + account )
                 res.json({"status":"fail","reason":"no account with that id"})
             }
-            else if ( arsql[0].token !== token )
+            else if ( arsql[0].token !== token && arsql[0].admin == 0 )
             {
                 console.log("block-delete: invalid security token for account: " + account )
                 res.json({"status":"fail","reason":"invalid security token"})
