@@ -475,7 +475,7 @@ onClickLike = (blockId) => {
                 return(
                   <div className='p-blocks' key={id.toString()}>
                       <button onClick={() => this.StoryopenModal(content)} className='st1'>{content.toString().substring(0,15) + "..."}</button>
-                {/* <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>  */ }
+                 <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>  
                       <div className='slash1'>/</div>
                       <button className="likeButton3" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
                       <div className='likes1'>{rating.toString()} Likes</div>

@@ -43,7 +43,7 @@ div {
   color: #1b6f85;
   display: inline-block;
   outline: none;
-  padding: 2px;
+  padding: 2%;
   position: relative;
   cursor: pointer;
 
@@ -108,24 +108,24 @@ div {
   position: absolute;
   outline: none;
   display: inline-block;
-  padding: 10px 25px;
+  padding: 10% 25%;
   align-self: auto;
   cursor: pointer;
 
 }
 
 .userimg {
-  height: 28pt;
-  width: 28pt;
+  height: 28%;
+  width: 28%;
 }
 
 .searchimg {
-  height: 20pt;
-  width: 20pt;
+  height: 20%;
+  width: 20%;
 }
 .notimg {
-  height: 25pt;
-  width: 25pt;
+  height: 25%;
+  width: 25%;
 }
 
 .submit-buttons_2 {
@@ -138,8 +138,9 @@ div {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 30px;
-  margin: 10px 2px;
+  font-size: 200%;
+  margin-top: 2%;
+  margin-left: 0.5%;
   font-weight: bold;
   cursor: pointer;
   -webkit-transition-duration: 0.4s;
@@ -164,8 +165,8 @@ div {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 30px;
-  margin: 10px 2px;
+  font-size: 145%;
+  margin-top: 1.1%;
   font-weight: bold;
   cursor: pointer;
   -webkit-transition-duration: 0.4s;
@@ -182,22 +183,22 @@ div {
 
 .black_line_2 {
   position: absolute;
-  margin-top: -3%;
-  margin-left: 85px;
+  margin-top: -2.7%;
+  margin-left: 6.8%;
   
-  width: 3px;
-  height: 28px;
+  width: 0.2%;
+  height: 4%;
   background-color: black;
   }
 
   .black_line_3 {
     position: absolute;
-    margin-top: -3%;
-    margin-left: 14.5%;
-    
-    width: 3px;
-    height: 28px;
-    background-color: black;
+  margin-top: -2.7%;
+  margin-left: 15.2%;
+  
+  width: 0.3%;
+  height: 4%;
+  background-color: black;
     }
 
   .stories {
@@ -505,7 +506,7 @@ color: white;
 .author3 {
   font-family: 'SignPainter';
     width: auto;
-    margin-top: 20%;
+    margin-top: 10%;
     margin-right: 3%;
     float: right;
     height: auto;
@@ -522,7 +523,7 @@ color: white;
 .views {
   font-family: 'SignPainter';
     width: auto;
-    margin-top: 20%;
+    margin-top: 10%;
     margin-left: 3%;
     float: left;
     font-size: 40%;

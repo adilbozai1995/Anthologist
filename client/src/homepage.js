@@ -99,10 +99,8 @@ class homepage extends Component {
         {/* Top buttons under menu bar */}
         <div className='top-buttons'>
         <button className="submit-buttons_2" onClick={() => this.sortstories(0)} id ="new-story" color="blue">New</button>
-        <div className="black_line_2"></div>
         <button className="submit-buttons_2" onClick={() => this.sortstories(1)} id ="popular-stories" color="blue">Popular</button>
         <button className="submit-buttons_2" onClick={() => this.sortstories(2)} id ="popular-stories" color="blue">Following</button>
-        <div className="black_line_3"></div>
         <button className="create-story" id ="create-story-button" color="blue">
             <Link className="create-story" to='/new-story'> create a story</Link>
         </button>
