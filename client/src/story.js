@@ -520,7 +520,8 @@ onClickEdit(blockId) {
     return (
       
      
-      <div className="App">
+    <div className="App">
+    
       
         
         
@@ -667,7 +668,7 @@ onClickEdit(blockId) {
         }
 
       
-      <Modal /*THIS A STORY YOU NEED TO CHANGE*/
+        <Modal /*THIS A STORY YOU NEED TO CHANGE*/
           isOpen={this.state.StorymodalIsOpen} 
           onRequestClose={this.StorycloseModal}
           style={customStyles}
@@ -684,26 +685,45 @@ onClickEdit(blockId) {
           <div>No dude</div>
 
         </Modal>
-
+      
         <Modal
-          isOpen={this.state.addBlockIsOpen}
-          onRequestClose={this.close_addBlock}>
+          isOpen={this.state.overwriteIsOpen}
+          onRequestClose={this.closeoverwrite}
+        >
 
-              <div class="change-description">
-              <label className='change-descp' > Add Block   </label>
-              <textarea className='add_block'  type="text" id="new_block"/>
-              </div>
-              <button onClick={() => this.onAddBlock()}>Add Block</button>
-              <label>
-              <input type="checkbox" id="eos_check" disabled={sessionStorage.canEndStory} value="ES" />
-              End of Story
-              </label>
+        <div class="change-description">
+        <label className='change-descp' > Update Block   </label>
+        <textarea className='add_block' type="text" id="edit_new_block">{this.state.StoryModalText}</textarea>
+        </div>
+        <button onClick={() => this.onClickEdit(this.state.StoryModalBlock)}>Update Block</button>
 
-              <button onClick={this.close_addBlock}>close</button>
+        <button onClick={this.closeoverwrite}>close</button>
 
         </Modal>
 
-      </div>
+
+
+        <Modal
+          isOpen={this.state.addBlockIsOpen}
+          onRequestClose={this.close_addBlock}
+        >
+
+        <div class="change-description">
+        <label className='change-descp' > Add Block   </label>
+        <textarea className='add_block'  type="text" id="new_block"/>
+        </div>
+        <button onClick={() => this.onAddBlock()}>Add Block</button>
+        <label>
+        <input type="checkbox" id="eos_check" disabled={!sessionStorage.canEndStory} value="ES" />
+        End of Story
+        </label>
+
+        <button onClick={this.close_addBlock}>close</button>
+
+        </Modal>
+
+    
+    </div>
 
     );
 

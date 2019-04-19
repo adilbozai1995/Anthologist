@@ -340,7 +340,7 @@ onClickEditDescription() {
               {/* -----------ADD A STORY UNDER CONTRIBUTIONS DYNAMICALLY-------- */}
               <div className="StoryCont">Story Contributions</div>
                  <div className='story-div2' >
-            {
+           {/*  {
                 // Iterates over each element in the blocks array in the state and makes a span
               this.state.storyBlocks.map(({block,index})=>{
                 return (
@@ -349,7 +349,7 @@ onClickEditDescription() {
                   </span>
                 )
               })
-            } </div>
+            } */} </div>
             
               {/* ------------------------------------------------------------------------ */}
 
@@ -357,14 +357,16 @@ onClickEditDescription() {
               {/* -----------ADD A BLOCK UNDER CONTRIBUTIONS DYNAMICALLY-------- */}
               <div className="BlocksCont">Blocks Contributions</div>
                  <div className='story-div3' >
-                 {
-              this.state.blocks.map(({block,index}) =>{
+                  {/* ------------DYNAMICALLY COMPLETED BLOCKS---------------- */}
+       
+            {
+              this.state.blocks.map(({id,story, content, author, username, rating, ending}) =>{
                 return(
-                  <div className='blocks' key={index.toString()} style={{"border-color":index.toString()}}>
-                      <button onClick={() => this.StoryopenModal()} className='st'>{}</button>
-                      <a href={"/profile/" + index.toString()} className='author'>{index.toString()}</a>
+                  <div className='blocks' key={id.toString()} style={{"border-color":ending.toString()}}>
+                      <a href={"/story/"+story.toString()} className='st'>{content.toString().substring(0,15) + " ..."}</a>
+                      <a href={"/profile/" + author.toString()} className='author'>{username.toString()}</a>
                       <div className='slash'>/</div>
-                      <div className='likes'>{index.toString()} Likes</div>
+                      <div className='likes'>{rating.toString()} Likes</div>
                   </div>
                 )
               })
