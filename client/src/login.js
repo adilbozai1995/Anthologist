@@ -258,12 +258,12 @@ constructor() {
         </div>
         
         {/* Search Bar */}
-        <input id="search_input bar" className="in" type="text" ></input>
-        <button className="notify"><img className="notimg" src='notification-icon.png'></img> </button>
-        <button className="user"><img className="userimg" src='avatar.png'></img> </button>
-         <button className="search"><img className="searchimg" src='search.png'></img> </button>
+    
+        
+        <button className="user"><Link to='/login'><img className="userimg" src='avatar.png'></img></Link> </button>
+      
 
-        </div>
+        </div> 
         
         
  
