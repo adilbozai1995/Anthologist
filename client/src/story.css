@@ -583,6 +583,23 @@ float: left;
   width: 30pt;
 }
 
+.flagStory2 {
+  font-family:'SignPainter';
+  font-size: 110%;
+  font-weight: bold;
+  color: #1b6f85;
+  background-color: transparent;
+  border: none;
+  margin-left:88%;
+  position: absolute;
+  top: 14%;
+  margin-bottom: 1%;
+  float: left;
+  align-self: auto;
+  outline: none;
+  cursor: pointer;
+}
+
 .likeButton2 {
   background-color: transparent;
    float: left;

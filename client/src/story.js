@@ -314,6 +314,10 @@ class story extends Component {
     xhttp.send(obj);
   }
 
+  onClickRecent(){
+    
+  }
+
   onFlag2()
   {
     if ( !localStorage.account || !localStorage.token ) return;
@@ -553,6 +557,8 @@ onClickEdit(blockId) {
         {/* Flag button */}
                     <button id='flagID' className="flagStory"><img className="flagimg" src='/flg.png' onClick={() => this.onFlag2()} ></img> </button>
 
+        {/* Recent */}
+                    <button className="flagStory2" onClick={() => this.onClickRecent()}> Recent </button>
 
         {/* ------------DYNAMICALLY PROPOSED BLOCKS---------------- */}
         <div className='proposed'>
