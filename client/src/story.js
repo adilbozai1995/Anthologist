@@ -107,8 +107,8 @@ class story extends Component {
     this.setState({ addBlockIsOpen: false });
   };
 
-  openoverwrite = (id,content) => {
-    this.setState({ overwriteIsOpen: true });
+  openoverwrite = (blockId,content) => {
+    this.setState({ overwriteIsOpen: true, StoryModalText: content, StoryModalBlock: blockId });
   };
 
   closeoverwrite = () => {
@@ -640,10 +640,9 @@ onClickEdit(blockId) {
 
         <div class="change-description">
         <label className='change-descp' > Update Block   </label>
-        <textarea className='add_block'  type="text" id="edit_new_block"/>
+        <textarea className='add_block' type="text" id="edit_new_block">{this.state.StoryModalText}</textarea>
         </div>
         <button onClick={() => this.onClickEdit()}>Update Block</button>
-        
 
         <button onClick={this.closeoverwrite}>close</button>
 
