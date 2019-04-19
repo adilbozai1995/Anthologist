@@ -55,7 +55,93 @@ global.mailer = nodemail.createTransport({
         pass: 'Team36rocks!'
     }
 });
+
 app.listen(port, (err) => {
     if ( err ) { console.log( err ); };
     console.log(`Anthologist backend server listening on port ${port}!`);
 });
+
+setInterval( function( )
+{
+    sqlcon.query( "SELECT * FROM stories;", [], function( err, srsql )
+    {
+        if ( err )
+        {
+            console.log( "update-loop: uncaught sql exception: " + err )
+        }
+        else
+        {
+            for ( var i = 0; i < srsql.length; i++ )
+            {
+                const story = srsql[i]
+
+                sqlcon.query( "SELECT COUNT(id) AS blockCount, MAX(rating) AS blockRating FROM blocks WHERE story=? AND iteration=?;",
+                [ story.id, story.iteration ], function( err, brsql )
+                {
+                    const rightnow = Date.now()
+
+                    if ( err )
+                    {
+                        console.log( "update-loop: uncaught sql exception 2: " + err )
+                    }
+                    else if ( story.votemode == 1 && story.votestart + (story.votetime * 60) < rightnow )
+                    {
+                        sqlcon.query( "SELECT id FROM blocks ORDER BY RANDOM() LIMIT 1 WHERE story=? AND iteration=? AND rating=?;",
+                        [
+                            story.id,
+                            story.iteration,
+                            brsql[0].blockRating
+                        ], function( err, vrsql )
+                        {
+                            if ( err )
+                            {
+                                console.log( "update-loop: uncaught sql exception 3: " + err )
+                            }
+                            else if ( vrsql.length <= 0 )
+                            {
+                                console.log( "update-loop: no winning rows returned: " + vrsql )
+                            }
+                            else
+                            {
+                                // Delete everything except that one row
+                                sqlsec.query( "DELETE FROM blocks WHERE story=? AND iteration=? AND id<>?;",
+                                [
+                                    story.id,
+                                    story.iteration,
+                                    vrsql[0].id
+                                ], function( err, drsql )
+                                {
+                                    if ( err )
+                                    {
+                                        console.log( "update-loop: uncaught sql exception 4: " + err )
+                                    }
+                                    else
+                                    {
+                                        // Move to next iteration
+                                        sqlsec.query( "UPDATE stories SET votemode=0, iteration=iteration+1 WHERE id=?;",
+                                        [
+                                            story.id
+                                        ]);
+
+                                        console.log( "update-loop: entering next iteration for story: " + story.id )
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    else if ( story.votemode == 0 && brsql[0].blockCount >= story.minblock )
+                    {
+                        // Editing/Deleting period ended, start voting
+                        sqlsec.query( "UPDATE stories SET votemode=1, votestart=? WHERE id=?;",
+                        [
+                            rightnow,
+                            story.id
+                        ]);
+
+                        console.log( "update-loop: now entering voting mode for story: " + story.id )
+                    }
+                });
+            }
+        }
+    });
+}, 60000 ); // Run every minute
