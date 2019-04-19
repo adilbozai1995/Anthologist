@@ -128,10 +128,10 @@ class profile extends Component {
 
     console.log(this.props)
 
-     var xhttp = new XMLHttpRequest();
-     xhttp.open("POST", "/api/verify" , true);
-     xhttp.setRequestHeader("Content-Type", "application/json");
-     xhttp.onreadystatechange = function () {
+     var xhttp2 = new XMLHttpRequest();
+     xhttp2.open("POST", "/api/verify" , true);
+     xhttp2.setRequestHeader("Content-Type", "application/json");
+     xhttp2.onreadystatechange = function () {
         if(this.readyState === 4 && this.status === 200) {
        
           var response = JSON.parse(this.responseText);
@@ -144,7 +144,7 @@ class profile extends Component {
           
         }
      };
-     xhttp.send(vobj);
+     xhttp2.send(vobj);
   }
 
 onClickVerifyEmail(){

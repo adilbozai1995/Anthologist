@@ -175,6 +175,7 @@ class story extends Component {
                 document.getElementById('votesLimit').innerHTML = "Min Blocks for Vote: " + response.minblock
                 document.getElementById('votesTime').innerHTML = "Vote Time (minutes): " + response.votetime
                 document.getElementById('nViews').innerHTML = response.views + " Views"
+                document.getElementById('nLikes').innerHTML = response.rating + " Likes"
 
                 // Check if we can end the story
                 sessionStorage.canEndStory = (response.iteration < response.storylen)
@@ -303,8 +304,33 @@ class story extends Component {
 //-----------------------------------------------------------------------------------------
 
 // -----LIKE BUTTON FUNCTION------
-onClickLike = () => {
-  
+onClickLike = (blockId) => {
+
+    if ( !localStorage.account || !localStorage.token ) return;
+
+    var obj = JSON.stringify({
+        "account": localStorage.account,
+        "token": localStorage.token,
+        "block": blockId
+    });
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/block-vote" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+                window.location.reload()
+            }
+        }
+    }
+    xhttp.send(obj)
 }
 
   render() {
@@ -347,7 +373,7 @@ onClickLike = () => {
                       <button className='st'>{content.toString()}</button>
                       <a href={"/profile/" + author.toString()} className='author'>{username.toString()}</a>
                       <div className='slash'>/</div>
-                      <button className="likeButton2" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
+                      <button className="likeButton2" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
                       <div className='likes'>{rating.toString()} Likes</div>
                   </div>
                 )
@@ -357,7 +383,7 @@ onClickLike = () => {
         {/* ----------------------------------------------------------- */}
 
         {/* Number of Likes */}
-        <div className='nOfLikes'>400 Likes</div>
+        <div className='nOfLikes' id='nLikes'>400 Likes</div>
 
         {/* Number of Views */}
         <div className='nOfViews' id='nViews'>100 Views</div>
@@ -404,7 +430,7 @@ onClickLike = () => {
                       <button className='st1'>{content.toString()}</button>
                       <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>
                       <div className='slash1'>/</div>
-                      <button className="likeButton3" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
+                      <button className="likeButton3" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
                       <div className='likes1'>{rating.toString()} Likes</div>
                   </div>
                 )

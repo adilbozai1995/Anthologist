@@ -217,7 +217,7 @@ module.exports = (app) => {
             }
             else
             {
-                sqlsec.query("UPDATE stories SET votetime=? WHERE id=?;",
+                sqlsec.query("UPDATE stories SET votetime=? WHERE votemode=0 AND id=?;",
                 [
                     votetime,
                     story
@@ -273,6 +273,7 @@ module.exports = (app) => {
                     else
                     {
                         var out = []
+                        var storyRating = 0;
 
                         for ( var i = 0; i < brsql.length; i++ )
                         {
@@ -290,6 +291,11 @@ module.exports = (app) => {
                                 "ending":brsql[i].ending,
                                 "flag":flag
                             });
+
+                            if ( brsql[i].iteration < rsql[0].iteration )
+                            {
+                                storyRating += brsql[i].rating
+                            }
                         }
 
                         console.log( "story-fetch: fetched story with id: " + story )
@@ -305,6 +311,7 @@ module.exports = (app) => {
                             "views":(rsql[0].views + 1),
                             "votestart":rsql[0].votestart,
                             "iteration":rsql[0].iteration,
+                            "rating":storyRating,
                             "blocks":out
                         });
                     }
