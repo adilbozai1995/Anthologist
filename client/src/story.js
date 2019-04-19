@@ -80,7 +80,8 @@ class story extends Component {
    state = {
     StoryIsOpen: false,
     secondModalIsOpen: false,
-    addBlockIsOpen:false
+    addBlockIsOpen:false,
+    overwriteIsOpen:false
   };
 
   StoryopenModal = (storyText) => {
@@ -104,6 +105,14 @@ class story extends Component {
 
   close_addBlock = () => {
     this.setState({ addBlockIsOpen: false });
+  };
+
+  openoverwrite = (id,content) => {
+    this.setState({ overwriteIsOpen: true });
+  };
+
+  closeoverwrite = () => {
+    this.setState({ overwriteIsOpen: false });
   };
   
 
@@ -507,7 +516,7 @@ onClickEdit(id) {
                       <button className="likeButton3" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
                       <button className="flagButton" onClick={() => this.onClickFlag(id)} ><i id="flag" className="far fa-flag fa-2x"></i></button>
                       <button className="deleteButton" onClick={() => this.onClickDelete(id)} ><i id="delete" className="fas fa-trash-alt fa-2x"></i></button>
-                      <button className="editButton" onClick={() => this.onClickEdit(id)} ><i id="edit" className="fas fa-edit fa-2x"></i></button>
+                      <button className="editButton" onClick={() => this.openoverwrite(id,content)}><i id="edit" className="fas fa-edit fa-2x"></i></button>
 
                       <div className='likes1'>{rating.toString()} Likes</div>
                   </div>
@@ -566,6 +575,24 @@ onClickEdit(id) {
           <button onClick={this.closeSecondModal}>close</button>
           <div>No dude</div>
         </Modal>
+
+      
+        <Modal
+          isOpen={this.state.overwriteIsOpen}
+          onRequestClose={this.closeoverwrite}
+        >
+
+        <div class="change-description">
+        <label className='change-descp' > Update Block   </label>
+        <textarea className='add_block'  type="text" id="edit_new_block"/>
+        </div>
+        <button onClick={() => this.onClickEdit()}>Update Block</button>
+        
+
+        <button onClick={this.closeoverwrite}>close</button>
+
+        </Modal>
+
 
 
         <Modal
