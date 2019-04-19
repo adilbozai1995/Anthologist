@@ -206,6 +206,11 @@ class story extends Component {
                             document.getElementById('nCount').innerHTML = seconds + " Until voting ends";
                         }
 
+                        if ( response.votestart + (response.votetime * 60 ) + 10 < Date.now() / 1000 )
+                        {
+                            window.location.reload()
+                        }
+
                     }, 1000 );
                 }
                 else
@@ -385,17 +390,67 @@ onClickLike = (blockId) => {
 }
 
 // -----FLAG BUTTON FUNCTION------
-onClickFlag(id) {
+onClickFlag(blockId)
+{
+    if ( !localStorage.account || !localStorage.token ) return;
 
+    var obj = JSON.stringify({
+        "account": localStorage.account,
+        "token": localStorage.token,
+        "flag": blockId
+    });
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/block-flag" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+
+            }
+        }
+    }
+    xhttp.send(obj)
 }
 
 //-----DELETE BUTTON FUNCTION------
-onClickDelete(id) {
+onClickDelete(blockId)
+{
+    if ( !localStorage.account || !localStorage.token ) return;
 
+    var obj = JSON.stringify({
+        "account": localStorage.account,
+        "token": localStorage.token,
+        "block": blockId
+    });
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/block-delete" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+                window.location.reload()
+            }
+        }
+    }
+    xhttp.send(obj)
 }
 
 //-----EDIT BUTTON FUNCTION------
-onClickEdit(id) {
+onClickEdit(blockId) {
 
 }
 
