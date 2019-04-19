@@ -388,6 +388,9 @@ onClickLike = (blockId) => {
         {/* Number of Views */}
         <div className='nOfViews' id='nViews'>100 Views</div>
 
+        {/* Countdown */}
+        <div className='n1Count' id='nCount'>100 Min</div>
+
 
         {/* Book Logo */}
         <div className='book-logo'>
@@ -428,7 +431,7 @@ onClickLike = (blockId) => {
                 return(
                   <div className='p-blocks' key={id.toString()}>
                       <button className='st1'>{content.toString()}</button>
-                      <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>
+                {/* <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>  */ }
                       <div className='slash1'>/</div>
                       <button className="likeButton3" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
                       <div className='likes1'>{rating.toString()} Likes</div>
