@@ -315,7 +315,8 @@ class story extends Component {
   }
 
   onClickRecent(){
-    
+    var scroller = document.getElementById("mainStoryContainer")
+    scroller.scrollTop = scroller.scrollHeight;
   }
 
   onFlag2()
@@ -499,7 +500,7 @@ onClickEdit(blockId) {
         
 
         {/* ------------DYNAMICALLY COMPLETED BLOCKS---------------- */}
-        <div className='blocks-container'>
+        <div id="mainStoryContainer" className='blocks-container'>
             {
               this.state.blocks.map(({id, iteration, content, author, username, flag, rating, ending}) =>{
                 return(
