@@ -261,12 +261,10 @@ onClickLike = () => {
         </div>
         
         {/* Search Bar */}
-    
         
-        <button className="user"><Link to='/login'><img className="userimg" src='avatar.png'></img></Link> </button>
-      
-
-        </div> 
+        <button className="user"><Link to='/login'><img className="userimg" src='/man.png' alt = ""></img></Link> </button>
+        
+        </div>
 
         <div>
           <button id ="verified" onClick={() => this.onClickVerifyEmail()} className="ver"> Verify Email</button> {this.state.isHidden}
