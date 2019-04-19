@@ -262,7 +262,7 @@ onClickLike = () => {
         
         {/* Search Bar */}
         
-        <button className="user"><Link to='/login'><img className="userimg" src='/man.png' alt = ""></img></Link> </button>
+        <button className="user"><Link to='/login'><img className="userimg" src='/picon.png' alt = ""></img></Link> </button>
         
         </div>
 
