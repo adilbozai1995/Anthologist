@@ -103,8 +103,9 @@ module.exports = (app) => {
             else
             {
                 const storyid = uuid( )
+                const rightnow = Date.now()
 
-                sqlsec.query( "INSERT INTO stories (id, author, title, charlimit, minblock, votetime, storylen) VALUES (?, ?, ?, ?, ?, ?, ?);",
+                sqlsec.query( "INSERT INTO stories (id, author, title, charlimit, minblock, votetime, storylen, born) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
                 [
                     storyid,
                     account,
@@ -112,7 +113,8 @@ module.exports = (app) => {
                     charlimit,
                     minblock,
                     votetime,
-                    storylen
+                    storylen,
+                    rightnow,
                 ]);
 
                 for ( var i = 0; i < writers.length; i++ )

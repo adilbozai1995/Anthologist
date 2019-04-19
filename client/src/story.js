@@ -240,7 +240,8 @@ class story extends Component {
 
             if ( response.status === 'okay' )
             {
-
+                // Refreshing is the easiest way
+                window.location.reload()
             }
         }
     };
