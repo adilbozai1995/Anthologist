@@ -226,11 +226,14 @@ class story extends Component {
                 }
 
                 // Check if we can end the story
-                sessionStorage.canEndStory = (response.iteration < response.storylen)
+                if ( response.iteration >= response.storylen ) sessionStorage.canEndStory = true;
 
                 for ( var i = 0; i < response.blocks.length; i++ )
                 {
                     var cblock = response.blocks[i]
+
+                    var endingColor = "white";
+                    if ( cblock.ending ) endingColor = "red";
 
                     updateBlock({
                         "id":cblock.id,
@@ -240,7 +243,7 @@ class story extends Component {
                         "username":cblock.username,
                         "flag":cblock.flag,
                         "rating":cblock.rating,
-                        "ending":cblock.ending
+                        "ending":endingColor
                     }, cblock.iteration < response.iteration );
                 }
             }
@@ -416,7 +419,7 @@ onClickEdit(id) {
         
         {/* Search Bar */}
         
-        <button className="user"><Link to='/login'><img className="userimg" src='/man.png'></img></Link> </button>
+        <button className="user"><Link to='/login'><img className="userimg" src='/picon.png'></img></Link> </button>
         
 
         </div>
@@ -432,7 +435,7 @@ onClickEdit(id) {
             {
               this.state.blocks.map(({id, iteration, content, author, username, flag, rating, ending}) =>{
                 return(
-                  <div className='blocks' key={id.toString()}>
+                  <div className='blocks' key={id.toString()} style={{"border-color":ending.toString()}}>
                       <button onClick={() => this.StoryopenModal(content)} className='st'>{content.toString().substring(0,15) + " ..."}</button>
                       <a href={"/profile/" + author.toString()} className='author'>{username.toString()}</a>
                       <div className='slash'>/</div>
@@ -492,9 +495,9 @@ onClickEdit(id) {
         {
               this.state.proposed.map(({id, iteration, content, author, username, flag, rating, ending}) =>{
                 return(
-                  <div className='p-blocks' key={id.toString()}>
+                  <div className='p-blocks' key={id.toString()} style={{"border-color":ending.toString()}}>
                       <button onClick={() => this.StoryopenModal(content)} className='st1'>{content.toString().substring(0,15) + "..."}</button>
-                 <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>  
+                 <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>
                       <div className='slash1'>/</div>
                       <button className="likeButton3" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
                       <button className="flagButton" onClick={() => this.onClickFlag(id)} ><i id="flag" className="far fa-flag fa-2x"></i></button>
@@ -571,7 +574,7 @@ onClickEdit(id) {
         </div>
         <button onClick={() => this.onAddBlock()}>Add Block</button>
         <label>
-        <input type="checkbox" id="eos_check" disabled={sessionStorage.canEndStory} value="ES" />
+        <input type="checkbox" id="eos_check" disabled={!sessionStorage.canEndStory} value="ES" />
         End of Story
       </label>
 
