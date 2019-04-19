@@ -65,7 +65,7 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
-        if ( votetime > 1440 || votetime < 5 )
+        if ( votetime > 1440 || votetime < 1 )
         {
             console.log( "story-create: vote time too long or short: " + votetime )
             return res.sendStatus(400)
