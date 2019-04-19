@@ -520,7 +520,8 @@ onClickEdit(blockId) {
     return (
       
      
-      <div className="App">
+    <div className="App">
+    
       
         
         
@@ -667,7 +668,7 @@ onClickEdit(blockId) {
         }
 
       
-      <Modal /*THIS A STORY YOU NEED TO CHANGE*/
+        <Modal /*THIS A STORY YOU NEED TO CHANGE*/
           isOpen={this.state.StorymodalIsOpen} 
           onRequestClose={this.StorycloseModal}
           style={customStyles}
@@ -683,25 +684,7 @@ onClickEdit(blockId) {
           <button onClick={this.closeSecondModal} > close </button>
           <div>No dude</div>
 
-<<<<<<< HEAD
         </Modal>
-
-        <Modal
-          isOpen={this.state.addBlockIsOpen}
-          onRequestClose={this.close_addBlock}>
-
-              <div class="change-description">
-              <label className='change-descp' > Add Block   </label>
-              <textarea className='add_block'  type="text" id="new_block"/>
-              </div>
-              <button onClick={() => this.onAddBlock()}>Add Block</button>
-              <label>
-              <input type="checkbox" id="eos_check" disabled={sessionStorage.canEndStory} value="ES" />
-              End of Story
-              </label>
-
-              <button onClick={this.close_addBlock}>close</button>
-=======
       
         <Modal
           isOpen={this.state.overwriteIsOpen}
@@ -733,14 +716,14 @@ onClickEdit(blockId) {
         <label>
         <input type="checkbox" id="eos_check" disabled={!sessionStorage.canEndStory} value="ES" />
         End of Story
-      </label>
+        </label>
 
         <button onClick={this.close_addBlock}>close</button>
->>>>>>> af88d7e3d7b822321a2d25d40bc2066e20c7a067
 
         </Modal>
 
-      </div>
+    
+    </div>
 
     );
 
