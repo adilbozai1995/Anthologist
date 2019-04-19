@@ -135,7 +135,7 @@ class story extends Component {
 
             if ( response.status === 'okay' )
             {
-
+            
             }
         }
     };
