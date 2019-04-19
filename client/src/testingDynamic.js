@@ -9,7 +9,7 @@ class testingDynamic extends React.Component {
     state = {
         value : {},
         blocks: [{index: 1, block : "Block1"}, {index: 2, block: "Block2"},{index: 3, block: "Block3"}]
-    } 
+    }
 
     //Function to add a block
     onAddItem = () =>{
@@ -21,9 +21,9 @@ class testingDynamic extends React.Component {
             };
         });
     };
-  
+
     render() {
-        return (           
+        return (
             // Story Box where each block gets added
              <div className='story-div' >
             {
@@ -45,12 +45,7 @@ class testingDynamic extends React.Component {
         >
           Add
         </button>
-            </div> 
-
-
-
-           
-            
+            </div>
         )
     }
   }

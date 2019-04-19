@@ -71,8 +71,8 @@ class story extends Component {
     this.state = {
       showPopup: false,
       value : {},
-      blocks:[{index: 1, block : "Completed Block1", author:"Author1"}, {index: 2, block: " Completed Block2", author:"Author2"},{index: 3, block: "Completed Block3", author:"Author3"}],
-      proposed:[{index: 1, block : "Proposed Block1", author:"Author1"},{index: 1, block : "Proposed Block2", author:"Author2"}, {index: 2, block: " Proposed Block3", author:"Author3"},{index: 3, block: "Proposed Block4", author:"Author4"}]
+      blocks:[],
+      proposed:[]
     };
   }
 
@@ -136,7 +136,7 @@ class story extends Component {
 
             if ( response.status === 'okay' )
             {
-            
+
             }
         }
     };
@@ -148,10 +148,13 @@ class story extends Component {
     var story = this.props.match.params.story;
 
     sessionStorage.mystory = story
+    sessionStorage.canEndStory = false;
 
     var obj = JSON.stringify({
         "story":story
     });
+
+    const updateBlock = this.onAddItem;
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/api/story-fetch" , true);
@@ -172,24 +175,76 @@ class story extends Component {
                 document.getElementById('votesLimit').innerHTML = "Min Blocks for Vote: " + response.minblock
                 document.getElementById('votesTime').innerHTML = "Vote Time (minutes): " + response.votetime
                 document.getElementById('nViews').innerHTML = response.views + " Views"
+
+                // Check if we can end the story
+                sessionStorage.canEndStory = (response.iteration < response.storylen)
+
+                for ( var i = 0; i < response.blocks.length; i++ )
+                {
+                    var cblock = response.blocks[i]
+
+                    updateBlock({
+                        "id":cblock.id,
+                        "iteration":cblock.iteration,
+                        "content":cblock.content,
+                        "author":cblock.author,
+                        "username":cblock.username,
+                        "flag":cblock.flag,
+                        "rating":cblock.rating,
+                        "ending":cblock.ending
+                    }, cblock.iteration < response.iteration );
+                }
             }
             else
             {
                 window.location.replace("/")
             }
         }
-        else if ( this.status == 400 )
+        else if ( this.status === 400 )
         {
             window.location.replace("/")
         }
      };
      xhttp.send(obj);
-
   }
 
   onAddBlock(){   /*UPDATE THE STORY HERE*/
 
-    document.getElementById('new_block').value = ""; 
+    if ( !localStorage.account || !localStorage.token ) return;
+
+    var story = this.props.match.params.story;
+
+    var ending = 0;
+    if ( document.getElementById("eos_check").checked ) ending = 1;
+
+    var obj = JSON.stringify({
+        "account": localStorage.account,
+        "token": localStorage.token,
+        "story": story,
+        "text": document.getElementById("new_block").value,
+        "ending": ending
+    });
+
+    document.getElementById("new_block").value = "";
+    document.getElementById("eos_check").checked = false;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/block-create", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+
+            }
+        }
+    };
+    xhttp.send(obj);
   }
 
   onFlag2()
@@ -222,15 +277,26 @@ class story extends Component {
     };
     xhttp.send(obj);
   }
-  
+
   //-----------------------FUNCTION TO ADD A BLOCK DYNAMICALLY-------------------------
-  onAddItem = () =>{
+  onAddItem = (updateVal, proposed) =>{
     this.setState(state => {
-        const blocks = state.blocks.concat(state.value);
-        return {
-            blocks,
-            value:{},
-        };
+        if ( proposed )
+        {
+            const props = state.proposed.concat(updateVal);
+            return {
+                props,
+                value:{},
+            };
+        }
+        else
+        {
+            const blocks = state.blocks.concat(updateVal);
+            return {
+                blocks,
+                value:{},
+            };
+        }
     });
 };
 //-----------------------------------------------------------------------------------------
@@ -260,9 +326,8 @@ onClickLike = () => {
         
         {/* Search Bar */}
         <input id="search_input bar" className="in" type="text" ></input>
-        <button className="notify"><img className="notimg" src='/notification-icon.png'></img> </button>
         <button className="user"><Link to='/login'><img className="userimg" src='/avatar.png'></img></Link> </button>
-         <button className="search"><img className="searchimg" src='/search.png'></img> </button>
+        <button className="search"><img className="searchimg" src='/search.png'></img> </button>
 
         </div>
 
@@ -275,15 +340,14 @@ onClickLike = () => {
         {/* ------------DYNAMICALLY COMPLETED BLOCKS---------------- */}
         <div className='blocks-container'>
             {
-              this.state.blocks.map(({block, index, author}) =>{
+              this.state.blocks.map(({id, iteration, content, author, username, flag, rating, ending}) =>{
                 return(
-                  
-                  <div className='blocks'>
-                  <button className='st' key={index.toString()}>{block.toString()}</button>
-                  <div className='author'>{author.toString()}</div>
-                  <div className='slash'>/</div>
-                  <button className="likeButton2" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
-                   <div className='likes'>Likes</div>
+                  <div className='blocks' key={id.toString()}>
+                      <button className='st'>{content.toString()}</button>
+                      <a href={"/profile/" + author.toString()} className='author'>{username.toString()}</a>
+                      <div className='slash'>/</div>
+                      <button className="likeButton2" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
+                      <div className='likes'>{rating.toString()} Likes</div>
                   </div>
                 )
               })
@@ -302,7 +366,6 @@ onClickLike = () => {
         <div className='book-logo'>
          <img className="bookimg" src='/book.png' ></img>
         </div>
-         
 
         {/* Attributes */}
         <div className='attributesBlock'>
@@ -333,17 +396,15 @@ onClickLike = () => {
 
         {/* ------------DYNAMICALLY PROPOSED BLOCKS---------------- */}
         <div className='proposed'>
-
         {
-              this.state.proposed.map(({block, index, author}) =>{
+              this.state.proposed.map(({id, iteration, content, author, username, flag, rating, ending}) =>{
                 return(
-                  
-                  <div className='p-blocks'>
-                  <button className='st1' key={index.toString()}>{block.toString()}</button>
-                  <div className='author1'>{author.toString()}</div>
-                  <div className='slash1'>/</div>
-                  <button className="likeButton3" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
-                   <div className='likes1'>Likes</div>
+                  <div className='p-blocks' key={id.toString()}>
+                      <button className='st1'>{content.toString()}</button>
+                      <a href={"/profile/" + author.toString()} className='author1'>{username.toString()}</a>
+                      <div className='slash1'>/</div>
+                      <button className="likeButton3" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
+                      <div className='likes1'>{rating.toString()} Likes</div>
                   </div>
                 )
               })
@@ -370,7 +431,7 @@ onClickLike = () => {
         </div>
 
         {/* Add Block Button */}
-        <button className="addAButton" onClick={this.open_addBlock} id ="addAButtonID" color="blue">Add a block</button>
+        <button className="addAButton" onClick={this.open_addBlock} id="addAButtonID" color="blue">Add a block</button>
        
         {/* Add a bookmark button */}
         <button className="bookmark"><img className="bkimg" onClick={() => this.addBlock()} src='/bookmark.png'></img> </button>
@@ -408,24 +469,20 @@ onClickLike = () => {
         <div class="change-description">
         <label className='change-descp' > Add Block   </label>
         <textarea className='add_block'  type="text" id="new_block"/>
-        </div>      
+        </div>
         <button onClick={() => this.onAddBlock()}>Add Block</button>
         <label>
-        <input type="checkbox" id="eos_check" value="ES" />
+        <input type="checkbox" id="eos_check" disabled={sessionStorage.canEndStory} value="ES" />
         End of Story
       </label>
-         
-        <button onClick={this.close_addBlock}>close</button>
-          
 
-         
-          
+        <button onClick={this.close_addBlock}>close</button>
+
         </Modal>
-        
 
       </div>
 
-    ); 
+    );
 
   }
 }

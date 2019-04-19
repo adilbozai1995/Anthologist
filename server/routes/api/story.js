@@ -261,17 +261,51 @@ module.exports = (app) => {
             {
                 sqlsec.query( "UPDATE stories SET views = views + 1 WHERE id=?", [ story ], function(ca,cb){} )
 
-                console.log( "story-fetch: fetched story with id: " + story )
-                res.json({
-                    "status":"okay",
-                    "author":rsql[0].author,
-                    "title":rsql[0].title,
-                    "flag":rsql[0].flag,
-                    "charlimit":rsql[0].charlimit,
-                    "minblock":rsql[0].minblock,
-                    "votetime":rsql[0].votetime,
-                    "storylen":rsql[0].storylen,
-                    "views":(rsql[0].views + 1)
+                sqlcon.query( "SELECT blocks.*, accounts.username FROM blocks INNER JOIN accounts ON blocks.author = accounts.id WHERE blocks.story=? ORDER BY blocks.iteration ASC;", [ story ], function( err, brsql )
+                {
+                    if ( err )
+                    {
+                        console.log( "story-fetch: sql_error: ", err );
+                        res.json({"status":"fail","reason":"un-caught sql error"})
+                    }
+                    else
+                    {
+                        var out = []
+
+                        for ( var i = 0; i < brsql.length; i++ )
+                        {
+                            var flag = 0;
+                            if ( brsql[i].flag !== "no_flag" ) flag = 1;
+
+                            out.push({
+                                "id":brsql[i].id,
+                                "content":brsql[i].content,
+                                //"story":brsql[i].story,
+                                "iteration":brsql[i].iteration,
+                                "author":brsql[i].author,
+                                "username":brsql[i].username,
+                                "rating":brsql[i].rating,
+                                "ending":brsql[i].ending,
+                                "flag":flag
+                            });
+                        }
+
+                        console.log( "story-fetch: fetched story with id: " + story )
+                        res.json({
+                            "status":"okay",
+                            "author":rsql[0].author,
+                            "title":rsql[0].title,
+                            "flag":rsql[0].flag,
+                            "charlimit":rsql[0].charlimit,
+                            "minblock":rsql[0].minblock,
+                            "votetime":rsql[0].votetime,
+                            "storylen":rsql[0].storylen,
+                            "views":(rsql[0].views + 1),
+                            "votestart":rsql[0].votestart,
+                            "iteration":rsql[0].iteration,
+                            "blocks":out
+                        });
+                    }
                 });
             }
         });
