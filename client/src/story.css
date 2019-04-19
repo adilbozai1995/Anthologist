@@ -490,6 +490,29 @@ text-align: center
   margin-left: 2%;
   margin-top: 14%;
 }
+.button{
+      background-image: linear-gradient(#7a8386, #454849);
+      background-attachment: fixed;
+      font-family:'SignPainter';
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 150%;
+      margin-top: 45%;
+      margin-bottom: 20%;
+      margin-left: 90%;
+      font-weight: bold;
+      cursor: pointer;
+      -webkit-transition-duration: 0.4s;
+      transition-duration: 0.4s;
+}
+
+.textModal{
+  color:black;
+  font-style: italic;
+}
 
 .changeTimeButton {
   width: 20%;
@@ -559,8 +582,6 @@ text-align: center
 
 
 .bkimg {
-
-
   height: 28pt;
   width: 28pt;
 }
