@@ -11,7 +11,14 @@ app.use(bodyParser.json())
 require('./routes')(app);
 
 app.get('/', function (req, res) {
-    res.send("Anthologist backend!");
+    out = "<h1>Anthologist backend!</h1><br>";
+
+    app._router.stack.forEach(function(r)
+    {
+        if (r.route && r.route.path && r.route.path != "/") out += r.route.path + "<br>"
+    });
+
+    res.send( out )
 });
 
 // Connect to the database as the insecure bot. use for reading data
@@ -144,4 +151,4 @@ setInterval( function( )
             }
         }
     });
-}, 60000 ); // Run every minute
+}, 10000 ); // Run every 10 seconds
