@@ -135,7 +135,6 @@ class story extends Component {
 
             if ( response.status === 'okay' )
             {
-            
             }
         }
     };
@@ -147,6 +146,7 @@ class story extends Component {
     var story = this.props.match.params.story;
 
     sessionStorage.mystory = story
+    sessionStorage.canEndStory = false;
 
     var obj = JSON.stringify({
         "story":story
@@ -171,6 +171,9 @@ class story extends Component {
                 document.getElementById('votesLimit').innerHTML = "Min Blocks for Vote: " + response.minblock
                 document.getElementById('votesTime').innerHTML = "Vote Time (minutes): " + response.votetime
                 document.getElementById('nViews').innerHTML = response.views + " Views"
+
+                // Check if we can end the story
+                sessionStorage.canEndStory = (response.iteration < response.storylen)
             }
             else
             {
@@ -188,7 +191,41 @@ class story extends Component {
 
   onAddBlock(){   /*UPDATE THE STORY HERE*/
 
-    document.getElementById('new_block').value = ""; 
+    if ( !localStorage.account || !localStorage.token ) return;
+
+    var story = this.props.match.params.story;
+
+    var ending = 0;
+    if ( document.getElementById("eos_check").checked ) ending = 1;
+
+    var obj = JSON.stringify({
+        "account": localStorage.account,
+        "token": localStorage.token,
+        "story": story,
+        "text": document.getElementById("new_block").value,
+        "ending": ending
+    });
+
+    document.getElementById("new_block").value = "";
+    document.getElementById("eos_check").checked = false;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/block-create", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+
+            }
+        }
+    };
+    xhttp.send(obj);
   }
 
   onFlag2()
@@ -356,7 +393,7 @@ onClickLike = () => {
         </div>
 
         {/* Add Block Button */}
-        <button className="addAButton" onClick={this.open_addBlock} id ="addAButtonID" color="blue">Add a block</button>
+        <button className="addAButton" onClick={this.open_addBlock} id="addAButtonID" color="blue">Add a block</button>
        
         {/* Add a bookmark button */}
         <button className="bookmark"><img className="bkimg" onClick={() => this.addBlock()} src='/bookmark.png'></img> </button>
@@ -394,7 +431,7 @@ onClickLike = () => {
         <div class="change-description">
         <label className='change-descp' > Add Block   </label>
         <textarea className='add_block'  type="text" id="new_block"/>
-        </div>      
+        </div>
         <button onClick={() => this.onAddBlock()}>Add Block</button>
         <label>
         <input type="checkbox" id="eos_check" value="ES" />

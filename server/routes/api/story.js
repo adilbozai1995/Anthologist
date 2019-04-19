@@ -271,7 +271,9 @@ module.exports = (app) => {
                     "minblock":rsql[0].minblock,
                     "votetime":rsql[0].votetime,
                     "storylen":rsql[0].storylen,
-                    "views":(rsql[0].views + 1)
+                    "views":(rsql[0].views + 1),
+                    "votestart":rsql[0].votestart,
+                    "iteration":rsql[0].iteration
                 });
             }
         });
