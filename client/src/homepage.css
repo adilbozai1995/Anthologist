@@ -181,7 +181,7 @@ div {
 
 
 .black_line_2 {
-  position: fixed;
+  position: absolute;
   margin-top: -3%;
   margin-left: 85px;
   
@@ -191,7 +191,7 @@ div {
   }
 
   .black_line_3 {
-    position: fixed;
+    position: absolute;
     margin-top: -3%;
     margin-left: 14.5%;
     
@@ -472,3 +472,9 @@ div {
   .story-cover12:hover {
     color: white;
   } 
+
+  a {
+    color:black;
+    font-style: normal;
+    text-decoration: none;
+  }

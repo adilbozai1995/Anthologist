@@ -60,7 +60,7 @@ class homepage extends Component {
                 // Iterates over each element in the blocks array in the state and makes a span
               this.state.storyBlocks.map(({block,index})=>{
                 return (
-                  <span key={index.toString()} className='block' >{block.toString()}</span>
+                  <a href=""  key={index.toString()} className='block' >{block.toString()}</a>
                 )
               })
             } 

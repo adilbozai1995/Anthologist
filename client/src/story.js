@@ -270,6 +270,7 @@ onClickLike = () => {
 
         {/* Title of story */}
         <div id="story-title" className="StoryTitle"> Working Title<a className="title" href> </a> </div>
+        
 
         {/* ------------DYNAMICALLY COMPLETED BLOCKS---------------- */}
         <div className='blocks-container'>
