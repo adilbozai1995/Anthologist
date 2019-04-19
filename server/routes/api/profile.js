@@ -56,7 +56,7 @@ module.exports = (app) => {
                                 }
                                 else
                                 {
-                                    sqlcon.query( "SELECT comments.*, accounts.username FROM comments INNER JOIN accounts.username ON comments.author=accounts.id WHERE userprof=? ORDER BY comments.born DESC;", [ account ],
+                                    sqlcon.query( "SELECT comments.*, accounts.username FROM comments INNER JOIN accounts ON comments.author=accounts.id WHERE userprof=? ORDER BY comments.born DESC;", [ account ],
                                     function( err, crsql )
                                     {
                                         if ( err )
