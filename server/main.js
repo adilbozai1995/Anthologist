@@ -78,7 +78,7 @@ setInterval( function( )
                 sqlcon.query( "SELECT COUNT(id) AS blockCount, MAX(rating) AS blockRating FROM blocks WHERE story=? AND iteration=?;",
                 [ story.id, story.iteration ], function( err, brsql )
                 {
-                    const rightnow = Date.now()
+                    const rightnow = Date.now() / 1000;
 
                     if ( err )
                     {
@@ -86,7 +86,7 @@ setInterval( function( )
                     }
                     else if ( story.votemode == 1 && story.votestart + (story.votetime * 60) < rightnow )
                     {
-                        sqlcon.query( "SELECT id FROM blocks ORDER BY RANDOM() LIMIT 1 WHERE story=? AND iteration=? AND rating=?;",
+                        sqlcon.query( "SELECT id FROM blocks WHERE story=? AND iteration=? AND rating=? LIMIT 1;",
                         [
                             story.id,
                             story.iteration,

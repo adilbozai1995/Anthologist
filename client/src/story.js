@@ -177,6 +177,50 @@ class story extends Component {
                 document.getElementById('nViews').innerHTML = response.views + " Views"
                 document.getElementById('nLikes').innerHTML = response.rating + " Likes"
 
+                if ( response.votemode )
+                {
+                    setInterval( function()
+                    {
+                        var seconds = Math.max( (response.votestart + (response.votetime * 60 )) - (Date.now() / 1000), 0 )
+                        var minutes = Math.floor( seconds / 60 )
+                        seconds = seconds % 60
+                        var hours = Math.floor( minutes / 60 )
+                        minutes = minutes % 60
+
+                        seconds = Math.floor( seconds )
+
+                        if ( hours > 0 )
+                        {
+                            document.getElementById('nCount').innerHTML = hours + ":" + minutes + ":" + seconds + " Until voting ends";
+                        }
+                        else if ( minutes > 0 )
+                        {
+                            document.getElementById('nCount').innerHTML = minutes + ":" + seconds + " Until voting ends";
+                        }
+                        else
+                        {
+                            document.getElementById('nCount').innerHTML = seconds + " Until voting ends";
+                        }
+
+                    }, 1000 );
+                }
+                else
+                {
+                    var blockCount = 0;
+
+                    for ( var i = 0; i < response.blocks.length; i++ )
+                    {
+                        if ( response.blocks[i].iteration === response.iteration )
+                        {
+                            blockCount++;
+                        }
+                    }
+
+                    blockCount = Math.max( response.minblock - blockCount, 0 )
+
+                    document.getElementById('nCount').innerHTML = blockCount + " Blocks until voting starts"
+                }
+
                 // Check if we can end the story
                 sessionStorage.canEndStory = (response.iteration < response.storylen)
 
