@@ -279,13 +279,13 @@ class story extends Component {
   }
 
   //-----------------------FUNCTION TO ADD A BLOCK DYNAMICALLY-------------------------
-  onAddItem = (updateVal, proposed) =>{
+  onAddItem = ( updateVal, regblock ) =>{
     this.setState(state => {
-        if ( proposed )
+        if ( !regblock )
         {
-            const props = state.proposed.concat(updateVal);
+            const proposed = state.proposed.concat(updateVal);
             return {
-                props,
+                proposed,
                 value:{},
             };
         }
