@@ -261,11 +261,12 @@ onClickLike = () => {
         </div>
         
         {/* Search Bar */}
-        <input className="in" type="text" ></input>
-        <button className="notify"><img className="notimg" src='/notification-icon.png'></img> </button>
-        <button className="user"><Link to='/login'><img className="userimg" src='/avatar.png'></img></Link> </button>
-         <button className="search"><img className="searchimg" src='/search.png'></img> </button>
-        </div>
+    
+        
+        <button className="user"><Link to='/login'><img className="userimg" src='avatar.png'></img></Link> </button>
+      
+
+        </div> 
 
         <div>
           <button id ="verified" onClick={() => this.onClickVerifyEmail()} className="ver"> Verify Email</button> {this.state.isHidden}
