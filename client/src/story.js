@@ -80,7 +80,8 @@ class story extends Component {
    state = {
     StoryIsOpen: false,
     secondModalIsOpen: false,
-    addBlockIsOpen:false
+    addBlockIsOpen:false,
+    overwriteIsOpen:false
   };
 
   StoryopenModal = (storyText) => {
@@ -104,6 +105,14 @@ class story extends Component {
 
   close_addBlock = () => {
     this.setState({ addBlockIsOpen: false });
+  };
+
+  openoverwrite = (blockId,content) => {
+    this.setState({ overwriteIsOpen: true, StoryModalText: content, StoryModalBlock: blockId });
+  };
+
+  closeoverwrite = () => {
+    this.setState({ overwriteIsOpen: false });
   };
   
 
@@ -305,6 +314,11 @@ class story extends Component {
     xhttp.send(obj);
   }
 
+  onClickRecent(){
+    var scroller = document.getElementById("mainStoryContainer")
+    scroller.scrollTop = scroller.scrollHeight;
+  }
+
   onFlag2()
   {
     if ( !localStorage.account || !localStorage.token ) return;
@@ -451,7 +465,34 @@ onClickDelete(blockId)
 
 //-----EDIT BUTTON FUNCTION------
 onClickEdit(blockId) {
+    if ( !localStorage.account || !localStorage.token ) return;
 
+    var obj = JSON.stringify({
+        "account": localStorage.account,
+        "token": localStorage.token,
+        "block": blockId,
+        "text": document.getElementById("edit_new_block").value
+    });
+
+    document.getElementById("edit_new_block").value = "";
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/block-edit" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+                window.location.reload()
+            }
+        }
+    }
+    xhttp.send(obj)
 }
 
   render() {
@@ -486,7 +527,7 @@ onClickEdit(blockId) {
         
 
         {/* ------------DYNAMICALLY COMPLETED BLOCKS---------------- */}
-        <div className='blocks-container'>
+        <div id="mainStoryContainer" className='blocks-container'>
             {
               this.state.blocks.map(({id, iteration, content, author, username, flag, rating, ending}) =>{
                 return(
@@ -544,6 +585,8 @@ onClickEdit(blockId) {
         {/* Flag button */}
                     <button id='flagID' className="flagStory"><img className="flagimg" src='/flg.png' onClick={() => this.onFlag2()} ></img> </button>
 
+        {/* Recent */}
+                    <button className="flagStory2" onClick={() => this.onClickRecent()}> Recent </button>
 
         {/* ------------DYNAMICALLY PROPOSED BLOCKS---------------- */}
         <div className='proposed'>
@@ -557,7 +600,7 @@ onClickEdit(blockId) {
                       <button className="likeButton3" onClick={() => this.onClickLike(id)} ><i id="like" className="far fa-thumbs-up fa-2x"></i></button>
                       <button className="flagButton" onClick={() => this.onClickFlag(id)} ><i id="flag" className="far fa-flag fa-2x"></i></button>
                       <button className="deleteButton" onClick={() => this.onClickDelete(id)} ><i id="delete" className="fas fa-trash-alt fa-2x"></i></button>
-                      <button className="editButton" onClick={() => this.onClickEdit(id)} ><i id="edit" className="fas fa-edit fa-2x"></i></button>
+                      <button className="editButton" onClick={() => this.openoverwrite(id,content)}><i id="edit" className="fas fa-edit fa-2x"></i></button>
 
                       <div className='likes1'>{rating.toString()} Likes</div>
                   </div>
@@ -616,6 +659,23 @@ onClickEdit(blockId) {
           <button onClick={this.closeSecondModal}>close</button>
           <div>No dude</div>
         </Modal>
+
+      
+        <Modal
+          isOpen={this.state.overwriteIsOpen}
+          onRequestClose={this.closeoverwrite}
+        >
+
+        <div class="change-description">
+        <label className='change-descp' > Update Block   </label>
+        <textarea className='add_block' type="text" id="edit_new_block">{this.state.StoryModalText}</textarea>
+        </div>
+        <button onClick={() => this.onClickEdit(this.state.StoryModalBlock)}>Update Block</button>
+
+        <button onClick={this.closeoverwrite}>close</button>
+
+        </Modal>
+
 
 
         <Modal
