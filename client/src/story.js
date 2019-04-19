@@ -465,7 +465,34 @@ onClickDelete(blockId)
 
 //-----EDIT BUTTON FUNCTION------
 onClickEdit(blockId) {
+    if ( !localStorage.account || !localStorage.token ) return;
 
+    var obj = JSON.stringify({
+        "account": localStorage.account,
+        "token": localStorage.token,
+        "block": blockId,
+        "text": document.getElementById("edit_new_block").value
+    });
+
+    document.getElementById("edit_new_block").value = "";
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/block-edit" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if ( response.status === 'okay' )
+            {
+                window.location.reload()
+            }
+        }
+    }
+    xhttp.send(obj)
 }
 
   render() {
@@ -643,7 +670,7 @@ onClickEdit(blockId) {
         <label className='change-descp' > Update Block   </label>
         <textarea className='add_block' type="text" id="edit_new_block">{this.state.StoryModalText}</textarea>
         </div>
-        <button onClick={() => this.onClickEdit()}>Update Block</button>
+        <button onClick={() => this.onClickEdit(this.state.StoryModalBlock)}>Update Block</button>
 
         <button onClick={this.closeoverwrite}>close</button>
 
