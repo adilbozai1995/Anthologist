@@ -84,7 +84,7 @@ class profile extends Component {
             document.getElementById('user_description').innerHTML = response.description;
 
             if(response.verify === "verified"){
-              document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));            
+              document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));
 
             }
           }
