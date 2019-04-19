@@ -36,7 +36,7 @@ module.exports = (app) => {
                 }
                 else
                 {
-                    sqlcon.query( "SELECT blocks.*, accounts.username FROM blocks INNER JOIN accounts ON blocks.author=accounts.id WHERE author=?;", [ account ],
+                    sqlcon.query( "SELECT blocks.*, accounts.username FROM blocks INNER JOIN accounts ON blocks.author=accounts.id WHERE author=? ORDER BY blocks.born DESC;", [ account ],
                     function( err, brsql )
                     {
                         if ( err )
@@ -56,7 +56,7 @@ module.exports = (app) => {
                                 }
                                 else
                                 {
-                                    sqlcon.query( "SELECT comments.*, accounts.username FROM comments INNER JOIN accounts.username ON comments.author=accounts.id WHERE userprof=?;", [ account ],
+                                    sqlcon.query( "SELECT comments.*, accounts.username FROM comments INNER JOIN accounts.username ON comments.author=accounts.id WHERE userprof=? ORDER BY comments.born DESC;", [ account ],
                                     function( err, crsql )
                                     {
                                         if ( err )
