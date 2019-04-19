@@ -298,7 +298,7 @@ onClickLike = () => {
               this.state.storyBlocks.map(({block,index})=>{
                 return (
                   <span key={index.toString()} className='block' >{block.toString()}
-                    <button className="likeButton" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
+                    <button className="likeButton2" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
                   </span>
                 )
               })

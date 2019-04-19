@@ -562,3 +562,12 @@ text-align: center
   width: 30pt;
 }
 
+.likeButton2 {
+  background-color: transparent;
+   float: left;
+  border: none;
+  margin-top: -4.5%;
+  outline: none;
+  cursor: pointer;
+}
+

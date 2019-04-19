@@ -69,7 +69,9 @@ class story extends Component {
   constructor() {
     super();
     this.state = {
-      showPopup: false
+      showPopup: false,
+      value : {},
+      blocks:[{index: 1, block : "Completed Block1", author:"Author1"}, {index: 2, block: " Completed Block2", author:"Author2"},{index: 3, block: "Completed Block3", author:"Author3"}],
     };
   }
 
@@ -183,6 +185,23 @@ class story extends Component {
     };
     xhttp.send(obj);
   }
+  
+  //-----------------------FUNCTION TO ADD A BLOCK DYNAMICALLY-------------------------
+  onAddItem = () =>{
+    this.setState(state => {
+        const blocks = state.blocks.concat(state.value);
+        return {
+            blocks,
+            value:{},
+        };
+    });
+};
+//-----------------------------------------------------------------------------------------
+
+// -----LIKE BUTTON FUNCTION------
+onClickLike = () => {
+  
+}
 
   render() {
     return (
@@ -214,41 +233,24 @@ class story extends Component {
         {/* Title of story */}
         <div id="story-title" className="StoryTitle"> Working Title<a className="title" href> </a> </div>
 
-        {/* Blocks */}
+        {/* ------------DYNAMICALLY COMPLETED BLOCKS---------------- */}
         <div className='blocks-container'>
-            <div className='blocks'>
-                <button className='st' >Completed Block 1</button>
-                <div className='author'>Author</div>
-                <div className='slash'>/</div>
-                <div className='likes'>Likes</div>
-
-
-            </div>
-            <div className='blocks'>
-            <button className='st'>Completed Block 2</button>
-                <div className='author'>Author</div>
-                <div className='slash'>/</div>
-                <div className='likes'>Likes</div>
-
-
-            </div>
-            <div className='blocks'>
-            <button className='st'>Completed Block 3</button>
-                <div className='author'>Author</div>
-                <div className='slash'>/</div>
-                <div className='likes'>Likes</div>
-
-
-            </div>
-            <div className='blocks'>
-            <button className='st'>Completed Block 4</button>
-                <div className='author'>Author</div>
-                <div className='slash'>/</div>
-                <div className='likes'>Likes</div>
-
-
-            </div>
+            {
+              this.state.blocks.map(({block, index, author}) =>{
+                return(
+                  
+                  <div className='blocks'>
+                  <button className='st' key={index.toString()}>{block.toString()}</button>
+                  <div className='author'>{author.toString()}</div>
+                  <div className='slash'>/</div>
+                  <button className="likeButton2" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
+                   <div className='likes'>Likes</div>
+                  </div>
+                )
+              })
+            }
         </div>
+        {/* ----------------------------------------------------------- */}
 
         {/* Number of Likes */}
         <div className='nOfLikes'>400 Likes</div>
