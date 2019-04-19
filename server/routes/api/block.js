@@ -134,15 +134,17 @@ module.exports = (app) => {
                             if ( canPost )
                             {
                                 const blockid = uuid()
+                                const rightnow = Date.now() / 1000;
 
-                                sqlsec.query( "INSERT INTO blocks (id, content, story, iteration, author, ending) VALUES (?, ?, ?, ?, ?, ?);",
+                                sqlsec.query( "INSERT INTO blocks (id, content, story, iteration, author, ending, born) VALUES (?, ?, ?, ?, ?, ?, ?);",
                                 [
                                     blockid,
                                     blocktext,
                                     story,
                                     curiter,
                                     account,
-                                    ending
+                                    ending,
+                                    rightnow
                                 ], function(ca,cb){});
 
                                 console.log( "block-create: posted new block: " + blockid )

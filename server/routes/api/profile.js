@@ -36,14 +36,97 @@ module.exports = (app) => {
                 }
                 else
                 {
-                    res.json({
-                        "status":"okay",
-                        "username": rsql[0].username,
-                        "description": rsql[0].description,
-                        "flag": rsql[0].flag,
-                        "verify": rsql[0].verify,
-                        "admin": rsql[0].admin,
-                        "image": rsql[0].image
+                    sqlcon.query( "SELECT blocks.*, accounts.username FROM blocks INNER JOIN accounts ON blocks.author=accounts.id WHERE author=?;", [ account ],
+                    function( err, brsql )
+                    {
+                        if ( err )
+                        {
+                            console.log( "fetch-profile: sql_error: ", err )
+                            res.json({"status":"fail","reason":"un-caught sql error"});
+                        }
+                        else
+                        {
+                            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id WHERE author=? ORDER BY stories.born DESC;", [ account ],
+                            function( err, srsql )
+                            {
+                                if ( err )
+                                {
+                                    console.log( "fetch-profile: sql_error: ", err )
+                                    res.json({"status":"fail","reason":"un-caught sql error"});
+                                }
+                                else
+                                {
+                                    sqlcon.query( "SELECT comments.*, accounts.username FROM comments INNER JOIN accounts.username ON comments.author=accounts.id WHERE userprof=?;", [ account ],
+                                    function( err, crsql )
+                                    {
+                                        if ( err )
+                                        {
+                                            console.log( "fetch-profile: sql_error: ", err )
+                                            res.json({"status":"fail","reason":"un-caught sql error"});
+                                        }
+                                        else
+                                        {
+                                            var blocks = []
+                                            var stories = []
+                                            var comments = []
+
+                                            for ( var i = 0; i < brsql.length; i++ )
+                                            {
+                                                var flag = 0;
+                                                if ( brsql[i].flag != "no_flag" ) flag = 1;
+
+                                                blocks.push({
+                                                    "id":brsql[i].id,
+                                                    "content":brsql[i].content,
+                                                    "story":brsql[i].story,
+                                                    "author":brsql[i].author,
+                                                    "username":brsql[i].username,
+                                                    "rating":brsql[i].rating,
+                                                    "ending":brsql[i].ending,
+                                                });
+                                            }
+
+                                            for ( var i = 0; i < srsql.length; i++ )
+                                            {
+                                                stories.push({
+                                                    "id":srsql[i].id,
+                                                    "author":srsql[i].author,
+                                                    "username":srsql[i].username,
+                                                    "title":srsql[i].title,
+                                                    "views":srsql[i].views
+                                                });
+                                            }
+
+                                            for ( var i = 0; i < crsql.length; i++ )
+                                            {
+                                                comments.push({
+                                                    "id":crsql[i].id,
+                                                    "author":crsql[i].author,
+                                                    "username":crsql[i].username,
+                                                    "content":crsql[i].content
+                                                });
+                                            }
+
+                                            var flag = 0;
+                                            if ( rsql[0].flag != 'no_flag' ) flag = 1;
+
+                                            res.json({
+                                                "status":"okay",
+                                                "username": rsql[0].username,
+                                                "description": rsql[0].description,
+                                                "flag": flag,
+                                                "verify": rsql[0].verify,
+                                                "admin": rsql[0].admin,
+                                                "image": rsql[0].image,
+                                                "blocks": blocks,
+                                                "stories": stories,
+                                                "comments": comments
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        }
                     });
                 }
             }
