@@ -103,6 +103,19 @@ class profile extends Component {
                 }, 0 );
             }
 
+            for ( var i = 0; i < response.stories.length; i++ )
+            {
+                var cstory = response.stories[i]
+
+                updateBlock({
+                    "id":cstory.id,
+                    "title":cstory.title,
+                    "author":cstory.author,
+                    "username":cstory.username,
+                    "views":cstory.views
+                }, 1 );
+            }
+
             if(response.verify === "verified"){
               document.getElementById('verified').parentNode.removeChild(document.getElementById('verified'));
 
@@ -340,16 +353,18 @@ onClickEditDescription() {
               {/* -----------ADD A STORY UNDER CONTRIBUTIONS DYNAMICALLY-------- */}
               <div className="StoryCont">Story Contributions</div>
                  <div className='story-div2' >
-           {/*  {
+            {
                 // Iterates over each element in the blocks array in the state and makes a span
-              this.state.storyBlocks.map(({block,index})=>{
+              this.state.stories.map(({id, title, author, username, views})=>{
                 return (
-                  <span key={index.toString()} className='block' >{block.toString()}
-                    <button className="likeButton2" onClick={() => this.onClickLike} ><i id="like"class="far fa-thumbs-up fa-2x"></i></button>
-                  </span>
+                    <div>
+                        <a href={"/story/" + id.toString()}>{title.toString()}</a>
+                        <p>{username.toString()}</p>
+                        <p>{views.toString()} Views</p>
+                    </div>
                 )
               })
-            } */} </div>
+            }</div>
             
               {/* ------------------------------------------------------------------------ */}
 
