@@ -70,6 +70,8 @@ module.exports = (app) => {
                                             var stories = []
                                             var comments = []
 
+                                            var blockRating = 0;
+
                                             for ( var i = 0; i < brsql.length; i++ )
                                             {
                                                 var flag = 0;
@@ -84,6 +86,8 @@ module.exports = (app) => {
                                                     "rating":brsql[i].rating,
                                                     "ending":brsql[i].ending,
                                                 });
+
+                                                blockRating += brsql[i].rating;
                                             }
 
                                             for ( var i = 0; i < srsql.length; i++ )
@@ -115,6 +119,7 @@ module.exports = (app) => {
                                                 "username": rsql[0].username,
                                                 "description": rsql[0].description,
                                                 "flag": flag,
+                                                "rating": blockRating,
                                                 "verify": rsql[0].verify,
                                                 "admin": rsql[0].admin,
                                                 "image": rsql[0].image,
