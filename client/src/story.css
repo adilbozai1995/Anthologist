@@ -212,7 +212,7 @@ text-align: center
     width: 87%;
     font-size: 100%;
     font-weight: bold;
-    margin-top: 2%;
+    margin-top: 6%;
     margin-left: 0%;
     text-align: right;
     float: left;
@@ -224,7 +224,7 @@ text-align: center
     font-size: 100%;
     font-weight: bold;
     margin-left: 88%;
-    margin-top: 2%;
+    margin-top: 6%;
 
 }
 
@@ -233,7 +233,7 @@ text-align: center
     width: 10%;
     font-size: 100%;
     font-weight: bold;
-    margin-top: -3%;
+    margin-top: -2%;
     text-align: left;
     float: right;
 }
@@ -458,11 +458,11 @@ text-align: center
 
 .author1 {
     font-family: 'SignPainter';
-    width: 87%;
+    width: auto;
     font-size: 110%;
     font-weight: bold;
-    margin-top: 10%;
-    margin-left: 0%;
+    margin-top: 14%;
+    margin-left: 75%;
     text-align: right;
     float: left;
 }
@@ -472,19 +472,24 @@ text-align: center
     width: 2%;
     font-size: 110%;
     font-weight: bold;
-    margin-left: 88%;
-    margin-top: 10%;
+    float: left;
+    text-align: right;
+
+    margin-left: 2%;
+    margin-top: 14%;
 
 }
 
 .likes1 {
-    font-family: 'SignPainter';
-    width: 10%;
-    font-size: 110%;
-    font-weight: bold;
-    margin-top: -4.7%;
-    text-align: left;
-    float: right;
+  font-family: 'SignPainter';
+  width: auto;
+  font-size: 110%;
+  font-weight: bold;
+  float: left;
+  text-align: right;
+
+  margin-left: 5%;
+  margin-top: 14%;
 }
 
 .changeTimeButton {
@@ -592,7 +597,8 @@ text-align: center
   background-color: transparent;
    float: left;
   border: none;
-  margin-top: -8%;
+  margin-top: 14%;
+  margin-left: 100%;
   outline: none;
   cursor: pointer;
 }
