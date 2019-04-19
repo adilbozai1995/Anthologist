@@ -16,6 +16,7 @@ div {
   display: block;
 }
 
+
 .notification-bar {
   display: flex;
   justify-content: space-between;
@@ -600,5 +601,10 @@ text-align: center
   margin-left: 100%;
   outline: none;
   cursor: pointer;
+}
+
+.show_story_text{
+  background: coral
+  
 }
 

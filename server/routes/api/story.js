@@ -131,14 +131,15 @@ module.exports = (app) => {
 
                 const blockid = uuid()
 
-                sqlsec.query( "INSERT INTO blocks (id, content, story, iteration, author, ending) VALUES (?, ?, ?, ?, ?, ?);",
+                sqlsec.query( "INSERT INTO blocks (id, content, story, iteration, author, ending, born) VALUES (?, ?, ?, ?, ?, ?, ?);",
                 [
                     blockid,
                     blocktext,
                     storyid,
                     0,
                     account,
-                    0
+                    0,
+                    rightnow
                 ]);
 
                 console.log("story-create: created new story: " + title );
@@ -538,6 +539,7 @@ module.exports = (app) => {
         }
         else if ( mode == 2 )
         {
+            // Can't fetch bookmarks if we're not logged in
             mode = 0;
         }
 
@@ -597,9 +599,13 @@ module.exports = (app) => {
         else
         {
             var orderval = "stories.born"
-            if ( mode == 1 ) orderval = "stories.views"
+            if ( mode == 1 )
+            {
+                orderval = "stories.views"
+            }
 
-            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id ORDER BY ?;", [orderval], function( err, rsql )
+            sqlcon.query( "SELECT stories.*, accounts.username FROM stories INNER JOIN accounts ON stories.author=accounts.id ORDER BY " + orderval + " DESC;",
+            [], function( err, rsql )
             {
                 if ( err )
                 {
