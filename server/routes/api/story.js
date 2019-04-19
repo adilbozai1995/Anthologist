@@ -566,7 +566,7 @@ module.exports = (app) => {
                 }
                 else
                 {
-                    sqlcon.query( "SELECT stories.* FROM story_bookmark INNER JOIN stories ON story_bookmark.story=stories.id WHERE story_bookmark.user=?;",
+                    sqlcon.query( "SELECT stories.*, accounts.username FROM story_bookmark INNER JOIN stories ON story_bookmark.story=stories.id INNER JOIN accounts ON stories.author=accounts.id WHERE story_bookmark.user=?;",
                     [ account ], function ( err, rsql )
                     {
                         if ( err )
