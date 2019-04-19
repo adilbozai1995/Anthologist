@@ -482,7 +482,7 @@ div {
 
   .storyBlock {
     border-radius: 10%;
-    font-family: 'SignPainter';
+    font-family: 'Story Book';
     font-size: 400%;
     text-align: center;
     font-weight: bold;
@@ -531,7 +531,7 @@ color: white;
 }
 
 .titleText {
-  font-family: 'SignPainter';
+  font-family: 'Story Book';
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   font-size: 150%;
