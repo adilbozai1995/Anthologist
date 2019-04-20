@@ -659,8 +659,8 @@ onClickEditAvatar(imgSrc) {
         <label className='change-descp'>Post new comment: </label>
         <textarea className='add_block' type="text" id="new-comment"/>
         </div>
-        <button onClick={() => this.insertComment()}>Submit</button>
-        <button className="button" onClick={this.close_comment}>Close</button>
+        <button className="button2"onClick={() => this.insertComment()}>Submit</button>
+        <button className="closeButton2" onClick={this.close_comment}>X</button>
         </Modal>
 
 

@@ -445,6 +445,25 @@
                           transition-duration: 0.4s;
                         }
 
+                        .closeButton2 {
+                          background-image: linear-gradient(#7a8386, #454849);
+                          background-attachment: fixed;
+                          font-family:'SignPainter';
+                          border: none;
+                          color: white;
+                          text-align: center;
+                          text-decoration: none;
+                          display: inline-block;
+                          float: right;
+                          font-size: 150%;
+                          margin-top: -14%;
+                          font-weight: bold;
+                          cursor: pointer;
+                          -webkit-transition-duration: 0.4s;
+                          transition-duration: 0.4s;
+                        }
+
+
             
 
                        
@@ -555,6 +574,21 @@
   outline: none;
   cursor: pointer;
   
+}
+
+.button2 {
+  background-image: linear-gradient(#7a8386, #454849);
+      background-attachment: fixed;
+      font-family:'SignPainter';
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 150%;
+      margin-top: 2%;
+      font-weight: bold;
+      cursor: pointer;
 }
 
 .cmtButton {
