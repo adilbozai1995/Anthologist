@@ -399,7 +399,8 @@
 
                       .cmt {
                         font-family: 'SignPainter';
-                        font-size: 140%;
+                        background-color: lightsteelblue;
+                        font-size: 300%;
                         text-align: center;
                         font-weight: bold;
                         border-radius: 10px;
@@ -407,11 +408,24 @@
                         margin-top: 2%;
                         width: 100%;
                         height: auto;
-                        background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
-                         -webkit-transition-duration: 0.4s;
+                     
+                      }
+                      .author4 {
+                        font-family: 'SignPainter';
+                          width: auto;
+                          margin-top: 3%;
+                          margin-right: 1%;
+                          float: right;
+                          height: 30%;
+                          font-size: 40%;
+                          font-weight: bold;
+                          -webkit-transition-duration: 0.4s;
                         transition-duration: 0.4s;
                         cursor: pointer;
                       }
+                      .author4:hover {
+                        color: white;
+                        }
 
 
 .story-div {

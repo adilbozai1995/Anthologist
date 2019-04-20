@@ -578,7 +578,7 @@ onClickEditAvatar(imgSrc) {
                       
                       <span className='cmt'>
                       {content.toString()}
-                      <a href={"/profile/" + author.toString()} className="author3">{username.toString()}</a>
+                      <a href={"/profile/" + author.toString()} className="author4">{username.toString()}</a>
 
                       </span>
                       
