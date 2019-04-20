@@ -6,6 +6,25 @@ import { Link } from 'react-router-dom';
 
 
 import './profile.css';
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    color                 : 'red',
+    centered              : 'true',
+    backgroundColor       : 'white',
+    marginRight           : '10%',
+    height                : '50%',
+    max_height            : '100%',  //check this line
+    width                 : '50%',
+    max_width             : '100%',   //check this line
+    borderRadius          : '4%',
+    position              : 'fixed',
+    overflow              : 'auto',
+    transform             : 'translate(-50%, -50%)'
+  }
+
+};
 
 
 class profile extends Component {
@@ -25,7 +44,8 @@ class profile extends Component {
   state = {
     modalIsOpen: false,
     secondModalIsOpen: false,
-    editStoryIsOpen:false
+    editStoryIsOpen:false,
+    commentIsOpen:false
   };
 
   openModal = () => {
@@ -50,12 +70,22 @@ class profile extends Component {
   close_editstory = () => {
     this.setState({ editStoryIsOpen: false });
   };
-  
+  open_comment = () => {
+    this.setState({ commentIsOpen: true });
+  };
+
+  close_comment = () => {
+    this.setState({ commentIsOpen: false });
+  };
 
   toggleHidden () {
     this.setState({
       isHidden: !this.state.isHidden
     })
+  }
+
+  insertComment(){
+
   }
 
 
@@ -550,9 +580,9 @@ onClickEditAvatar(imgSrc) {
 
       </div>
 
-      <button className="cmtButton"  id="commentButton" color="blue" >Comment</button>
-      <br></br>
+      <button className="cmtButton" onClick={() => this.open_comment()}  id="commentButton" color="blue" >Comment</button>
 
+      <br></br>
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <button onClick={this.closeModal}>close</button>
           <div>I am a modal</div>
@@ -586,6 +616,26 @@ onClickEditAvatar(imgSrc) {
           <button onClick={() => this.onClickEditAvatar('/man3.png')}> <img src='/man3.png' alt = "Nothing"></img> </button>
           <button onClick={() => this.onClickEditAvatar('/man4.png')}> <img src='/man4.png' alt = "Nothing"></img> </button>
           <button onClick={() => this.onClickEditAvatar('/man5.png')}> <img src='/man5.png' alt = "Nothing"></img> </button>
+        </Modal>
+
+
+
+
+
+        <Modal
+          isOpen={this.state.commentIsOpen}
+          onRequestClose={this.close_comment}
+        >
+
+        <div class="change-description">
+        <label className='change-descp' > Add new descritpion   </label>
+        <input className='change-descp' type="text" id="new-description"/>
+        </div>
+        <button onClick={() => this.insertComment()}>Update Description</button>
+            <div>Edit Story</div>
+          <button onClick={this.close_comment}>close</button>
+
+          
         </Modal>
 
 
