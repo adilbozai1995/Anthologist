@@ -390,7 +390,7 @@
                           border-style: solid;
                           border-width: 4pt;
                           border-color: black;
-                          overflow: hidden;
+                          overflow: auto;
                           overflow-y: scroll;
 
     
@@ -418,9 +418,9 @@
   width: 15%;
   height: 100%;
   background-color: transparent;
-
-  overflow: hidden;
   overflow-y: scroll;
+
+  overflow: auto;
   float: left;
   margin-right: 3%;
   
@@ -430,16 +430,17 @@
   width: 40%;
   height: 100%;
   background-color: transparent;
-  overflow: hidden;
-  overflow-y: scroll;
+ 
   float: left;
   margin-right: 3%;
   background-color: lightsteelblue;
                           border-style: solid;
                           border-width: 4pt;
                           border-color: black;
-                          overflow: hidden;
+                          overflow: auto;
                           overflow-y: scroll;
+
+                          
   
 }
 
@@ -447,8 +448,9 @@
   width: 40%;
   height: 100%;
   background-color: transparent;
-  overflow: hidden;
+  overflow: auto;
   overflow-y: scroll;
+
   float: right;
   margin-right: 10%;
   margin-top: -30%;
@@ -456,8 +458,7 @@
                           border-style: solid;
                           border-width: 4pt;
                           border-color: black;
-                          overflow: hidden;
-                          overflow-y: scroll;
+                     
   
 }
 

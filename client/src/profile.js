@@ -464,8 +464,31 @@ onClickEditDescription() {
                 </div>
 
       <div className='comments'>
+              
+         {/* -----------COMMENTS DYNAMICALLY-------- */}
+                 
+         {
+                // Iterates over each element in the blocks array in the state and makes a span
+              this.state.comments.map(({id, content, author, username})=>{
+                return (
+                  <div>
+                      
+                      <span className='cmt'>
+                      {content.toString()}
+                      <a href={"/profile/" + author.toString()} className="author3">{username.toString()}</a>
 
-      <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
+                      </span>
+                      
+                      
+                  </div>
+                )
+              })
+            }
+            
+              {/* ------------------------------------------------------------------------ */}
+
+
+      {/* <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
       <span className='cmt'>Commented on a story called "A Boy with a Laptop"</span>
       <span className='cmt'>Commented on a story called "A Boy with a Laptop"</span>
       <span className='cmt'>Commented on a story called "Girl with the dragon tattoo"</span>
@@ -473,7 +496,7 @@ onClickEditDescription() {
       <span className='cmt'>Commented on a story called "Apple Tree"</span>
       <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
       <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
-      <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
+      <span className='cmt'>Commented on a story called "A Lonely Boy"</span> */}
       
 
 
