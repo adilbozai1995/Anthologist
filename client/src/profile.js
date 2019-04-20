@@ -85,7 +85,7 @@ class profile extends Component {
   }
 
   insertComment(){
-    
+
   }
 
 
@@ -580,7 +580,7 @@ onClickEditAvatar(imgSrc) {
 
       </div>
 
-      <button className="cmtButton"  id="commentButton" color="blue" >Comment</button>
+      <button className="cmtButton" onClick={() => this.open_comment()}  id="commentButton" color="blue" >Comment</button>
 
 
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
