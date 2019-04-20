@@ -634,8 +634,7 @@ onClickEditAvatar(imgSrc) {
         <input className='change-descp' type="text" id="new-description"/>
         </div>
         <button onClick={() => this.onClickEditDescription()}>Update Description</button>
-            <div>Edit Story</div>
-          <button onClick={this.close_editstory}>close</button>
+          <button className="closeButton"onClick={this.close_editstory}>X</button>
 
           <div>Change Profile Picture</div>
           <button onClick={() => this.onClickEditAvatar('/avatar.png')}> <img src='/avatar.png' alt = "Nothing"></img> </button>
