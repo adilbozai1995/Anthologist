@@ -657,7 +657,7 @@ onClickEditAvatar(imgSrc) {
 
         <div class="submit-comment">
         <label className='change-descp'>Post new comment: </label>
-        <input className='change-descp' type="text" id="new-comment"/>
+        <textarea className='add_block' type="text" id="new-comment"/>
         </div>
         <button onClick={() => this.insertComment()}>Submit</button>
         <button className="button" onClick={this.close_comment}>Close</button>
