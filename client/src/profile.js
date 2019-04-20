@@ -626,6 +626,7 @@ onClickEditAvatar(imgSrc) {
         <Modal
           isOpen={this.state.editStoryIsOpen}
           onRequestClose={this.close_editstory}
+          style={customStyles2}
         >
 
         <div class="change-description">
@@ -660,7 +661,7 @@ onClickEditAvatar(imgSrc) {
         <input className='change-descp' type="text" id="new-comment"/>
         </div>
         <button onClick={() => this.insertComment()}>Submit</button>
-        <button onClick={this.close_comment}>Close</button>
+        <button className="button" onClick={this.close_comment}>Close</button>
         </Modal>
 
 
