@@ -362,7 +362,7 @@ module.exports = (app) => {
             }
             else
             {
-                sqlcon.query( "UPDATE accounts SET image=? WHERE id=?;", [image, account], function( a, b ) {} )
+                sqlsec.query( "UPDATE accounts SET image=? WHERE id=?;", [image, account])
 
                 console.log( "profile-image: updated image for account: " + account )
                 res.json({"status":"okay"})

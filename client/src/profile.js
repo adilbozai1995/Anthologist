@@ -85,6 +85,11 @@ class profile extends Component {
             document.getElementById('user_description').innerHTML = response.description;
             document.getElementById("likeScore").innerHTML = response.rating + " Likes";
 
+            if ( response.image != 'no_image' )
+            {
+                document.getElementById('profileAvatar').src = response.image
+            }
+
             for ( var i = 0; i < response.blocks.length; i++ )
             {
                 var cblock = response.blocks[i]
@@ -323,6 +328,35 @@ onClickEditDescription() {
     xhttp.send(obj)
 }
 
+onClickEditAvatar(imgSrc) {
+    if ( !localStorage.account || !localStorage.token )return;
+
+    var obj = JSON.stringify({
+        "account":localStorage.account,
+        "token":localStorage.token,
+        "image":imgSrc
+    })
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/profile-image" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if(this.readyState === 4 && this.status === 200)
+        {
+
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if (response.status === 'okay')
+            {
+                document.getElementById('profileAvatar').src = imgSrc
+            }
+        }
+    }
+    xhttp.send(obj)
+}
+
   render() {
     return (
 
@@ -356,7 +390,7 @@ onClickEditDescription() {
         </div>
 
         <div id ="2" className="Namecontainer">
-            <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div>
+            <div id = "n0" > <img id="profileAvatar" className="Image" src='/avatar.png' ></img> </div>
             <button id='flag' className="notify"><img className="notimg" src='/flg.png' onClick={() => this.onFlag()} ></img> </button>
             <button id='edit' onClick={this.open_editstory} className="edit_p">Edit Profile</button> {/*edir profile button*/}
             <Link to='/'><button className="logout" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
@@ -506,15 +540,14 @@ onClickEditDescription() {
         <button onClick={() => this.onClickEditDescription()}>Update Description</button>
             <div>Edit Story</div>
           <button onClick={this.close_editstory}>close</button>
-          
 
           <div>Change Profile Picture</div>
-          <button id = "n0" > <img src='/avatar.png' alt = "Nothing"></img> </button> 
-          <button> <img src='/man.png' alt = "Nothing"></img> </button> 
-          <button> <img src='/man2.png' alt = "Nothing"></img> </button> 
-          <button> <img src='/man3.png' alt = "Nothing"></img> </button> 
-          <button> <img src='/man4.png' alt = "Nothing"></img> </button> 
-          <button> <img src='/man5.png' alt = "Nothing"></img> </button> 
+          <button onClick={() => this.onClickEditAvatar('/avatar.png')}> <img src='/avatar.png' alt = "Nothing"></img> </button>
+          <button onClick={() => this.onClickEditAvatar('/man.png')}> <img src='/man.png' alt = "Nothing"></img> </button>
+          <button onClick={() => this.onClickEditAvatar('/man2.png')}> <img src='/man2.png' alt = "Nothing"></img> </button>
+          <button onClick={() => this.onClickEditAvatar('/man3.png')}> <img src='/man3.png' alt = "Nothing"></img> </button>
+          <button onClick={() => this.onClickEditAvatar('/man4.png')}> <img src='/man4.png' alt = "Nothing"></img> </button>
+          <button onClick={() => this.onClickEditAvatar('/man5.png')}> <img src='/man5.png' alt = "Nothing"></img> </button>
         </Modal>
 
 
