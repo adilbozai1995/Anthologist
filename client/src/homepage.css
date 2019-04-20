@@ -327,7 +327,7 @@ div {
     text-align: center;
     font-weight: bold;
     background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
-    box-shadow: 10px 10px grey;
+    box-shadow: 10px 10px lightsteelblue;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
@@ -496,8 +496,8 @@ div {
     width: 85%;
     overflow: auto;
     height: auto;
-    background-image: linear-gradient(rgb(63, 59, 59),rgb(180, 179, 179));
-    box-shadow: 10px 10px grey;
+    background: grey;
+    box-shadow: 25px 25px lightblue;
     
 }
 
