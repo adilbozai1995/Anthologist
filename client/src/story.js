@@ -692,8 +692,9 @@ onClickEdit(blockId) {
           style={customStyles}
         >
 
+      <label className='change-descp' > Update Block   </label>
         <div class="change-description">
-        <label className='change-descp' > Update Block   </label>
+        
         <textarea className='add_block' type="text" id="edit_new_block">{this.state.StoryModalText}</textarea>
         </div>
         <button onClick={() => this.onClickEdit(this.state.StoryModalBlock)}>Update Block</button>
