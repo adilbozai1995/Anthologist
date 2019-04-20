@@ -16,6 +16,9 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
+        const account = req.body.account
+        const token = req.body.token
+
         if ( !isuuid.v4( account ) )
         {
             console.log( "comment-create: invalid account: " + account )
@@ -36,6 +39,12 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
+        if ( profile === account )
+        {
+            console.log( "comment-create: cannot leave comment on own profile: " + account )
+            return res.sendStatus(400)
+        }
+
         const text = req.body.text
 
         if ( text.length <= 0 )
@@ -44,21 +53,21 @@ module.exports = (app) => {
             return res.sendStatus(400)
         }
 
-        sqlcon.query( "SELECT token FROM account WHERE id=?;", [account], function( err, arsql )
+        sqlcon.query( "SELECT token FROM accounts WHERE id=?;", [account], function( err, arsql )
         {
             if ( err )
             {
-                console.log( "story-create: sql_error: ", err );
+                console.log( "comment-create: sql_error: ", err );
                 res.json({"status":"fail","reason":"un-caught sql error"})
             }
             else if ( arsql.length <= 0 )
             {
-                console.log( "story-create: no account with id: " + account )
+                console.log( "comment-create: no account with id: " + account )
                 res.json({"status":"fail","reason":"no account with that id"})
             }
             else if ( arsql[0].token !== token )
             {
-                console.log("story-create: invalid security token for account: " + account )
+                console.log("comment-create: invalid security token for account: " + account )
                 res.json({"status":"fail","reason":"invalid security token"})
             }
             else
@@ -66,14 +75,17 @@ module.exports = (app) => {
                 const comment = uuid();
                 const rightnow = Date.now() / 1000;
 
-                sqlsec.query( "INSERT INTO comments (id, content, author, profile, born) VALUES (?, ?, ?, ?, ?);",
+                sqlsec.query( "INSERT INTO comments (id, content, author, userprof, born) VALUES (?, ?, ?, ?, ?);",
                 [
                     comment,
                     text,
                     account,
                     profile,
                     rightnow
-                ], function( a, b ) {} );
+                ]);
+
+                console.log( "comment-create: account: " + account + ", posted a comment to: " + profile )
+                res.json({"status":"okay"})
             }
         });
     });
