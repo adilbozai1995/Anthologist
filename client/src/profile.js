@@ -609,7 +609,7 @@ onClickEditAvatar(imgSrc) {
 
       <button className="cmtButton" onClick={() => this.open_comment()}  id="commentButton" color="blue" >Comment</button>
 
-
+      <br></br>
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <button onClick={this.closeModal}>close</button>
           <div>I am a modal</div>
