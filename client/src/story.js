@@ -215,7 +215,7 @@ class story extends Component {
                 {
                     setInterval( function()
                     {
-                        if ( typeof( document.getElementById('nCount') ) === 'undefined' ) return;
+                        if ( document.getElementById('nCount') == null ) return;
 
                         var seconds = Math.max( (response.votestart + (response.votetime * 60 )) - (Date.now() / 1000), 0 )
                         var minutes = Math.floor( seconds / 60 )
@@ -694,10 +694,17 @@ onClickEdit(blockId) {
           style={customStyles}
         >
 
-        <div class="change-description">
-        <label className='change-descp' > Update Block   </label>
-        <textarea className='add_block' type="text" id="edit_new_block">{this.state.StoryModalText}</textarea>
+      <label className='change-descp' > Update Block</label>
+      <div>
+          
         </div>
+   
+        
+        <textarea className='add_block' type="text" id="edit_new_block">{this.state.StoryModalText}</textarea>
+        <div>
+          
+        </div>
+        
         <button onClick={() => this.onClickEdit(this.state.StoryModalBlock)}>Update Block</button>
 
         <button className="button" onClick={this.closeoverwrite}>close</button>
@@ -709,19 +716,26 @@ onClickEdit(blockId) {
         <Modal
           isOpen={this.state.addBlockIsOpen}
           onRequestClose={this.close_addBlock}
+          style={customStyles}
         >
 
-        <div class="change-description">
         <label className='change-descp' > Add Block   </label>
-        <textarea className='add_block'  type="text" id="new_block"/>
+        <div>
+
         </div>
+
+        <textarea className='add_block'  type="text" id="new_block"/>
+        <div>
+          
+        </div>
+        
         <button onClick={() => this.onAddBlock()}>Add Block</button>
         <label>
         <input type="checkbox" id="eos_check" disabled={!sessionStorage.canEndStory} value="ES" />
         End of Story
         </label>
 
-        <button onClick={this.close_addBlock}>close</button>
+        <button className="button" onClick={this.close_addBlock}>close</button>
 
         </Modal>
 
