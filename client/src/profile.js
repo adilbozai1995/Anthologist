@@ -6,6 +6,25 @@ import { Link } from 'react-router-dom';
 
 
 import './profile.css';
+const customStyles2 = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    color                 : 'red',
+    centered              : 'true',
+    backgroundColor       : 'white',
+    marginRight           : '10%',
+    height                : '50%',
+    max_height            : '100%',  //check this line
+    width                 : '50%',
+    max_width             : '100%',   //check this line
+    borderRadius          : '4%',
+    position              : 'fixed',
+    overflow              : 'auto',
+    transform             : 'translate(-50%, -50%)'
+  }
+
+};
 
 
 class profile extends Component {
@@ -25,7 +44,8 @@ class profile extends Component {
   state = {
     modalIsOpen: false,
     secondModalIsOpen: false,
-    editStoryIsOpen:false
+    editStoryIsOpen:false,
+    commentIsOpen:false
   };
 
   openModal = () => {
@@ -50,7 +70,13 @@ class profile extends Component {
   close_editstory = () => {
     this.setState({ editStoryIsOpen: false });
   };
-  
+  open_comment = () => {
+    this.setState({ commentIsOpen: true });
+  };
+
+  close_comment = () => {
+    this.setState({ commentIsOpen: false });
+  };
 
   toggleHidden () {
     this.setState({
@@ -58,8 +84,39 @@ class profile extends Component {
     })
   }
 
+insertComment()
+{
+    if ( !localStorage.account || !localStorage.token ) return;
 
-  componentDidMount() {
+    var obj = JSON.stringify({
+        "account":localStorage.account,
+        "token":localStorage.token,
+        "profile":this.props.match.params.account,
+        "text":document.getElementById("new-comment").value
+    });
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/comment-create" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if (response.status === 'okay')
+            {
+                window.location.reload()
+            }
+        }
+    };
+    xhttp.send(obj);
+}
+
+
+  componentDidMount()
+  {
 
      var account = this.props.match.params.account;
 
@@ -84,6 +141,11 @@ class profile extends Component {
             document.getElementById('n1').innerHTML = response.username;
             document.getElementById('user_description').innerHTML = response.description;
             document.getElementById("likeScore").innerHTML = response.rating + " Likes";
+
+            if ( response.image !== 'no_image' )
+            {
+                document.getElementById('profileAvatar').src = response.image
+            }
 
             for ( var i = 0; i < response.blocks.length; i++ )
             {
@@ -114,6 +176,18 @@ class profile extends Component {
                     "username":cstory.username,
                     "views":cstory.views
                 }, 1 );
+            }
+
+            for ( var i = 0; i < response.comments.length; i++ )
+            {
+                var ccomment = response.comments[i]
+
+                updateBlock({
+                    "id":ccomment.id,
+                    "author":ccomment.author,
+                    "username":ccomment.username,
+                    "content":ccomment.content
+                }, 2 );
             }
 
             if(response.verify === "verified"){
@@ -257,7 +331,7 @@ onLogout() {
 //-----------------------FUNCTION TO ADD A BLOCK DYNAMICALLY-------------------------
 onAddItem = ( updateVal, upmode ) =>{
     this.setState(state => {
-        if ( upmode == 0 )
+        if ( upmode === 0 )
         {
             const blocks = state.blocks.concat(updateVal);
             return {
@@ -265,7 +339,7 @@ onAddItem = ( updateVal, upmode ) =>{
                 value:{},
             };
         }
-        else if ( upmode == 1 )
+        else if ( upmode === 1 )
         {
             const stories = state.stories.concat(updateVal);
             return {
@@ -273,7 +347,7 @@ onAddItem = ( updateVal, upmode ) =>{
                 value:{},
             };
         }
-        else if ( upmode == 2 )
+        else if ( upmode === 2 )
         {
             const comments = state.comments.concat(updateVal);
             return {
@@ -323,6 +397,35 @@ onClickEditDescription() {
     xhttp.send(obj)
 }
 
+onClickEditAvatar(imgSrc) {
+    if ( !localStorage.account || !localStorage.token )return;
+
+    var obj = JSON.stringify({
+        "account":localStorage.account,
+        "token":localStorage.token,
+        "image":imgSrc
+    })
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/profile-image" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if(this.readyState === 4 && this.status === 200)
+        {
+
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if (response.status === 'okay')
+            {
+                document.getElementById('profileAvatar').src = imgSrc
+            }
+        }
+    }
+    xhttp.send(obj)
+}
+
   render() {
     return (
 
@@ -356,7 +459,7 @@ onClickEditDescription() {
         </div>
 
         <div id ="2" className="Namecontainer">
-            <div id = "n0" > <img className="Image" src='/avatar.png' ></img> </div>
+            <div id = "n0" > <img id="profileAvatar" className="Image" src='/avatar.png' ></img> </div>
             <button id='flag' className="notify"><img className="notimg" src='/flg.png' onClick={() => this.onFlag()} ></img> </button>
             <button id='edit' onClick={this.open_editstory} className="edit_p">Edit Profile</button> {/*edir profile button*/}
             <Link to='/'><button className="logout" id ="logout" color="blue" onClick={() => this.onLogout()}> logout</button></Link>
@@ -464,8 +567,31 @@ onClickEditDescription() {
                 </div>
 
       <div className='comments'>
+              
+         {/* -----------COMMENTS DYNAMICALLY-------- */}
+                 
+         {
+                // Iterates over each element in the blocks array in the state and makes a span
+              this.state.comments.map(({id, content, author, username})=>{
+                return (
+                  <div>
+                      
+                      <span className='cmt'>
+                      {content.toString()}
+                      <a href={"/profile/" + author.toString()} className="author4">{username.toString()}</a>
 
-      <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
+                      </span>
+                      
+                      
+                  </div>
+                )
+              })
+            }
+            
+              {/* ------------------------------------------------------------------------ */}
+
+
+      {/* <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
       <span className='cmt'>Commented on a story called "A Boy with a Laptop"</span>
       <span className='cmt'>Commented on a story called "A Boy with a Laptop"</span>
       <span className='cmt'>Commented on a story called "Girl with the dragon tattoo"</span>
@@ -473,7 +599,7 @@ onClickEditDescription() {
       <span className='cmt'>Commented on a story called "Apple Tree"</span>
       <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
       <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
-      <span className='cmt'>Commented on a story called "A Lonely Boy"</span>
+      <span className='cmt'>Commented on a story called "A Lonely Boy"</span> */}
       
 
 
@@ -481,6 +607,9 @@ onClickEditDescription() {
 
       </div>
 
+      <button className="cmtButton" onClick={() => this.open_comment()}  id="commentButton" color="blue" >Comment</button>
+
+      <br></br>
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <button onClick={this.closeModal}>close</button>
           <div>I am a modal</div>
@@ -497,6 +626,7 @@ onClickEditDescription() {
         <Modal
           isOpen={this.state.editStoryIsOpen}
           onRequestClose={this.close_editstory}
+          style={customStyles2}
         >
 
         <div class="change-description">
@@ -504,17 +634,33 @@ onClickEditDescription() {
         <input className='change-descp' type="text" id="new-description"/>
         </div>
         <button onClick={() => this.onClickEditDescription()}>Update Description</button>
-            <div>Edit Story</div>
-          <button onClick={this.close_editstory}>close</button>
-          
+          <button className="closeButton"onClick={this.close_editstory}>X</button>
 
           <div>Change Profile Picture</div>
-          <button id = "n0" > <img src='/avatar.png' alt = "Nothing"></img> </button> 
-          <button> <img src='/man.png' alt = "Nothing"></img> </button> 
-          <button> <img src='/man2.png' alt = "Nothing"></img> </button> 
-          <button> <img src='/man3.png' alt = "Nothing"></img> </button> 
-          <button> <img src='/man4.png' alt = "Nothing"></img> </button> 
-          <button> <img src='/man5.png' alt = "Nothing"></img> </button> 
+          <button onClick={() => this.onClickEditAvatar('/avatar.png')}> <img src='/avatar.png' alt = "Nothing"></img> </button>
+          <button onClick={() => this.onClickEditAvatar('/man.png')}> <img src='/man.png' alt = "Nothing"></img> </button>
+          <button onClick={() => this.onClickEditAvatar('/man2.png')}> <img src='/man2.png' alt = "Nothing"></img> </button>
+          <button onClick={() => this.onClickEditAvatar('/man3.png')}> <img src='/man3.png' alt = "Nothing"></img> </button>
+          <button onClick={() => this.onClickEditAvatar('/man4.png')}> <img src='/man4.png' alt = "Nothing"></img> </button>
+          <button onClick={() => this.onClickEditAvatar('/man5.png')}> <img src='/man5.png' alt = "Nothing"></img> </button>
+        </Modal>
+
+
+
+
+
+        <Modal
+          isOpen={this.state.commentIsOpen}
+          onRequestClose={this.close_comment}
+          style={customStyles2}
+        >
+
+        <div class="submit-comment">
+        <label className='change-descp'>Post new comment: </label>
+        <input className='change-descp' type="text" id="new-comment"/>
+        </div>
+        <button onClick={() => this.insertComment()}>Submit</button>
+        <button className="button" onClick={this.close_comment}>Close</button>
         </Modal>
 
 

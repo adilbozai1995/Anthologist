@@ -264,7 +264,7 @@ module.exports = (app) => {
             {
                 sqlsec.query( "UPDATE stories SET views = views + 1 WHERE id=?", [ story ], function(ca,cb){} )
 
-                sqlcon.query( "SELECT blocks.*, accounts.username FROM blocks INNER JOIN accounts ON blocks.author = accounts.id WHERE blocks.story=? ORDER BY blocks.iteration ASC;", [ story ], function( err, brsql )
+                sqlcon.query( "SELECT blocks.*, accounts.username FROM blocks INNER JOIN accounts ON blocks.author = accounts.id WHERE blocks.story=? ORDER BY blocks.iteration ASC, blocks.rating DESC, blocks.born DESC;", [ story ], function( err, brsql )
                 {
                     if ( err )
                     {
