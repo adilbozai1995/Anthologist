@@ -84,12 +84,39 @@ class profile extends Component {
     })
   }
 
-  insertComment(){
+insertComment()
+{
+    if ( !localStorage.account || !localStorage.token ) return;
 
-  }
+    var obj = JSON.stringify({
+        "account":localStorage.account,
+        "token":localStorage.token,
+        "profile":this.props.match.params.account,
+        "text":document.getElementById("new-comment").value
+    });
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/comment-create" , true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function ()
+    {
+        if ( this.readyState === 4 && this.status === 200 )
+        {
+            var response = JSON.parse(this.responseText);
+            console.log(response);
+
+            if (response.status === 'okay')
+            {
+                window.location.reload()
+            }
+        }
+    };
+    xhttp.send(obj);
+}
 
 
-  componentDidMount() {
+  componentDidMount()
+  {
 
      var account = this.props.match.params.account;
 
@@ -627,15 +654,12 @@ onClickEditAvatar(imgSrc) {
           onRequestClose={this.close_comment}
         >
 
-        <div class="change-description">
-        <label className='change-descp' > Add new descritpion   </label>
-        <input className='change-descp' type="text" id="new-description"/>
+        <div class="submit-comment">
+        <label className='change-descp'>Post new comment: </label>
+        <input className='change-descp' type="text" id="new-comment"/>
         </div>
-        <button onClick={() => this.insertComment()}>Update Description</button>
-            <div>Edit Story</div>
-          <button onClick={this.close_comment}>close</button>
-
-          
+        <button onClick={() => this.insertComment()}>Submit</button>
+        <button onClick={this.close_comment}>Close</button>
         </Modal>
 
 
