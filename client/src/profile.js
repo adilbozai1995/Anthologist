@@ -85,7 +85,7 @@ class profile extends Component {
             document.getElementById('user_description').innerHTML = response.description;
             document.getElementById("likeScore").innerHTML = response.rating + " Likes";
 
-            if ( response.image != 'no_image' )
+            if ( response.image !== 'no_image' )
             {
                 document.getElementById('profileAvatar').src = response.image
             }
@@ -119,6 +119,18 @@ class profile extends Component {
                     "username":cstory.username,
                     "views":cstory.views
                 }, 1 );
+            }
+
+            for ( var i = 0; i < response.comments.length; i++ )
+            {
+                var ccomment = response.comments[i]
+
+                updateBlock({
+                    "id":ccomment.id,
+                    "author":ccomment.author,
+                    "username":ccomment.username,
+                    "content":ccomment.content
+                }, 2 );
             }
 
             if(response.verify === "verified"){
@@ -262,7 +274,7 @@ onLogout() {
 //-----------------------FUNCTION TO ADD A BLOCK DYNAMICALLY-------------------------
 onAddItem = ( updateVal, upmode ) =>{
     this.setState(state => {
-        if ( upmode == 0 )
+        if ( upmode === 0 )
         {
             const blocks = state.blocks.concat(updateVal);
             return {
@@ -270,7 +282,7 @@ onAddItem = ( updateVal, upmode ) =>{
                 value:{},
             };
         }
-        else if ( upmode == 1 )
+        else if ( upmode === 1 )
         {
             const stories = state.stories.concat(updateVal);
             return {
@@ -278,7 +290,7 @@ onAddItem = ( updateVal, upmode ) =>{
                 value:{},
             };
         }
-        else if ( upmode == 2 )
+        else if ( upmode === 2 )
         {
             const comments = state.comments.concat(updateVal);
             return {
