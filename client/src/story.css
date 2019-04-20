@@ -669,3 +669,13 @@ float: left;
  outline: none;
  cursor: pointer;
 }
+
+
+.add_block{
+  width: 80%;
+  height: 50%; 
+  font-size: 110%;
+  margin-top: 2%
+  
+  
+}
