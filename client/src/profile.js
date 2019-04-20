@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 import './profile.css';
-const customStyles = {
+const customStyles2 = {
   content : {
     top                   : '50%',
     left                  : '50%',
@@ -626,6 +626,7 @@ onClickEditAvatar(imgSrc) {
         <Modal
           isOpen={this.state.editStoryIsOpen}
           onRequestClose={this.close_editstory}
+          style={customStyles2}
         >
 
         <div class="change-description">
@@ -652,6 +653,7 @@ onClickEditAvatar(imgSrc) {
         <Modal
           isOpen={this.state.commentIsOpen}
           onRequestClose={this.close_comment}
+          style={customStyles2}
         >
 
         <div class="submit-comment">
@@ -659,7 +661,7 @@ onClickEditAvatar(imgSrc) {
         <input className='change-descp' type="text" id="new-comment"/>
         </div>
         <button onClick={() => this.insertComment()}>Submit</button>
-        <button onClick={this.close_comment}>Close</button>
+        <button className="button" onClick={this.close_comment}>Close</button>
         </Modal>
 
 
