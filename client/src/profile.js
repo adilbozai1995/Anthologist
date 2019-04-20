@@ -551,7 +551,7 @@ onClickEditAvatar(imgSrc) {
       </div>
 
       <button className="cmtButton"  id="commentButton" color="blue" >Comment</button>
-
+      <br></br>
 
       <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal}>
           <button onClick={this.closeModal}>close</button>
