@@ -500,13 +500,11 @@ float: left;
       text-decoration: none;
       display: inline-block;
       font-size: 150%;
-      margin-top: 45%;
-      margin-bottom: 20%;
+      margin-top: 5%;
       margin-left: 90%;
       font-weight: bold;
       cursor: pointer;
-      -webkit-transition-duration: 0.4s;
-      transition-duration: 0.4s;
+      
 }
 
 .textModal{
@@ -606,7 +604,7 @@ float: left;
 
 .flagStory2 {
   font-family:'SignPainter';
-  font-size: 110%;
+  font-size: 200%;
   font-weight: bold;
   color: #1b6f85;
   background-color: transparent;
