@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 import './profile.css';
-const customStyles = {
+const customStyles2 = {
   content : {
     top                   : '50%',
     left                  : '50%',
@@ -578,7 +578,7 @@ onClickEditAvatar(imgSrc) {
                       
                       <span className='cmt'>
                       {content.toString()}
-                      <a href={"/profile/" + author.toString()} className="author3">{username.toString()}</a>
+                      <a href={"/profile/" + author.toString()} className="author4">{username.toString()}</a>
 
                       </span>
                       
@@ -626,6 +626,7 @@ onClickEditAvatar(imgSrc) {
         <Modal
           isOpen={this.state.editStoryIsOpen}
           onRequestClose={this.close_editstory}
+          style={customStyles2}
         >
 
         <div class="change-description">
@@ -633,8 +634,7 @@ onClickEditAvatar(imgSrc) {
         <input className='change-descp' type="text" id="new-description"/>
         </div>
         <button onClick={() => this.onClickEditDescription()}>Update Description</button>
-            <div>Edit Story</div>
-          <button onClick={this.close_editstory}>close</button>
+          <button className="closeButton"onClick={this.close_editstory}>X</button>
 
           <div>Change Profile Picture</div>
           <button onClick={() => this.onClickEditAvatar('/avatar.png')}> <img src='/avatar.png' alt = "Nothing"></img> </button>
@@ -652,6 +652,7 @@ onClickEditAvatar(imgSrc) {
         <Modal
           isOpen={this.state.commentIsOpen}
           onRequestClose={this.close_comment}
+          style={customStyles2}
         >
 
         <div class="submit-comment">
@@ -659,7 +660,7 @@ onClickEditAvatar(imgSrc) {
         <input className='change-descp' type="text" id="new-comment"/>
         </div>
         <button onClick={() => this.insertComment()}>Submit</button>
-        <button onClick={this.close_comment}>Close</button>
+        <button className="button" onClick={this.close_comment}>Close</button>
         </Modal>
 
 
