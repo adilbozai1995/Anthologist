@@ -112,11 +112,15 @@ class news extends Component {
                 
         </div>
 
+
+        
         {/* Add new Story */}
+        
         <div className = 'new_story_text'>
 
         <div>
-                <textarea className='add_text'  type="text" id="story"/>
+        
+                <textarea className='add_text'  placeholder="FIRST BLOCK GOES HERE" type="text" id="story"/>
             </div>
 
             
