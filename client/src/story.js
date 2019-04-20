@@ -215,6 +215,8 @@ class story extends Component {
                 {
                     setInterval( function()
                     {
+                        if ( typeof( document.getElementById('nCount') ) === 'undefined' ) return;
+
                         var seconds = Math.max( (response.votestart + (response.votetime * 60 )) - (Date.now() / 1000), 0 )
                         var minutes = Math.floor( seconds / 60 )
                         seconds = seconds % 60
