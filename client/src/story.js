@@ -689,6 +689,7 @@ onClickEdit(blockId) {
         <Modal
           isOpen={this.state.overwriteIsOpen}
           onRequestClose={this.closeoverwrite}
+          style={customStyles}
         >
 
         <div class="change-description">
@@ -697,7 +698,7 @@ onClickEdit(blockId) {
         </div>
         <button onClick={() => this.onClickEdit(this.state.StoryModalBlock)}>Update Block</button>
 
-        <button onClick={this.closeoverwrite}>close</button>
+        <button className="button" onClick={this.closeoverwrite}>close</button>
 
         </Modal>
 
