@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 import './profile.css';
-const customStyles = {
+const customStyles2 = {
   content : {
     top                   : '50%',
     left                  : '50%',
@@ -625,6 +625,7 @@ onClickEditAvatar(imgSrc) {
         <Modal
           isOpen={this.state.commentIsOpen}
           onRequestClose={this.close_comment}
+          style={customStyles2}
         >
 
         <div class="change-description">
