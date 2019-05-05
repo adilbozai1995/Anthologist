@@ -516,6 +516,7 @@ color: white;
     font-weight: bold;
     -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
+  margin-bottom: 2%;
   cursor: pointer;
 }
 .author3:hover {
@@ -529,12 +530,19 @@ color: white;
     margin-left: 3%;
     float: left;
     font-size: 40%;
+    margin-bottom: 2%;
     font-weight: bold;
 }
 
+.views:hover {
+  color: white;
+  }
+
 .titleText {
-  font-family: 'Story Book';
+  font-family: 'Palatino';
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
-  font-size: 150%;
+  margin-top:7%;
+
+  font-size: 120%;
 }
